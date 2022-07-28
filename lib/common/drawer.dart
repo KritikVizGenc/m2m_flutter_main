@@ -6,6 +6,7 @@ import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/splash_screen.dart';
 import '../pages/registiration_page.dart';
+import '../main.dart';
 
 class DrawerHelp extends StatefulWidget{
 
@@ -71,7 +72,7 @@ drawer: Drawer(
                     child: Icon(Icons.person, size: 45, color: Colors.grey.shade300,),
                   
                   ),
-                   Text('\nHome', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
+                   Text('\nName Surname', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
 
                    
                          

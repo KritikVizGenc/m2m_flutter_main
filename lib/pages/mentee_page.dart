@@ -49,7 +49,7 @@ class MenteePage extends  StatefulWidget{
           ),
         ),
          actions: [
-IconButton(
+     IconButton(
   icon: const Icon(Icons.search),
   onPressed: () {
     showSearch(context: context, 
@@ -61,7 +61,7 @@ IconButton(
          ],
           ),
           body: Center(
-          child: Card(
+          child:Card(
             
         child: InkWell(
           splashColor: Colors.black,
@@ -75,12 +75,7 @@ IconButton(
           ),
         ),
 
-        
       ),
-
-
-
-
       
     ),
   

@@ -1,9 +1,15 @@
+import 'dart:html';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/main.dart';
 import 'login_page.dart';
+import 'mentee_page.dart';
 import 'splash_screen.dart';
 import 'widgets/header_widget.dart';
+import '../common/drawer.dart';
+import 'package:m2m_flutter_main/main.dart';
 
 import 'registiration_page.dart';
 
@@ -16,10 +22,8 @@ class MainPage extends StatefulWidget{
 }
 
 class _MainPageState extends State<MainPage>{
-
-  double  _drawerIconSize = 24;
+   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,10 +44,17 @@ class _MainPageState extends State<MainPage>{
         ),
         actions: [
           Container(
-            margin: EdgeInsets.only( top: 16, right: 16,),
+            margin: EdgeInsets.only( top: 20, right: 20,),
             child: Stack(
               children: <Widget>[
-                Icon(Icons.notifications),
+               IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      showSearch(context: context, 
+                      delegate: MySearchDelegate()
+                      );
+                    },
+                  ),
                 Positioned(
                   right: 0,
                   child: Container(
@@ -56,9 +67,9 @@ class _MainPageState extends State<MainPage>{
               ],
             ),
           )
-        ],
+        ],  
       ),
-  drawer: Drawer(
+ drawer: Drawer(
         child: Container(
           decoration:BoxDecoration(
               gradient: LinearGradient(
@@ -106,7 +117,7 @@ class _MainPageState extends State<MainPage>{
                     child: Icon(Icons.person, size: 45, color: Colors.grey.shade300,),
                   
                   ),
-                   Text('\nHome', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
+                   Text('\nName Surname', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
 
                    
                          
@@ -185,6 +196,7 @@ class _MainPageState extends State<MainPage>{
         ),
       ),
       body: SingleChildScrollView(
+        
         child: Stack(
           children: [
             Container(height: 100, child: HeaderWidget(100,false,Icons.house_rounded),),
@@ -279,6 +291,26 @@ class _MainPageState extends State<MainPage>{
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+    items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'Home',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.favorite),
+        label: 'Favorite',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.notifications),
+        label: 'Notifications',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.chat),
+        label: 'Chats',
+      ),
+    ],
+  ),
     );
   }
 
