@@ -119,7 +119,7 @@ drawer: Drawer(
                 leading: Icon(Icons.people_alt, size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary),
                 title: Text('Mentees',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).colorScheme.secondary),),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MenteePage()),);
                 },
               ),
              
