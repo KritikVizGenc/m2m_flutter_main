@@ -6,6 +6,7 @@ import 'package:m2m_flutter_main/pages/splash_screen.dart';
 
 import 'login_page.dart';
 import 'mentee_page.dart';
+import 'main_page.dart';
 
 class MentorPage extends  StatefulWidget{
   @override
@@ -194,7 +195,11 @@ bottomNavigationBar: BottomNavigationBar(
     items: const <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         icon: Icon(Icons.home_filled),
-        label: 'Home',
+        label: 'Home'
+        onTap(){
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
+        },
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.favorite_border),
