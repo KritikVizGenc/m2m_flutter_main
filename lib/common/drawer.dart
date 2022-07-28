@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:m2m_flutter_main/pages/main_page.dart';
+import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/splash_screen.dart';
 import '../pages/registiration_page.dart';
 import '../main.dart';
+import 'package:flutter/services.dart';
+
 
 class DrawerHelp extends StatefulWidget{
 
@@ -23,22 +26,9 @@ class _DrawerState extends State<DrawerHelp>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-drawer: Drawer(
-        child: Container(
-          decoration:BoxDecoration(
-              gradient: LinearGradient(
-              begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  stops: [0.0, 1.0],
-                  colors: [
-                    Theme.of(context).primaryColor.withOpacity(0.2),
-                    Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-                  ]
-              )
-          ) ,
+    return  Drawer(
           child: ListView(
-            children: [
+            children:<Widget>[
               DrawerHeader(
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
@@ -111,7 +101,7 @@ drawer: Drawer(
                 title: Text('Mentors', style: TextStyle(fontSize: _drawerFontSize, color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>MentorPage()),);
                 },
               ),
              
@@ -148,10 +138,11 @@ drawer: Drawer(
               ),
             ],
           ),
-        ),
-      ),
+          
+        );
+      
 
 
-    );
+    
   }
 }

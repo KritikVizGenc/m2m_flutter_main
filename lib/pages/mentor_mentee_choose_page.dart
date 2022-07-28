@@ -4,6 +4,8 @@ import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
+import 'package:m2m_flutter_main/common/drawer.dart';
 
 import 'mentee_page.dart';
 import 'mentor_page.dart';
@@ -19,6 +21,8 @@ class _ChoosePageState extends State<ChoosePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:BottomBar(),
+      drawer: DrawerHelp(),
       appBar: AppBar(
         title: Text(
           "Choose Page",
@@ -83,6 +87,7 @@ class _ChoosePageState extends State<ChoosePage> {
           ),
         ]),
       ),
+      
     );
   }
 }
