@@ -59,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: 140.0,
             child: Center(
               child: ClipOval(
-                child: Icon(Icons.widgets,size: 128,),
+                child: Icon(Icons.widgets,size: 128,), //giriş ekran icon
               ),
             ),
             decoration: BoxDecoration(

@@ -9,7 +9,6 @@ import 'pages/mentee_page.dart';
 import 'pages/mentor_mentee_choose_page.dart';
 import 'pages/registiration_page.dart';
 
-
 void main() {
   runApp(LoginUIApp());
 }
@@ -22,6 +21,7 @@ class LoginUIApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
         primaryColor: _primaryColor,
@@ -33,4 +33,4 @@ class LoginUIApp extends StatelessWidget {
       home: SplashScreen(title: 'Flutter Login'),
     );
   }
-}  
+}

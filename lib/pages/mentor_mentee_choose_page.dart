@@ -54,7 +54,10 @@ class _ChoosePageState extends State<ChoosePage> {
             margin: EdgeInsets.fromLTRB(40, 10, 40, 10),
             child: Text(
               'Your e-mail has been verified.',
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 30.0,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           Container(

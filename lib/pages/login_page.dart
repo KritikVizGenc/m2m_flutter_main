@@ -16,7 +16,9 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   double _headerHeight = 650;
-  Key _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  bool checkedValue = false;
+  bool checkboxValue = false;
 
   @override
   Widget build(BuildContext context) {
@@ -67,19 +69,31 @@ class _LoginPageState extends State<LoginPage> {
                           child: Column(
                             children: [
                               Container(
-                                child: TextField(
+                                child: TextFormField(
                                   decoration: ThemeHelper().textInputDecoration(
                                       'E-mail address', 'Enter your email'),
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "Please enter your email";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
                               ),
                               SizedBox(height: 30.0),
                               Container(
-                                child: TextField(
+                                child: TextFormField(
                                   obscureText: true,
                                   decoration: ThemeHelper().textInputDecoration(
                                       'Password', 'Enter your password'),
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "Please enter your password";
+                                    }
+                                    return null;
+                                  },
                                 ),
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
@@ -122,11 +136,12 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    //After successful login we will redirect to profile page. Let's create profile page now
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => MainPage()));
+                                    if (_formKey.currentState!.validate()) {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) => MainPage()),
+                                          (Route<dynamic> route) => false);
+                                    }
                                   },
                                 ),
                               ),
