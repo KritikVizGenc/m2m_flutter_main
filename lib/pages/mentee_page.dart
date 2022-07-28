@@ -71,7 +71,7 @@ IconButton(
           child: const SizedBox(
             width: 300,
             height: 100,
-            child: Text('Tıklanır card'),
+            child: Text('Mentors'),
           ),
         ),
 

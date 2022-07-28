@@ -16,7 +16,6 @@ class MainPage extends StatefulWidget{
 }
 
 class _MainPageState extends State<MainPage>{
-
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
 
