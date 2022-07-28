@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/model/login_request_model.dart';
+import 'package:m2m_flutter_main/model/login_response_model.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 import '../common/theme_helper.dart';
 
 import 'main_page.dart';
@@ -19,6 +23,10 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                                     }
                                     return null;
                                   },
+                                  controller: emailController,
                                 ),
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
@@ -94,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                                     }
                                     return null;
                                   },
+                                  controller: passwordController,
                                 ),
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
@@ -136,12 +146,40 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                              builder: (context) => MainPage()),
-                                          (Route<dynamic> route) => false);
+                                    if(validateAndSave()){
+                                      setState(() {
+                                        //isAPIcallProcess = true;
+                                      });
+                                      
+                                      LoginRequestModel model = LoginRequestModel(
+                                          email: emailController.text,
+                                          password: passwordController.text);
+
+                                      APIService.login(model).then((response) => {
+                                        if(response){
+                                          Navigator.of(context).pushAndRemoveUntil(
+                                               MaterialPageRoute(
+                                                   builder: (context) => MainPage()),
+                                               (Route<dynamic> route) => false)
+                                        } else {
+                                            //Hata mesajı gösterilecek
+                                          FormHelper.showSimpleAlertDialog(
+                                          context,
+                                          "Başlık",
+                                          "Invalid username or password",
+                                          "OK",
+                                          () {
+                                            Navigator.pop(context);
+                                          })
+                                        }
+                                      });
                                     }
+                                    // if (_formKey.currentState!.validate()) {
+                                    //   Navigator.of(context).pushAndRemoveUntil(
+                                    //       MaterialPageRoute(
+                                    //           builder: (context) => MainPage()),
+                                    //       (Route<dynamic> route) => false);
+                                    // }
                                   },
                                 ),
                               ),
@@ -175,5 +213,14 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if(form!.validate()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
