@@ -281,6 +281,23 @@ class _MainPageState extends State<MainPage>{
           ],
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+    items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home_filled),
+        label: 'Home',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.favorite_border),
+        label: 'Favorite',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.chat_bubble_outline),
+        label: 'Chats',
+      ),
+    ],
+  ),
+
     );
   }
 

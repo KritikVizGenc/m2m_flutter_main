@@ -193,15 +193,15 @@ drawer: Drawer(
 bottomNavigationBar: BottomNavigationBar(
     items: const <BottomNavigationBarItem>[
       BottomNavigationBarItem(
-        icon: Icon(Icons.call),
-        label: 'Calls',
+        icon: Icon(Icons.home_filled),
+        label: 'Home',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.camera),
-        label: 'Camera',
+        icon: Icon(Icons.favorite_border),
+        label: 'Favorite',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.chat),
+        icon: Icon(Icons.chat_bubble_outline),
         label: 'Chats',
       ),
     ],
