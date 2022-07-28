@@ -21,7 +21,7 @@ class _ChoosePageState extends State<ChoosePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar:BottomBar(),
+      bottomNavigationBar: BottomBar(),
       drawer: DrawerHelp(),
       appBar: AppBar(
         title: Text(
@@ -44,7 +44,28 @@ class _ChoosePageState extends State<ChoosePage> {
       body: Center(
         child: Column(children: <Widget>[
           Container(
-            margin: EdgeInsets.fromLTRB(40, 300, 40, 20),
+            margin: EdgeInsets.fromLTRB(40, 50, 40, 0),
+            child: Icon(
+              Icons.email,
+              size: 90,
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(40, 10, 40, 10),
+            child: Text(
+              'Your e-mail has been verified.',
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            //margin: EdgeInsets.fromLTRB(40, 50, 40, 0),
+            child: Text(
+              'Select your user type to continue',
+              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.fromLTRB(40, 30, 40, 20),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 188, 84, 85),
@@ -87,7 +108,6 @@ class _ChoosePageState extends State<ChoosePage> {
           ),
         ]),
       ),
-      
     );
   }
 }
