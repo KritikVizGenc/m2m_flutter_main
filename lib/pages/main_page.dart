@@ -1,15 +1,11 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:m2m_flutter_main/main.dart';
+import 'package:m2m_flutter_main/pages/mentee_page.dart';
+import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'login_page.dart';
-import 'mentee_page.dart';
 import 'splash_screen.dart';
 import 'widgets/header_widget.dart';
-import '../common/drawer.dart';
-import 'package:m2m_flutter_main/main.dart';
 
 import 'registiration_page.dart';
 
@@ -22,8 +18,9 @@ class MainPage extends StatefulWidget{
 }
 
 class _MainPageState extends State<MainPage>{
-   double  _drawerIconSize = 24;
+  double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,18 +41,10 @@ class _MainPageState extends State<MainPage>{
         ),
         actions: [
           Container(
-            margin: EdgeInsets.only( top: 20, right: 20,),
+            margin: EdgeInsets.only( top: 16, right: 16,),
             child: Stack(
               children: <Widget>[
-               IconButton(
-                    icon: const Icon(Icons.search),
-
-                    onPressed: () {
-                      showSearch(context: context, 
-                      delegate: MySearchDelegate()
-                      );
-                    },
-                  ),
+                Icon(Icons.notifications),
                 Positioned(
                   right: 0,
                   child: Container(
@@ -68,9 +57,9 @@ class _MainPageState extends State<MainPage>{
               ],
             ),
           )
-        ],  
+        ],
       ),
- drawer: Drawer(
+  drawer: Drawer(
         child: Container(
           decoration:BoxDecoration(
               gradient: LinearGradient(
@@ -118,7 +107,7 @@ class _MainPageState extends State<MainPage>{
                     child: Icon(Icons.person, size: 45, color: Colors.grey.shade300,),
                   
                   ),
-                   Text('\nName Surname', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
+                   Text('\nHome', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
 
                    
                          
@@ -157,7 +146,7 @@ class _MainPageState extends State<MainPage>{
                 title: Text('Mentors', style: TextStyle(fontSize: _drawerFontSize, color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MentorPage()),);
                 },
               ),
              
@@ -165,7 +154,7 @@ class _MainPageState extends State<MainPage>{
                 leading: Icon(Icons.people_alt, size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary),
                 title: Text('Mentees',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).colorScheme.secondary),),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MenteePage()),);
                 },
               ),
              
@@ -197,7 +186,6 @@ class _MainPageState extends State<MainPage>{
         ),
       ),
       body: SingleChildScrollView(
-        
         child: Stack(
           children: [
             Container(height: 100, child: HeaderWidget(100,false,Icons.house_rounded),),
@@ -292,28 +280,6 @@ class _MainPageState extends State<MainPage>{
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-    items: const <BottomNavigationBarItem>[
-      
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.favorite),
-        label: 'Favorite',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.notifications),
-        label: 'Notifications',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.chat),
-        label: 'Chats',
-      ),
-    ],
-  ),
     );
   }
 
