@@ -32,7 +32,7 @@ class MenteePage extends  StatefulWidget{
     
     home: Scaffold(  
       
-      
+    
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("Mentee Page",
@@ -62,22 +62,44 @@ IconButton(
          ],
           ),
           body: Center(
-          child: Card(
+ child:
+      ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Card(child:ListTile(
+            title: Text("NAME"),
+            subtitle: Text("Hİ,I am the mentee."),
+            leading: CircleAvatar(backgroundImage: NetworkImage("https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+            trailing: Icon(Icons.person_add_alt_rounded))),
+          Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentee."), leading: CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded))),
+          Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentee."), leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded))),
+          Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentee."), leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded)))
+        ],
+      ),
+    
+
+
+
+      //     child: Card(
             
-        child: InkWell(
-          splashColor: Colors.black,
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
-          child: const SizedBox(
-            width: 300,
-            height: 100,
-            child: Text('Mentors'),
-          ),
-        ),
+      //   child: InkWell(
+      //     splashColor: Colors.black,
+      //     onTap: () {
+      //       debugPrint('Card tapped.');
+      //     },
+
+      //     child: const SizedBox(
+      //       width: 300,
+      //       height: 100,
+      //       child: Text('Mentors'),
+      //     ),
+
+
+          
+      //   ),
 
         
-      ),
+      // ),
 
 
 
