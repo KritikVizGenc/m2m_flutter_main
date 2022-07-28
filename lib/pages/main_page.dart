@@ -49,6 +49,7 @@ class _MainPageState extends State<MainPage>{
               children: <Widget>[
                IconButton(
                     icon: const Icon(Icons.search),
+
                     onPressed: () {
                       showSearch(context: context, 
                       delegate: MySearchDelegate()
@@ -293,8 +294,10 @@ class _MainPageState extends State<MainPage>{
       ),
       bottomNavigationBar: BottomNavigationBar(
     items: const <BottomNavigationBarItem>[
+      
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
+        
         label: 'Home',
       ),
       BottomNavigationBarItem(
