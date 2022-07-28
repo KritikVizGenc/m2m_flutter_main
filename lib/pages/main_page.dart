@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:m2m_flutter_main/pages/mentee_page.dart';
-import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'login_page.dart';
+import 'mentee_page.dart';
+import 'mentor_page.dart';
 import 'splash_screen.dart';
 import 'widgets/header_widget.dart';
 
@@ -18,6 +18,7 @@ class MainPage extends StatefulWidget{
 }
 
 class _MainPageState extends State<MainPage>{
+
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
 
