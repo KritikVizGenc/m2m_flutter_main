@@ -28,9 +28,12 @@ body: Center(
       ListView(
         padding: const EdgeInsets.all(8),
         children: <Widget>[
+        
+        
           Card(child:ListTile(
             title: Text("NAME"),
-            subtitle: Text("Hİ,I am the MENTOR."),
+
+            subtitle: Text("HI,I am the MENTOR."),
             leading: CircleAvatar(backgroundImage: NetworkImage("https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
             trailing: Icon(Icons.person_add_alt_rounded))),
           Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentor."), leading: CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded))),
@@ -40,6 +43,27 @@ body: Center(
       ),
     
 ),
+
+ backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Mentee Page",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        elevation: 0.5,
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace:Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[Theme.of(context).primaryColor, Theme.of(context).colorScheme.secondary,]
+              )
+          ),
+        ),
+
+
+      ),
+
 drawer: Drawer(
         child: Container(
           decoration:BoxDecoration(

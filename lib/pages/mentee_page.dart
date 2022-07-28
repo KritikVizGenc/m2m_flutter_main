@@ -31,7 +31,26 @@ class MenteePage extends  StatefulWidget{
     return MaterialApp(
     
     home: Scaffold(  
-      
+      body: Center(
+ child:
+      ListView(
+        padding: const EdgeInsets.all(8),
+        children: <Widget>[
+        
+        
+          Card(child:ListTile(
+            title: Text("NAME"),
+
+            subtitle: Text("HI,I am the MENTOR."),
+            leading: CircleAvatar(backgroundImage: NetworkImage("https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+            trailing: Icon(Icons.person_add_alt_rounded))),
+          Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentor."), leading: CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded))),
+          Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentor."), leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded))),
+          Card(child:ListTile( title: Text("NAME"),subtitle: Text("Mentor."), leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), trailing: Icon(Icons.person_add_alt_rounded)))
+        ],
+      ),
+    
+),
     
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -61,28 +80,28 @@ class MenteePage extends  StatefulWidget{
 
          ],
           ),
-          body: Center(
-          child:Card(
+    //       body: Center(
+    //       child:Card(
             
-      //   child: InkWell(
-      //     splashColor: Colors.black,
-      //     onTap: () {
-      //       debugPrint('Card tapped.');
-      //     },
+    //   //   child: InkWell(
+    //   //     splashColor: Colors.black,
+    //   //     onTap: () {
+    //   //       debugPrint('Card tapped.');
+    //   //     },
 
-      //     child: const SizedBox(
-      //       width: 300,
-      //       height: 100,
-      //       child: Text('Mentors'),
-      //     ),
+    //   //     child: const SizedBox(
+    //   //       width: 300,
+    //   //       height: 100,
+    //   //       child: Text('Mentors'),
+    //   //     ),
 
 
           
-      //   ),
+    //   //   ),
 
-      ),
+    //   ),
       
-    ),
+    // ),
   
 
 drawer: Drawer(
