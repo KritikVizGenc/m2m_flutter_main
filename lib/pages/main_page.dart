@@ -76,6 +76,7 @@ class _MainPageState extends State<MainPage>{
               DrawerHeader(
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor,
+                  
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -83,32 +84,74 @@ class _MainPageState extends State<MainPage>{
                     colors: [ Theme.of(context).primaryColor,Theme.of(context).colorScheme.secondary,],
                   ),
                 ),
+               
                 child: Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Text("Drawer",
-                    style: TextStyle(fontSize: 25,color: Colors.white, fontWeight: FontWeight.bold),
+                 
+                  height: 40,
+                  alignment: Alignment.center,
+                  child: Column(children: [
+                    
+
+                    Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(width: 5, color: Colors.white),
+                      color: Colors.white,
+                      boxShadow: [
+                        
+                        BoxShadow(color: Colors.black12, blurRadius: 20, offset: const Offset(5, 5),),
+                      ],
+                    ),
+                    child: Icon(Icons.person, size: 45, color: Colors.grey.shade300,),
+                  
                   ),
+                   Text('\nHome', style: TextStyle(fontSize: 26, color: Theme.of(context).colorScheme.onPrimary),),
+
+                   
+                         
+                  ],
+                  ),
+                  
+                
                 ),
-              ),
+                ),
+              
               ListTile(
-                leading: Icon(Icons.screen_lock_landscape_rounded, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
-                title: Text('Splash Screen', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
+                leading: Icon(Icons.home, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
+                title: Text('Home', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                },
+              ),
+              
+               ListTile(
+                leading: Icon(Icons.category, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
+                title: Text('Categories', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                },
+              ),
+               Divider(color: Theme.of(context).primaryColor, height: 1,),
+               ListTile(
+                leading: Icon(Icons.meeting_room, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
+                title: Text('Meetings', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
                 },
               ),
               ListTile(
-                leading: Icon(Icons.login_rounded,size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary),
-                title: Text('Login Page', style: TextStyle(fontSize: _drawerFontSize, color: Theme.of(context).colorScheme.secondary),
+                leading: Icon(Icons.people_outline ,size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary),
+                title: Text('Mentors', style: TextStyle(fontSize: _drawerFontSize, color: Theme.of(context).colorScheme.secondary),
                 ),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()),);
                 },
               ),
-              Divider(color: Theme.of(context).primaryColor, height: 1,),
+             
               ListTile(
-                leading: Icon(Icons.person_add_alt_1, size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary),
-                title: Text('Registration Page',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).colorScheme.secondary),),
+                leading: Icon(Icons.people_alt, size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary),
+                title: Text('Mentees',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).colorScheme.secondary),),
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationPage()),);
                 },
@@ -116,6 +159,20 @@ class _MainPageState extends State<MainPage>{
              
              
               Divider(color: Theme.of(context).primaryColor, height: 1,),
+              ListTile(
+                leading: Icon(Icons.settings, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
+                title: Text('Settings', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.help_center, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
+                title: Text('Help', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                },
+              ),
               ListTile(
                 leading: Icon(Icons.logout_rounded, size: _drawerIconSize,color: Theme.of(context).colorScheme.secondary,),
                 title: Text('Logout',style: TextStyle(fontSize: _drawerFontSize,color: Theme.of(context).colorScheme.secondary),),
