@@ -4,11 +4,15 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 
 class BottomBar extends StatelessWidget {
-  const BottomBar({Key? key}) : super(key: key);
+  int _selectedIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
-    return  BottomNavigationBar(
+    
+    return 
+    
+     BottomNavigationBar(
     items: const <BottomNavigationBarItem>[
       BottomNavigationBarItem(
         
@@ -32,7 +36,27 @@ class BottomBar extends StatelessWidget {
         label: 'Chats',
       ),
     ],
+     currentIndex: _selectedIndex,
+       selectedItemColor: Colors.green,
+      unselectedItemColor: Colors.grey,
+      backgroundColor: Colors.deepOrange,
+      onTap: _onTap,
+    
+
+      
+      
+      elevation: 15,
+     
   );
     
   }
+void _onTap(int index)
+  {
+    _selectedIndex = index;
+    setState(() {
+
+    });
+  }
+  
+  void setState(Null Function() param0) {}
 }
