@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m_flutter_main/model/login_request_model.dart';
 import 'package:m2m_flutter_main/model/login_response_model.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
@@ -27,11 +28,10 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 100, 38, 38),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -52,10 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                         padding: EdgeInsets.fromLTRB(0, 5, 0, 35),
                         child: Text(
                           'Hi There!',
-                          style: TextStyle(
-                              height: 0.1,
-                              fontSize: 60,
-                              fontWeight: FontWeight.bold),
+                          style: GoogleFonts.abel(fontSize: 80),
                         ),
                       ),
 
@@ -146,33 +143,43 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    if(validateAndSave()){
+                                    if (validateAndSave()) {
                                       setState(() {
                                         //isAPIcallProcess = true;
                                       });
-                                      
-                                      LoginRequestModel model = LoginRequestModel(
-                                          email: emailController.text,
-                                          password: passwordController.text);
 
-                                      APIService.login(model).then((response) => {
-                                        if(response){
-                                          Navigator.of(context).pushAndRemoveUntil(
-                                               MaterialPageRoute(
-                                                   builder: (context) => MainPage()),
-                                               (Route<dynamic> route) => false)
-                                        } else {
-                                            //Hata mesajı gösterilecek
-                                          FormHelper.showSimpleAlertDialog(
-                                          context,
-                                          "Başlık",
-                                          "Invalid username or password",
-                                          "OK",
-                                          () {
-                                            Navigator.pop(context);
-                                          })
-                                        }
-                                      });
+                                      LoginRequestModel model =
+                                          LoginRequestModel(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+
+                                      APIService.login(model).then((response) =>
+                                          {
+                                            if (response)
+                                              {
+                                                Navigator.of(context)
+                                                    .pushAndRemoveUntil(
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    MainPage()),
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false)
+                                              }
+                                            else
+                                              {
+                                                //Hata mesajı gösterilecek
+                                                FormHelper.showSimpleAlertDialog(
+                                                    context,
+                                                    "Başlık",
+                                                    "Invalid username or password",
+                                                    "OK", () {
+                                                  Navigator.pop(context);
+                                                })
+                                              }
+                                          });
                                     }
                                     // if (_formKey.currentState!.validate()) {
                                     //   Navigator.of(context).pushAndRemoveUntil(
@@ -217,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool validateAndSave() {
     final form = _formKey.currentState;
-    if(form!.validate()) {
+    if (form!.validate()) {
       return true;
     } else {
       return false;
