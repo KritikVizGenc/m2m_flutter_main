@@ -20,14 +20,19 @@ class MenteePage extends  StatefulWidget{
   
   
   class _MenteePageState extends State<MenteePage>{
-  @override
+   TextEditingController editingController = TextEditingController();
 
+  final duplicateItems = List<String>.generate(10000, (i) => "Eleman $i");
+  //var items = lis
+
+  @override
+  
   double  _drawerIconSize = 24;
   double _drawerFontSize = 17;
+  void filterSearchResults(String query){
 
 
-
-
+  }
   
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -38,8 +43,20 @@ class MenteePage extends  StatefulWidget{
       ListView(
         padding: const EdgeInsets.all(8),
         children: <Widget>[
-        
-        
+          SizedBox(height:15,),
+          TextField( onChanged: (value){
+
+          },
+            decoration: InputDecoration(
+              labelText: "Listeyi ara",
+              hintText: "Aramak için yaz",
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius:BorderRadius.all(Radius.circular(10))
+                 ),
+            ),
+
+          ),
           Card(child:ListTile(
             title: Text("NAME"),
             subtitle: Text("HI,I am the MENTEE."),
@@ -67,6 +84,7 @@ class MenteePage extends  StatefulWidget{
             trailing: Icon(Icons.person_add_alt_rounded)
             )
             )
+            
         ],
       ),
     
@@ -74,6 +92,7 @@ class MenteePage extends  StatefulWidget{
     
       backgroundColor: Colors.white,
       appBar: AppBar(
+        
         title: Text("Mentee Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
@@ -89,6 +108,7 @@ class MenteePage extends  StatefulWidget{
           ),
         ),
          actions: [
+          
      IconButton(
   icon: const Icon(Icons.search),
   onPressed: () {
