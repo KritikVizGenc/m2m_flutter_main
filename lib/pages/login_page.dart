@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:m2m_flutter_main/model/login_request_model.dart';
 import 'package:m2m_flutter_main/model/login_response_model.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
@@ -31,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 100, 38, 38),
+      backgroundColor: Color.fromARGB(255, 227, 180, 180),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -53,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           'Hi There!',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 89, 89, 89),
                             fontSize: 60,
                           ),
                         ),
@@ -66,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                           'Now it\'s easy to find mentor,just create an account',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 89, 89, 89),
                             fontSize: 20,
                           ),
                         ),
