@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/circle.dart';
+import 'package:m2m_flutter_main/square.dart';
 import 'login_page.dart';
 import 'mentee_page.dart';
 import 'mentor_page.dart';
@@ -8,28 +10,31 @@ import 'splash_screen.dart';
 import 'widgets/header_widget.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
-//import 'package:'
 
+import 'package:m2m_flutter_main/square.dart';
 import 'registiration_page.dart';
 
-class MainPage extends StatefulWidget{
+class MainPage extends StatelessWidget{
+final List _posts = ['post 1',
+'post 2 ',
+'post 3',
+'post 4',
 
-  @override
-  State<StatefulWidget> createState() {
-    return _MainPageState();
-  }
-}
+];
+final List _stories = ['fav 1',
+'fav 2 ',
+'fav 3',
+'fav 4',
+'fav 5',
 
-class _MainPageState extends State<MainPage>{
+];
 
-  double  _drawerIconSize = 24;
-  double _drawerFontSize = 17;
    
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
     
-   child : Scaffold(
+    
+   return Scaffold(
       drawer: DrawerHelp(),
        bottomNavigationBar: BottomBar(),
       appBar: AppBar(
@@ -69,82 +74,41 @@ class _MainPageState extends State<MainPage>{
           )
         ],
       ),
+body: Column(
 
-body: ListView(
-  physics: NeverScrollableScrollPhysics(),
+children :[
+Container(
+ height: 150,
+  child: ListView.builder(
+    itemCount: _stories.length,
+    scrollDirection: Axis.horizontal,
+    itemBuilder: (context,index){
+return MyCircle(
+  child: _stories[index],
+);
+  }),
   
-  children: [
-Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   Container(
-  
-  height: 200,
-  
-  color: Colors.deepPurple[200],
-  
-
-  ),
-),
-Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   Container(
-  
-  height: 200,
-  
-  color: Colors.deepPurple[200],
-  
-
-
-  ),
-),
-
-Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   Container(
-  
-  height: 200,
-  
-  color: Colors.deepPurple[200],
-  
-
-
   ),
 
+
+  Expanded(
+    
+
+child: ListView.builder(
+  
+  itemCount: _posts.length, 
+  itemBuilder: (context,index){
+
+  return MySquare(
+    child: _posts[index],
+  
+  );
+}),
+   
 ),
-Padding(
-  padding: const EdgeInsets.all(8.0),
-  child:   Container(
-  
-  height: 200,
-  
-  color: Colors.deepPurple[200],
-  
-
-
-  ),
-),
-
-
-],
-
-
-
-
-
-
-
-)
-
-
-
-
-
-     
-  
-       
-     
+],  
     ),
-    );
+   );
   }
 
 }
