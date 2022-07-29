@@ -150,9 +150,10 @@ class _LoginPageState extends State<LoginPage> {
                                       setState(() {
                                         //isAPIcallProcess = true;
                                       });
+                                      
                                       LoginRequestModel model = LoginRequestModel(
-                                          email: emailController.text.toString(),
-                                          password: passwordController.text.toString());
+                                          email: emailController.text,
+                                          password: passwordController.text);
 
                                       APIService.login(model).then((response) => {
                                         if(response){
@@ -162,7 +163,6 @@ class _LoginPageState extends State<LoginPage> {
                                                (Route<dynamic> route) => false)
                                         } else {
                                             //Hata mesajı gösterilecek
-                                          print("hata oluştuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu"),
                                           FormHelper.showSimpleAlertDialog(
                                           context,
                                           "Başlık",

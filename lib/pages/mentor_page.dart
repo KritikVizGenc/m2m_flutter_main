@@ -65,7 +65,7 @@ class _MentorPageState extends State<MentorPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "Mentee Page",
+          "Mentor Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,
