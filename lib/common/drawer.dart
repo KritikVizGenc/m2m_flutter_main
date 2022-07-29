@@ -90,7 +90,7 @@ class _DrawerState extends State<DrawerHelp> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+                          MainPage()));
             },
           ),
           ListTile(
