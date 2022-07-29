@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
+import 'package:m2m_flutter_main/pages/registiration_page.dart';
 
 import 'mentee_page.dart';
 import 'mentor_page.dart';
@@ -109,7 +110,7 @@ class _ChoosePageState extends State<ChoosePage> {
                 ),
                 onPressed: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => MentorPage()));
+                      MaterialPageRoute(builder: (context) => RegistrationPage()));
                 },
               ),
             ),

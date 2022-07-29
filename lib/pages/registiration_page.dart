@@ -15,7 +15,11 @@ class RegistrationPage extends StatefulWidget {
   }
 }
 
+enum SingingCharacter { mentor, mentee }
+
 class _RegistrationPageState extends State<RegistrationPage> {
+  SingingCharacter? _character = SingingCharacter.mentor;
+
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
@@ -143,7 +147,50 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                           decoration: ThemeHelper().inputBoxDecorationShaddow(),
                         ),
-                        SizedBox(height: 15.0),
+                        FormField<bool>(
+                          builder: (state) {
+                            return Column(
+                              children: <Widget>[
+                                Column(
+                                  children: <Widget>[
+                                    RadioListTile<SingingCharacter>(
+                                      title: const Text('Mentor'),
+                                      value: SingingCharacter.mentor,
+                                      groupValue: _character,
+                                      onChanged: (SingingCharacter? value) {
+                                        setState(() {
+                                          _character = value;
+                                        });
+                                      },
+                                    ),
+                                    RadioListTile<SingingCharacter>(
+                                      title: const Text('Mentee'),
+                                      value: SingingCharacter.mentee,
+                                      groupValue: _character,
+                                      onChanged: (SingingCharacter? value) {
+                                        setState(() {
+                                          _character = value;
+                                        });
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    state.errorText ?? '',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      color: Theme.of(context).errorColor,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
+                        ),
+                        //SizedBox(height: 15.0),
                         FormField<bool>(
                           builder: (state) {
                             return Column(
@@ -186,7 +233,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             }
                           },
                         ),
-                        SizedBox(height: 20.0),
+                        SizedBox(height: 5.0),
                         Container(
                           decoration:
                               ThemeHelper().buttonBoxDecoration(context),
@@ -208,7 +255,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               if (_formKey.currentState!.validate()) {
                                 Navigator.of(context).pushAndRemoveUntil(
                                     MaterialPageRoute(
-                                        builder: (context) => ChoosePage()),
+                                        builder: (context) => MainPage()),
                                     (Route<dynamic> route) => false);
                               }
                             },
