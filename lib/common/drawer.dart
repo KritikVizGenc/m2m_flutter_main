@@ -77,7 +77,7 @@ class _DrawerState extends State<DrawerHelp>{
                 leading: Icon(Icons.home, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
                 title: Text('Home', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage()));
                 },
               ),
               
@@ -85,7 +85,7 @@ class _DrawerState extends State<DrawerHelp>{
                 leading: Icon(Icons.category, size: _drawerIconSize, color: Theme.of(context).colorScheme.secondary,),
                 title: Text('Categories', style: TextStyle(fontSize: 17, color: Theme.of(context).colorScheme.secondary),),
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
+                  //Navigator.push(context, MaterialPageRoute(builder: (context) => SplashScreen(title: "Splash Screen")));
                 },
               ),
                Divider(color: Theme.of(context).primaryColor, height: 1,),
