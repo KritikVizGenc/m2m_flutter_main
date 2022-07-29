@@ -27,11 +27,10 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 255, 230, 230),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -49,10 +48,11 @@ class _LoginPageState extends State<LoginPage> {
                     //crossAxisAlignment: Alignment(0.5, 0.5),
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 35),
+                        padding: EdgeInsets.fromLTRB(0, 50, 0, 35),
                         child: Text(
                           'Hi There!',
                           style: TextStyle(
+                              color: Color.fromARGB(255, 83, 83, 83),
                               height: 0.1,
                               fontSize: 60,
                               fontWeight: FontWeight.bold),
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                           'Now it\'s easy to find mentor,just create an account',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Colors.grey,
+                            color: Color.fromARGB(255, 83, 83, 83),
                             fontSize: 20,
                           ),
                         ),
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     "Forgot your password?",
                                     style: TextStyle(
-                                      color: Colors.grey,
+                                      color: Color.fromARGB(255, 83, 83, 83),
                                     ),
                                   ),
                                 ),
@@ -146,33 +146,43 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    if(validateAndSave()){
+                                    if (validateAndSave()) {
                                       setState(() {
                                         //isAPIcallProcess = true;
                                       });
-                                      
-                                      LoginRequestModel model = LoginRequestModel(
-                                          email: emailController.text,
-                                          password: passwordController.text);
 
-                                      APIService.login(model).then((response) => {
-                                        if(response){
-                                          Navigator.of(context).pushAndRemoveUntil(
-                                               MaterialPageRoute(
-                                                   builder: (context) => MainPage()),
-                                               (Route<dynamic> route) => false)
-                                        } else {
-                                            //Hata mesajı gösterilecek
-                                          FormHelper.showSimpleAlertDialog(
-                                          context,
-                                          "Başlık",
-                                          "Invalid username or password",
-                                          "OK",
-                                          () {
-                                            Navigator.pop(context);
-                                          })
-                                        }
-                                      });
+                                      LoginRequestModel model =
+                                          LoginRequestModel(
+                                              email: emailController.text,
+                                              password:
+                                                  passwordController.text);
+
+                                      APIService.login(model).then((response) =>
+                                          {
+                                            if (response)
+                                              {
+                                                Navigator.of(context)
+                                                    .pushAndRemoveUntil(
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    MainPage()),
+                                                        (Route<dynamic>
+                                                                route) =>
+                                                            false)
+                                              }
+                                            else
+                                              {
+                                                //Hata mesajı gösterilecek
+                                                FormHelper.showSimpleAlertDialog(
+                                                    context,
+                                                    "Başlık",
+                                                    "Invalid username or password",
+                                                    "OK", () {
+                                                  Navigator.pop(context);
+                                                })
+                                              }
+                                          });
                                     }
                                     // if (_formKey.currentState!.validate()) {
                                     //   Navigator.of(context).pushAndRemoveUntil(
@@ -217,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
 
   bool validateAndSave() {
     final form = _formKey.currentState;
-    if(form!.validate()) {
+    if (form!.validate()) {
       return true;
     } else {
       return false;
