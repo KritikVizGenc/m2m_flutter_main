@@ -39,7 +39,7 @@ dependencies:
   otp_text_field: ^1.1.1
   api_cache_manager: ^1.0.1
   snippet_coder_utils: ^1.0.12
-  google_fonts: ^3.0.1
+  //google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_test:

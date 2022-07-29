@@ -42,17 +42,20 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SafeArea(
               child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 10),
                   margin: EdgeInsets.fromLTRB(
-                      20, 10, 20, 10), // This will be the login form
+                      20, 0, 20, 10), // This will be the login form
                   child: Column(
                     //crossAxisAlignment: Alignment(0.5, 0.5),
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 35),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 35),
                         child: Text(
                           'Hi There!',
-                          style: GoogleFonts.abel(fontSize: 80),
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 60,
+                          ),
                         ),
                       ),
 
