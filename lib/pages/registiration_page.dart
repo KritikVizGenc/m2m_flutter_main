@@ -1,7 +1,10 @@
+import 'package:m2m_flutter_main/model/register_request_model.dart';
 import 'package:m2m_flutter_main/pages/mentor_mentee_choose_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 import '../common/theme_helper.dart';
+import '../service/api_service.dart';
 import 'widgets/header_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -23,6 +26,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
+
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +93,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                         Container(
                           child: TextFormField(
+                            controller: nameController,
                             decoration: ThemeHelper().textInputDecoration(
                                 'First Name', 'Enter your first name'),
                           ),
@@ -95,6 +104,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         ),
                         Container(
                           child: TextFormField(
+                            controller: surnameController,
                             decoration: ThemeHelper().textInputDecoration(
                                 'Last Name', 'Enter your last name'),
                           ),
@@ -103,6 +113,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         SizedBox(height: 20.0),
                         Container(
                           child: TextFormField(
+                            controller: emailController,
                             decoration: ThemeHelper().textInputDecoration(
                                 "E-mail address*", "Enter your email"),
                             keyboardType: TextInputType.emailAddress,
@@ -123,6 +134,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
                                 "Password*", "Enter your password"),
+                            controller: passwordController,
                             validator: (val) {
                               if (val!.isEmpty) {
                                 return "Please enter your password";
@@ -137,7 +149,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           child: TextFormField(
                             obscureText: true,
                             decoration: ThemeHelper().textInputDecoration(
-                                "Confirm Password*", "Enter your password"),
+                                "Confirm Password*", "Confirm your password"),
                             validator: (val) {
                               if (val!.isEmpty) {
                                 return "Please enter your password";
@@ -252,12 +264,46 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               ),
                             ),
                             onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                Navigator.of(context).pushAndRemoveUntil(
-                                    MaterialPageRoute(
-                                        builder: (context) => MainPage()),
-                                    (Route<dynamic> route) => false);
+
+                              if(validateAndSave()){
+                                setState(() {
+                                  //isAPIcallProcess = true;
+                                });
+
+                                RegisterRequestModel model = RegisterRequestModel(
+                                    name: nameController.text,
+                                    surname: surnameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                    userRole: 1
+                                );
+
+                                APIService.register(model).then((response) => {
+                                  if(response){
+                                    Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => MainPage()),
+                                            (Route<dynamic> route) => false)
+                                  } else {
+                                    //Hata mesajı gösterilecek
+                                    FormHelper.showSimpleAlertDialog(
+                                        context,
+                                        "Hata",
+                                        "Invalid username or password",
+                                        "OK",
+                                            () {
+                                          Navigator.pop(context);
+                                        })
+                                  }
+                                });
                               }
+
+                              // if (_formKey.currentState!.validate()) {
+                              //   Navigator.of(context).pushAndRemoveUntil(
+                              //       MaterialPageRoute(
+                              //           builder: (context) => MainPage()),
+                              //       (Route<dynamic> route) => false);
+                              // }
                             },
                           ),
                         ),
@@ -271,5 +317,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
       ),
     );
+  }
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if(form!.validate()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

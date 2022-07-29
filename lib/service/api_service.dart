@@ -5,6 +5,7 @@ import 'package:m2m_flutter_main/config.dart';
 import 'package:m2m_flutter_main/model/login_request_model.dart';
 import 'package:m2m_flutter_main/model/login_response_model.dart';
 import 'package:m2m_flutter_main/model/register_request_model.dart';
+import 'package:m2m_flutter_main/model/register_response_model.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
 
 class APIService {
@@ -45,8 +46,8 @@ class APIService {
           body: jsonEncode(model.toJson()),
         );
 
-        if(response.statusCode == 200){
-          await SharedService.setLoginDetails(loginResponseJson(response.body));
+        if(response.statusCode == 201){
+          await SharedService.setRegisterDetails(registerResponseJson(response.body));
           return true;
         } else {
           return false;
