@@ -16,9 +16,14 @@ class MentorPage extends StatefulWidget {
 }
 
 class _MentorPageState extends State<MentorPage> {
+   TextEditingController editingController = TextEditingController();
   double _drawerIconSize = 24;
   double _drawerFontSize = 17;
   @override
+   void filterSearchResults(String query){
+
+//search kısmı dolacak
+  }
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerHelp(),
@@ -27,6 +32,21 @@ class _MentorPageState extends State<MentorPage> {
         child: ListView(
           padding: const EdgeInsets.all(8),
           children: <Widget>[
+             //searchbar için gerekli
+          SizedBox(height:15,),
+          TextField( onChanged: (value){
+
+          },
+            decoration: InputDecoration(
+              labelText: "Listeyi ara",
+              hintText: "Aramak için yaz",
+              prefixIcon: Icon(Icons.search),
+              border: OutlineInputBorder(
+                borderRadius:BorderRadius.all(Radius.circular(10))
+                 ),
+            ),
+
+          ),
             Card(
                 child: ListTile(
                     title: Text("NAME"),
