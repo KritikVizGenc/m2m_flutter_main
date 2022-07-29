@@ -1,22 +1,26 @@
 
 import 'dart:convert';
 
-RegisterResponseModel registerResponseModel(String str) =>
+RegisterResponseModel registerResponseJson(String str) =>
     RegisterResponseModel.fromJson(json.decode(str));
 
 class RegisterResponseModel {
   RegisterResponseModel({
     required this.newUser,
+    required this.token,
   });
   late final NewUser newUser;
+  late final String token;
 
   RegisterResponseModel.fromJson(Map<String, dynamic> json){
     newUser = NewUser.fromJson(json['newUser']);
+    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['newUser'] = newUser.toJson();
+    _data['token'] = token;
     return _data;
   }
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:api_cache_manager/api_cache_manager.dart';
 import 'package:api_cache_manager/models/cache_db_model.dart';
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/model/register_response_model.dart';
 
 import '../model/login_response_model.dart';
 
@@ -27,7 +28,17 @@ class SharedService {
       LoginResponseModel model,
       ) async {
     APICacheDBModel cacheDBModel = APICacheDBModel(
-        key: "login_details",
+        key: "register_details",
+        syncData: jsonEncode(model.toJson()));
+
+    await APICacheManager().addCacheData(cacheDBModel);
+  }
+
+  static Future<void> setRegisterDetails(
+      RegisterResponseModel model,
+      ) async {
+    APICacheDBModel cacheDBModel = APICacheDBModel(
+        key: "register_details",
         syncData: jsonEncode(model.toJson()));
 
     await APICacheManager().addCacheData(cacheDBModel);
