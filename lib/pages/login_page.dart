@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 230, 230),
+      backgroundColor: Color.fromARGB(255, 211, 203, 237),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           'Hi There!',
                           style: TextStyle(
-                              color: Color.fromARGB(255, 83, 83, 83),
+                              color: Color.fromARGB(255, 50, 28, 49),
                               height: 0.1,
                               fontSize: 60,
                               fontWeight: FontWeight.bold),
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                           'Now it\'s easy to find mentor,just create an account',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: Color.fromARGB(255, 83, 83, 83),
+                            color: Color.fromARGB(255, 50, 28, 49),
                             fontSize: 20,
                           ),
                         ),
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                                   child: Text(
                                     "Forgot your password?",
                                     style: TextStyle(
-                                      color: Color.fromARGB(255, 83, 83, 83),
+                                      color: Color.fromARGB(255, 36, 19, 35),
                                     ),
                                   ),
                                 ),
@@ -210,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                                       },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        color: Theme.of(context).accentColor),
+                                        color: Theme.of(context).primaryColor),
                                   ),
                                 ])),
                               ),
