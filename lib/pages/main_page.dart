@@ -32,7 +32,7 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.secondary,
+      backgroundColor: Color.fromARGB(255, 231, 236, 251),
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
       appBar: AppBar(
@@ -84,35 +84,100 @@ class MainPage extends StatelessWidget {
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Container(
-              color: Color.fromARGB(255, 231, 236, 251),
-              height: 150,
-              child: GridView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 25,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1),
-                itemBuilder: (context, index) {
-                  return MyCircle(child: Text("1"));
-                },
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(290, 0, 0, 0),
+                  child: TextButton(
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 50, 28, 49),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MentorPage()));
+                    },
+                  ),
+                ),
+                Container(
+                  color: Color.fromARGB(255, 69, 41, 67),
+                  height: 150,
+                  child: GridView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 25,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1),
+                    itemBuilder: (context, index) {
+                      return MyCircle(child: Text("1"));
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-            child: Container(
-              color: Color.fromARGB(255, 231, 236, 251),
-              height: 150,
-              child: GridView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 25,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1),
-                itemBuilder: (context, index) {
-                  return MyCircle(child: Text("1"));
-                },
-              ),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            child: Column(
+              children: [
+                Container(
+                  padding: EdgeInsets.fromLTRB(290, 0, 0, 0),
+                  child: TextButton(
+                    child: Text(
+                      'See all',
+                      style: TextStyle(
+                          color: Color.fromARGB(255, 50, 28, 49),
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MentorPage()));
+                    },
+                  ),
+                ),
+                Container(
+                  color: Color.fromARGB(255, 69, 41, 67),
+                  height: 150,
+                  child: GridView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 25,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 1),
+                    itemBuilder: (context, index) {
+                      return MyCircle(child: Text("1"));
+                    },
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(0, 40, 240, 0),
+                  child: Text(
+                    'Categories',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 50, 28, 49),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Container(
+                  height: 150,
+                  child: GridView.builder(
+                    itemCount: 5,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3),
+                    itemBuilder: (context, index) {
+                      return MySquare(child: Text("1"));
+                    },
+                  ),
+                ),
+              ],
             ),
           )
         ],

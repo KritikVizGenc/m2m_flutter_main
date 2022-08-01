@@ -12,12 +12,12 @@ class MyCircle extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: Color.fromARGB(255, 69, 41, 67),
+          color: Theme.of(context).colorScheme.secondary,
         ),
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
-            primary: Color.fromARGB(255, 69, 41, 67),
-            minimumSize: Size(MediaQuery.of(context).size.width * 0.3,
+            primary: Theme.of(context).colorScheme.secondary,
+            minimumSize: Size(MediaQuery.of(context).size.width * 0.2,
                 MediaQuery.of(context).size.height * 0.2),
             //elevation: 3,
           ),
