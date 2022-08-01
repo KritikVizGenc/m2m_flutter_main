@@ -46,8 +46,8 @@ class LoginUIApp extends StatelessWidget {
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
-      home: SplashScreen(title: 'Flutter Login'),
-      //home: MainPage(),
+      //home: SplashScreen(title: 'Flutter Login'),
+      home: MainPage(),
     );
   }
 }
