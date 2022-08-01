@@ -7,6 +7,7 @@ import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'login_page.dart';
 import 'mentee_page.dart';
+import '../common/Listing.dart';
 
 class MentorPage extends StatefulWidget {
   @override
@@ -28,60 +29,7 @@ class _MentorPageState extends State<MentorPage> {
     return Scaffold(
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
-      body: Center(
-        child: ListView(
-          padding: const EdgeInsets.all(8),
-          children: <Widget>[
-             //searchbar için gerekli
-          SizedBox(height:15,),
-          TextField( onChanged: (value){
-
-          },
-            decoration: InputDecoration(
-              labelText: "Listeyi ara",
-              hintText: "Aramak için yaz",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius:BorderRadius.all(Radius.circular(10))
-                 ),
-            ),
-
-          ),
-            Card(
-                child: ListTile(
-                    title: Text("NAME"),
-                    subtitle: Text("HI,I am the MENTOR."),
-                    leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-                    trailing: Icon(Icons.person_add_alt_rounded))),
-            Card(
-                child: ListTile(
-                    title: Text("NAME"),
-                    subtitle: Text("Mentor."),
-                    leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")),
-                    trailing: Icon(Icons.person_add_alt_rounded))),
-            Card(
-                child: ListTile(
-                    title: Text("NAME"),
-                    subtitle: Text("Mentor."),
-                    leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")),
-                    trailing: Icon(Icons.person_add_alt_rounded))),
-            Card(
-                child: ListTile(
-                    title: Text("NAME"),
-                    subtitle: Text("Mentor."),
-                    leading: CircleAvatar(
-                        backgroundImage: NetworkImage(
-                            "https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")),
-                    trailing: Icon(Icons.person_add_alt_rounded)))
-          ],
-        ),
-      ),
+      body: ListDisplay(),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(

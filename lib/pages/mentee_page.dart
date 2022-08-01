@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
+import '../common/Listing.dart';
 
 import 'login_page.dart';
 import 'main_page.dart';
@@ -38,57 +39,58 @@ class MenteePage extends  StatefulWidget{
     return MaterialApp(
     
     home: Scaffold(  
-      body: Center(
- child:
-      ListView(
-        padding: const EdgeInsets.all(8),
-        children: <Widget>[
-          SizedBox(height:15,),
-          TextField( onChanged: (value){
+      body: ListDisplay(),
+//       Center(
+//  child:
+//       ListView(
+//         padding: const EdgeInsets.all(8),
+//         children: <Widget>[
+//           SizedBox(height:15,),
+//           TextField( onChanged: (value){
 
-          },
-            decoration: InputDecoration(
-              labelText: "Listeyi ara",
-              hintText: "Aramak için yaz",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius:BorderRadius.all(Radius.circular(10))
-                 ),
-            ),
+//           },
+//             decoration: InputDecoration(
+//               labelText: "Listeyi ara",
+//               hintText: "Aramak için yaz",
+//               prefixIcon: Icon(Icons.search),
+//               border: OutlineInputBorder(
+//                 borderRadius:BorderRadius.all(Radius.circular(10))
+//                  ),
+//             ),
 
-          ),
-          Card(child:ListTile(
-            title: Text("NAME"),
-            subtitle: Text("HI,I am the MENTEE."),
-            leading: CircleAvatar(backgroundImage: NetworkImage("https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
-            trailing: Icon(Icons.person_add_alt_rounded))),
-          Card(
-            child:ListTile( 
-              title: Text("NAME"),subtitle: Text("Mentee."), 
-              leading: CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), 
-              trailing: Icon(Icons.person_add_alt_rounded)
-              )
-              ),
-          Card(
-            child:ListTile( 
-              title: Text("NAME"),
-              subtitle: Text("Mentee."), 
-              leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")),
-               trailing: Icon(Icons.person_add_alt_rounded)
-               )
-               ),
-          Card(
-            child:ListTile( title: Text("NAME"),
-            subtitle: Text("Mentee."), 
-            leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), 
-            trailing: Icon(Icons.person_add_alt_rounded)
-            )
-            )
+//           ),
+//           Card(child:ListTile(
+//             title: Text("NAME"),
+//             subtitle: Text("HI,I am the MENTEE."),
+//             leading: CircleAvatar(backgroundImage: NetworkImage("https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
+//             trailing: Icon(Icons.person_add_alt_rounded))),
+//           Card(
+//             child:ListTile( 
+//               title: Text("NAME"),subtitle: Text("Mentee."), 
+//               leading: CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), 
+//               trailing: Icon(Icons.person_add_alt_rounded)
+//               )
+//               ),
+//           Card(
+//             child:ListTile( 
+//               title: Text("NAME"),
+//               subtitle: Text("Mentee."), 
+//               leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")),
+//                trailing: Icon(Icons.person_add_alt_rounded)
+//                )
+//                ),
+//           Card(
+//             child:ListTile( title: Text("NAME"),
+//             subtitle: Text("Mentee."), 
+//             leading:  CircleAvatar(backgroundImage: NetworkImage("https://miro.medium.com/fit/c/64/64/1*WSdkXxKtD8m54-1xp75cqQ.jpeg")), 
+//             trailing: Icon(Icons.person_add_alt_rounded)
+//             )
+//             )
             
-        ],
-      ),
+//         ],
+//       ),
     
-),
+// ),
     
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -142,8 +144,6 @@ class MenteePage extends  StatefulWidget{
     //   ),
       
     // ),
-  
-
               drawer: DrawerHelp(),
               bottomNavigationBar: BottomBar(),
           ),
