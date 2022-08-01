@@ -87,10 +87,7 @@ class _DrawerState extends State<DrawerHelp> {
             ),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          MainPage()));
+                  context, MaterialPageRoute(builder: (context) => MainPage()));
             },
           ),
           ListTile(

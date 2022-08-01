@@ -26,8 +26,9 @@ class LoginUIApp extends StatelessWidget {
     800: Color.fromARGB(255, 94, 62, 92), //90%
     900: Color.fromARGB(255, 62, 35, 60), //100%
   };
-  Color _primaryColor = Color.fromARGB(255, 62, 35, 60);
+  Color _primaryColor = Color.fromARGB(255, 69, 41, 67);
   Color accentColor = Color.fromARGB(255, 29, 33, 63);
+  Color backColor = Color.fromARGB(255, 231, 236, 251);
   MaterialColor primeColor = MaterialColor(0xFF3399FF, color);
   // This widget is the root of your application.
   @override
@@ -46,6 +47,7 @@ class LoginUIApp extends StatelessWidget {
         primarySwatch: primeColor,
       ),
       home: SplashScreen(title: 'Flutter Login'),
+      //home: MainPage(),
     );
   }
 }

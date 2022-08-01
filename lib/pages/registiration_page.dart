@@ -35,7 +35,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 240, 236, 253),
       body: SingleChildScrollView(
         child: Stack(
           children: [
@@ -219,7 +219,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                         }),
                                     Text(
                                       "I accept all terms and conditions.",
-                                      style: TextStyle(color: Colors.grey),
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 36, 19, 35),
+                                      ),
                                     ),
                                   ],
                                 ),
@@ -264,38 +266,42 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               ),
                             ),
                             onPressed: () {
-
-                              if(validateAndSave()){
+                              if (validateAndSave()) {
                                 setState(() {
                                   //isAPIcallProcess = true;
                                 });
 
-                                RegisterRequestModel model = RegisterRequestModel(
-                                    name: nameController.text,
-                                    surname: surnameController.text,
-                                    email: emailController.text,
-                                    password: passwordController.text,
-                                    userRole: 1
-                                );
+                                RegisterRequestModel model =
+                                    RegisterRequestModel(
+                                        name: nameController.text,
+                                        surname: surnameController.text,
+                                        email: emailController.text,
+                                        password: passwordController.text,
+                                        userRole: 1);
 
                                 APIService.register(model).then((response) => {
-                                  if(response){
-                                    Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(
-                                            builder: (context) => MainPage()),
-                                            (Route<dynamic> route) => false)
-                                  } else {
-                                    //Hata mesajı gösterilecek
-                                    FormHelper.showSimpleAlertDialog(
-                                        context,
-                                        "Hata",
-                                        "Invalid username or password",
-                                        "OK",
-                                            () {
-                                          Navigator.pop(context);
-                                        })
-                                  }
-                                });
+                                      if (response)
+                                        {
+                                          Navigator.of(context)
+                                              .pushAndRemoveUntil(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          MainPage()),
+                                                  (Route<dynamic> route) =>
+                                                      false)
+                                        }
+                                      else
+                                        {
+                                          //Hata mesajı gösterilecek
+                                          FormHelper.showSimpleAlertDialog(
+                                              context,
+                                              "Hata",
+                                              "Invalid username or password",
+                                              "OK", () {
+                                            Navigator.pop(context);
+                                          })
+                                        }
+                                    });
                               }
 
                               // if (_formKey.currentState!.validate()) {
@@ -318,9 +324,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
       ),
     );
   }
+
   bool validateAndSave() {
     final form = _formKey.currentState;
-    if(form!.validate()) {
+    if (form!.validate()) {
       return true;
     } else {
       return false;
