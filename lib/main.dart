@@ -8,7 +8,6 @@ import 'pages/splash_screen.dart';
 import 'pages/login_page.dart';
 import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
-import 'pages/mentor_mentee_choose_page.dart';
 import 'pages/registiration_page.dart';
 
 void main() {

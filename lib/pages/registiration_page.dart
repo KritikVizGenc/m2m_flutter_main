@@ -1,5 +1,4 @@
 import 'package:m2m_flutter_main/model/register_request_model.dart';
-import 'package:m2m_flutter_main/pages/mentor_mentee_choose_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
@@ -9,7 +8,6 @@ import 'widgets/header_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'main_page.dart';
-import 'mentor_mentee_choose_page.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override

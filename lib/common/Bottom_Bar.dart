@@ -9,15 +9,13 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Widget child;
-    switch(_selectedIndex){
+    switch (_selectedIndex) {
       case 0:
-      
-      
-      
     }
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
+          backgroundColor: Color.fromARGB(255, 69, 41, 67),
           icon: Icon(Icons.home),
           label: 'Home',
         ),

@@ -5,7 +5,6 @@
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import '../model/listing_model.dart';
 import '../pages/main_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/mentor_page.dart';
@@ -23,33 +22,12 @@ class _ListDisplayState extends State<ListDisplay> {
   var counter;
   var personelResult;
 
-  Future ListingALL() async {
-    try {
-      final response = await get(url);
-      if (response == 200) {
-        var result = ListingFromJson(response.body);
-        if (mounted)
-          setState(() {
-            counter = result.userTables.length / 4;
-            personelResult = result;
-            print("");
-          });
-        return result;
-      } else {
-        print(response);
-      }
-    } catch (e) {
-      print(e.toString());
-    }
-  }
-
   TextEditingController editingController = TextEditingController();
   final duplicateItems = List<String>.generate(10000, (i) => "Eleman $i");
 
   List<String> list = [];
   void initState() {
     super.initState();
-    ListingALL();
   }
 
   void filterSearchResults(String query) {

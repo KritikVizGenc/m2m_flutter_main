@@ -3,7 +3,6 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
-import 'package:m2m_flutter_main/pages/widgets/appbar_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/square.dart';
@@ -162,19 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     child: const Center(child: Text('Entry C')),
                   ),
 
-                  /*Container(
-                  //color: Color.fromARGB(255, 69, 41, 67),
-
-                  height: 150,
-                  child: GridView.builder(
-                    itemCount: 25,
-                    gridDelegate:
-                        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
-                    itemBuilder: (context, index) {
-                      return MySquare(child: Text("Comments"));
-                    },
-                  ),
-                ),*/
+                  
                 ],
               ),
             ),
