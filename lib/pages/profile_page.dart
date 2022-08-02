@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/model/user.dart';
+import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/appbar_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
@@ -22,6 +23,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final user = UserPreferences.myUser;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
       //appBar: buildAppBar(context),
       drawer: DrawerHelp(),
@@ -49,10 +51,34 @@ class _ProfilePageState extends State<ProfilePage> {
             margin: EdgeInsets.only(
               top: 16,
               right: 16,
+              bottom: 10,
             ),
             child: Stack(
               children: <Widget>[
-                Icon(Icons.edit),
+                Column(
+                  children: [
+                    /*Padding(
+                      //adding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                    ),*/
+                    TextButton.icon(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => EditProfilePage()));
+                      },
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                      ),
+                      label: Text(
+                        'Edit Profile',
+                        style: TextStyle(color: Colors.white, fontSize: 10),
+                      ),
+                    ),
+                    //Icon(Icons.edit),
+                  ],
+                ),
                 Positioned(
                   right: 0,
                   child: Container(
@@ -74,7 +100,10 @@ class _ProfilePageState extends State<ProfilePage> {
           const SizedBox(height: 24),
           ProfileWidget(
             imagePath: user.imagePath,
-            onClicked: () async {},
+            onClicked: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => EditProfilePage()));
+            },
           ),
           const SizedBox(height: 24),
           buildName(user),

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +6,10 @@ import 'package:flutter/material.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
 import 'package:table_calendar/table_calendar.dart';
+
 class MeetPage extends StatefulWidget {
   @override
-_MeetPageState createState() => _MeetPageState();
+  _MeetPageState createState() => _MeetPageState();
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,7 @@ class _MeetPageState extends State<MeetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerHelp(),
-              bottomNavigationBar: BottomBar(),
+      bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text("ARRANGE MEET"),
         centerTitle: true,
@@ -143,7 +142,6 @@ class _MeetPageState extends State<MeetPage> {
                 child: Text("Ok"),
                 onPressed: () {
                   if (_eventController.text.isEmpty) {
-
                   } else {
                     if (selectedEvents[selectedDay] != null) {
                       selectedEvents[selectedDay]?.add(
@@ -154,11 +152,10 @@ class _MeetPageState extends State<MeetPage> {
                         Event(title: _eventController.text)
                       ];
                     }
-
                   }
                   Navigator.pop(context);
                   _eventController.clear();
-                  setState((){});
+                  setState(() {});
                   return;
                 },
               ),
