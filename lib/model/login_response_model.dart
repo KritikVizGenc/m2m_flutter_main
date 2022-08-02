@@ -9,19 +9,19 @@ class LoginResponseModel {
     required this.message,
     required this.token,
   });
-  late final UserWithEmail userWithEmail;
-  late final String message;
-  late final String token;
+  late final UserWithEmail? userWithEmail;
+  late final String? message;
+  late final String? token;
 
   LoginResponseModel.fromJson(Map<String, dynamic> json){
-    userWithEmail = UserWithEmail.fromJson(json['userWithEmail']);
+    userWithEmail = json['userWithEmail'] != null ? UserWithEmail.fromJson(json['userWithEmail']) : null;
     message = json['message'];
     token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['userWithEmail'] = userWithEmail.toJson();
+    _data['userWithEmail'] = userWithEmail?.toJson();
     _data['message'] = message;
     _data['token'] = token;
     return _data;

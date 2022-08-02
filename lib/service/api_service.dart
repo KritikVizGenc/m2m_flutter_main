@@ -11,7 +11,7 @@ import 'package:m2m_flutter_main/service/shared_service.dart';
 class APIService {
   static var client = http.Client();
 
-      static Future<bool> login(LoginRequestModel model) async {
+      static Future<LoginResponseModel> login(LoginRequestModel model) async {
         Map<String, String> requestHeaders = {
           'Content-Type': 'application/json',
         };
@@ -26,16 +26,12 @@ class APIService {
 
         if(response.statusCode == 200){
           await SharedService.setLoginDetails(loginResponseJson(response.body));
-          return true;
-        } else {
-          return false;
         }
-
-
+        return loginResponseJson(response.body);
       }
 
 
-      static Future<bool> register(RegisterRequestModel model) async {
+      static Future<RegisterResponseModel> register(RegisterRequestModel model) async {
         Map<String, String> requestHeaders = {
           'Content-Type': 'application/json',
         };
@@ -45,12 +41,13 @@ class APIService {
           headers: requestHeaders,
           body: jsonEncode(model.toJson()),
         );
-
-        if(response.statusCode == 201){
-          await SharedService.setRegisterDetails(registerResponseJson(response.body));
-          return true;
-        } else {
-          return false;
+        if(response.statusCode == 200){
+          await SharedService.setLoginDetails(loginResponseJson(response.body));
         }
+        return registerResponseJson(response.body);
       }
+
+
+
+
 }

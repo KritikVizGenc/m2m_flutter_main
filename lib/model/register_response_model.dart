@@ -8,19 +8,23 @@ class RegisterResponseModel {
   RegisterResponseModel({
     required this.newUser,
     required this.token,
+    required this.message
   });
-  late final NewUser newUser;
-  late final String token;
+  late final NewUser? newUser;
+  late final String? token;
+  late final String? message;
 
   RegisterResponseModel.fromJson(Map<String, dynamic> json){
-    newUser = NewUser.fromJson(json['newUser']);
+    newUser = json['newUser'] != null ? NewUser.fromJson(json['newUser']) : null;
     token = json['token'];
+    message = json['message'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['newUser'] = newUser.toJson();
+    _data['newUser'] = newUser?.toJson();
     _data['token'] = token;
+    _data['message'] = message;
     return _data;
   }
 }
