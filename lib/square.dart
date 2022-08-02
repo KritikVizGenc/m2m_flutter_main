@@ -8,7 +8,7 @@ class MySquare extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 35),
       child: Container(
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
@@ -17,12 +17,12 @@ class MySquare extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: Theme.of(context).colorScheme.secondary,
-            minimumSize: Size(MediaQuery.of(context).size.width * 1.2,
-                MediaQuery.of(context).size.height * 1.1),
+            minimumSize: Size(MediaQuery.of(context).size.width * 0.5,
+                MediaQuery.of(context).size.height * 0.5),
             //elevation: 3,
           ),
           child: Text(
-            '1',
+            'Comments',
             style: TextStyle(fontSize: 20.0),
           ),
           onPressed: () {

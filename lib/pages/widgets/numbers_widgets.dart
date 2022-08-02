@@ -8,10 +8,6 @@ class NumbersWidget extends StatelessWidget {
           buildButton(context, '4.8', 'Ranking'),
         ],
       );
-  Widget buildDivider() => Container(
-        height: 24,
-        child: VerticalDivider(),
-      );
 
   Widget buildButton(BuildContext context, String value, String text) =>
       MaterialButton(
