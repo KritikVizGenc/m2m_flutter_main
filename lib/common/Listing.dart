@@ -5,7 +5,7 @@
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:m2m_flutter_main/model/Mentee_list_model.dart';
+import '../model/listing_model.dart';
 import '../pages/main_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/mentor_page.dart';
@@ -27,11 +27,12 @@ class _ListDisplayState extends State<ListDisplay> {
     try {
       final response = await get(url);
       if (response == 200) {
-        var result = menteeListFromJson(response.body);
+        var result = ListingFromJson(response.body);
         if (mounted)
           setState(() {
-            counter = 15;
+            counter = result.userTables.length / 4;
             personelResult = result;
+            print("");
           });
         return result;
       } else {
@@ -47,7 +48,6 @@ class _ListDisplayState extends State<ListDisplay> {
 
   List<String> list = [];
   void initState() {
-    list.addAll(duplicateItems);
     super.initState();
     ListingALL();
   }
@@ -109,7 +109,7 @@ class _ListDisplayState extends State<ListDisplay> {
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => MainPage())),
 
-                  title: Text(pers),
+                  title: Text(""),
                   subtitle: Text(""),
                   leading: CircleAvatar(
                       backgroundImage: NetworkImage(
