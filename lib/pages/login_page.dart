@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:m2m_flutter_main/model/login_request_model.dart';
 import 'package:m2m_flutter_main/model/login_response_model.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
+import 'package:m2m_flutter_main/service/shared_service.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import '../common/theme_helper.dart';
 
@@ -159,25 +160,22 @@ class _LoginPageState extends State<LoginPage> {
 
                                       APIService.login(model).then((response) =>
                                           {
-                                            if (response)
+                                            if (response.userWithEmail != null)
                                               {
-                                                Navigator.of(context)
-                                                    .pushAndRemoveUntil(
-                                                        MaterialPageRoute(
-                                                            builder:
-                                                                (context) =>
-                                                                    MainPage()),
-                                                        (Route<dynamic>
-                                                                route) =>
-                                                            false)
+                                        Navigator.pushNamedAndRemoveUntil(
+                                        context,
+                                        '/home',
+                                            (route) => false,
+                                      )
+
                                               }
                                             else
                                               {
                                                 //Hata mesajı gösterilecek
                                                 FormHelper.showSimpleAlertDialog(
                                                     context,
-                                                    "Başlık",
-                                                    "Invalid username or password",
+                                                    "Error",
+                                                    response.message!,
                                                     "OK", () {
                                                   Navigator.pop(context);
                                                 })
@@ -202,11 +200,10 @@ class _LoginPageState extends State<LoginPage> {
                                     text: 'Create',
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    RegistrationPage()));
+                                        Navigator.pushNamed(
+                                          context,
+                                          '/register',
+                                        );
                                       },
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
