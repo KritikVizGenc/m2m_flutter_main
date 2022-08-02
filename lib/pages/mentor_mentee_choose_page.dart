@@ -109,8 +109,10 @@ class _ChoosePageState extends State<ChoosePage> {
                   style: TextStyle(fontSize: 40.0),
                 ),
                 onPressed: () {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => RegistrationPage()));
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegistrationPage()));
                 },
               ),
             ),

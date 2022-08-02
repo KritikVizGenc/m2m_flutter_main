@@ -39,40 +39,49 @@ class _DrawerState extends State<DrawerHelp> {
                 ],
               ),
             ),
-            child: Container(
-              height: 40,
-              alignment: Alignment.center,
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 5, color: Colors.white),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 20,
-                          offset: const Offset(5, 5),
-                        ),
-                      ],
+            
+              child: Container(
+                height: 40,
+                alignment: Alignment.center,
+                
+                child: Column(
+                  children: [
+                    Container(
+                      
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(width: 5, color: Colors.white),
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            blurRadius: 20,
+                            offset: const Offset(5, 5),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.person,
+                        size: 45,
+                        color: Colors.grey.shade300,
+                      ),
                     ),
-                    child: Icon(
-                      Icons.person,
-                      size: 45,
-                      color: Colors.grey.shade300,
+                    Text(
+                      '\nName Surname',
+                      style: TextStyle(
+                          fontSize: 26,
+                          color: Theme.of(context).colorScheme.onPrimary),
                     ),
-                  ),
-                  Text(
-                    '\nName Surname',
-                    style: TextStyle(
-                        fontSize: 26,
-                        color: Theme.of(context).colorScheme.onPrimary),
-                  ),
-                ],
+                    /*onPressed: () {
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => MenteePage()));
+                  },*/
+                  ],
+                  
+                ),
               ),
-            ),
+            
           ),
           ListTile(
             leading: Icon(

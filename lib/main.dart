@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
@@ -37,6 +38,7 @@ class LoginUIApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Login',
       theme: ThemeData(
+        dividerColor: Colors.black,
         drawerTheme: DrawerThemeData(
             backgroundColor: _primaryColor, scrimColor: accentColor),
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
@@ -47,7 +49,7 @@ class LoginUIApp extends StatelessWidget {
         primarySwatch: primeColor,
       ),
       //home: SplashScreen(title: 'Flutter Login'),
-      home: MainPage(),
+      home: ProfilePage(),
     );
   }
 }
