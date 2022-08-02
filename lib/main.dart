@@ -4,17 +4,29 @@ import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:m2m_flutter_main/service/shared_service.dart';
 import 'pages/splash_screen.dart';
 import 'pages/login_page.dart';
 import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
 
-void main() {
-  runApp(LoginUIApp());
+Widget _defaultHome = const LoginPage();
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  bool result = await SharedService.isLoggedIn();
+  print("--------------------------------------------------");
+  print(result);
+  if(result) {
+    _defaultHome = MainPage();
+  }
+  
+  runApp(MyApp());
 }
 
-class LoginUIApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   static Map<int, Color> color = {
     50: Color.fromARGB(255, 111, 116, 165), //10%
     100: Color.fromARGB(255, 7, 11, 47), //20%
@@ -31,6 +43,8 @@ class LoginUIApp extends StatelessWidget {
   Color accentColor = Color.fromARGB(255, 29, 33, 63);
   Color backColor = Color.fromARGB(255, 231, 236, 251);
   MaterialColor primeColor = MaterialColor(0xFF3399FF, color);
+
+  MyApp({Key? key}) : super(key: key);
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -48,8 +62,14 @@ class LoginUIApp extends StatelessWidget {
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
-      // home: SplashScreen(title: 'Flutter Login'),
-      home: ProfilePage(),
+     // home: SplashScreen(title: 'Flutter Login'),
+      //home: LoginPage(),
+      routes: {
+        '/': (context) => _defaultHome,
+        '/home': (context) => MainPage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => RegistrationPage(),
+      },
     );
   }
 }
