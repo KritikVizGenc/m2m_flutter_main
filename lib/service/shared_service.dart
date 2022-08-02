@@ -20,7 +20,6 @@ class SharedService {
       var cacheData = await APICacheManager().getCacheData("login_details");
       return loginResponseJson(cacheData.syncData);
     }
-    return null;
   }
 
 
@@ -28,21 +27,12 @@ class SharedService {
       LoginResponseModel model,
       ) async {
     APICacheDBModel cacheDBModel = APICacheDBModel(
-        key: "register_details",
+        key: "login_details",
         syncData: jsonEncode(model.toJson()));
 
     await APICacheManager().addCacheData(cacheDBModel);
   }
 
-  static Future<void> setRegisterDetails(
-      RegisterResponseModel model,
-      ) async {
-    APICacheDBModel cacheDBModel = APICacheDBModel(
-        key: "register_details",
-        syncData: jsonEncode(model.toJson()));
-
-    await APICacheManager().addCacheData(cacheDBModel);
-  }
 
   static Future<void> logout(BuildContext context) async {
     await APICacheManager().deleteCache("login_details");
