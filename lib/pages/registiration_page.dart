@@ -269,6 +269,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   //isAPIcallProcess = true;
                                 });
 
+                                print(nameController.text);
+                                print(surnameController.text);
+                                print(emailController.text);
+                                print(passwordController.text);
+
                                 RegisterRequestModel model =
                                     RegisterRequestModel(
                                         name: nameController.text,
@@ -278,7 +283,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                         userRole: 1);
 
                                 APIService.register(model).then((response) => {
-                                      if (response)
+                                      if (response.newUser != null)
                                         {
                                           Navigator.of(context)
                                               .pushAndRemoveUntil(
@@ -293,8 +298,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                           //Hata mesajı gösterilecek
                                           FormHelper.showSimpleAlertDialog(
                                               context,
-                                              "Hata",
-                                              "Invalid username or password",
+                                              "Error",
+                                              response.message!,
                                               "OK", () {
                                             Navigator.pop(context);
                                           })
