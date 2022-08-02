@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:m2m_flutter_main/common/drawer.dart';
+
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'package:m2m_flutter_main/pages/registiration_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
@@ -11,9 +12,10 @@ import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import '../common/Listing.dart';
 import 'package:http/http.dart';
-
+import '../model/getUserAll_model.dart';
 import 'login_page.dart';
 import 'main_page.dart';
+import '../model/getUserAll_model.dart';
 
 class MenteePage extends StatefulWidget {
   @override
@@ -27,18 +29,18 @@ class _MenteePageState extends State<MenteePage> {
 
   final url = "http://10.0.2.2:5000/api/getAll";
 
-  var _postsJson = [];
+  List<GetUsersAllModel> productsResponseFromJson(String str) =>
+      List<GetUsersAllModel>.from(
+          json.decode(str).map((x) => GetUsersAllModel.fromJson(x)));
 
-  void fetchPosts() async {
-    try {
-      final response = await get(Uri.parse(url));
-      final jsonData = jsonDecode(response.body) as List;
+  late Future<List<GetUsersAllModel>> futureUser;
+  Future<List<GetUsersAllModel>> fetchUser() async {
+    final response = await get(Uri.parse(url));
 
-      setState(() {
-        _postsJson = jsonData;
-      });
-    } catch (err) {
-      print(err);
+    if (response.statusCode == 200) {
+      return productsResponseFromJson(response.body);
+    } else {
+      throw Exception('Failed to load album');
     }
   }
 
@@ -46,7 +48,7 @@ class _MenteePageState extends State<MenteePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    fetchPosts();
+    futureUser = fetchUser();
   }
 
   final duplicateItems = List<String>.generate(10000, (i) => "Eleman $i");
@@ -60,15 +62,67 @@ class _MenteePageState extends State<MenteePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: ListView.builder(
-            itemCount: _postsJson.length,
-            itemBuilder: (context, i) {
-              final post = _postsJson[i];
+        body: Center(
+          child: FutureBuilder<List<GetUsersAllModel>>(
+            future: futureUser,
+            builder: (context, i) {
+              if (i.hasData) {
+                return ListView.builder(
+                    itemCount: 8,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                          title: Text('${i.data?[index].name}' +
+                              '   ' +
+                              '${i.data?[index].surname}' +
+                              ' ----> ' +
+                              '${i.data?[index].userRole}'),
+                          subtitle: Text('${i.data?[index].email}'),
+                          leading: CircleAvatar(
+                            child: Text('${i.data?[index].name[0]}'),
+                          ));
+                    });
+              } else if (i.hasError) {
+                return Text('${i.error}');
+              }
 
-              return Text(
-                  "Id:${post["id"]} Surname: ${post["surname"]} \n email: ${post["email"]} \n\n");
-            }),
-
+              // By default, show a loading spinner.
+              return const CircularProgressIndicator();
+            },
+          ),
+        ),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            "Mentee Page",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          elevation: 0.5,
+          iconTheme: IconThemeData(color: Colors.white),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                  Theme.of(context).primaryColor,
+                  Theme.of(context).colorScheme.secondary,
+                ])),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                showSearch(context: context, delegate: MySearchDelegate());
+              },
+            ),
+          ],
+        ),
+        drawer: DrawerHelp(),
+        bottomNavigationBar: BottomBar(),
+      ),
+    );
+  }
+}
 //       Center(
 //  child:
 //       ListView(
@@ -121,59 +175,26 @@ class _MenteePageState extends State<MenteePage> {
 
 // ),
 
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            "Mentee Page",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).colorScheme.secondary,
-                ])),
-          ),
-          actions: [
-            IconButton(
-              icon: const Icon(Icons.search),
-              onPressed: () {
-                showSearch(context: context, delegate: MySearchDelegate());
-              },
-            ),
-          ],
-        ),
-        //       body: Center(
-        //       child:Card(
+//       body: Center(
+//       child:Card(
 
-        //   //   child: InkWell(
-        //   //     splashColor: Colors.black,
-        //   //     onTap: () {
-        //   //       debugPrint('Card tapped.');
-        //   //     },
+//   //   child: InkWell(
+//   //     splashColor: Colors.black,
+//   //     onTap: () {
+//   //       debugPrint('Card tapped.');
+//   //     },
 
-        //   //     child: const SizedBox(
-        //   //       width: 300,
-        //   //       height: 100,
-        //   //       child: Text('Mentors'),
-        //   //     ),
+//   //     child: const SizedBox(
+//   //       width: 300,
+//   //       height: 100,
+//   //       child: Text('Mentors'),
+//   //     ),
 
-        //   //   ),
+//   //   ),
 
-        //   ),
+//   ),
 
-        // ),
-        drawer: DrawerHelp(),
-        bottomNavigationBar: BottomBar(),
-      ),
-    );
-  }
-}
+// ),
 
 class MySearchDelegate extends SearchDelegate {
   @override
