@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -48,8 +49,8 @@ class LoginUIApp extends StatelessWidget {
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
-      //home: SplashScreen(title: 'Flutter Login'),
-      home: ProfilePage(),
+      home: SplashScreen(title: 'Flutter Login'),
+      //home: EditProfilePage(),
     );
   }
 }
