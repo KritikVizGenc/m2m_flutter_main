@@ -37,9 +37,10 @@ dependencies:
   hexcolor: ^2.0.4
   font_awesome_flutter: ^9.1.0
   otp_text_field: ^1.1.1
-  api_cache_manager: ^1.0.1
+  api_cache_manager: ^1.0.2
   snippet_coder_utils: ^1.0.12
   table_calendar: ^3.0.6
+  http: ^0.13.4
   #google_fonts: ^3.0.1
 
 dev_dependencies:
