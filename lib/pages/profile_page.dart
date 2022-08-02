@@ -45,55 +45,19 @@ class _ProfilePageState extends State<ProfilePage> {
                 Theme.of(context).colorScheme.secondary,
               ])),
         ),
-        //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
-        actions: [
-          Container(
-            margin: EdgeInsets.only(
-              top: 16,
-              right: 10,
-              bottom: 15,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.edit,
+              color: Colors.white,
             ),
-            child: Stack(
-              children: <Widget>[
-                Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 40, 0),
-                    ),
-                    TextButton.icon(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => EditProfilePage()));
-                      },
-                      icon: Icon(
-                        size: 20,
-                        Icons.edit,
-                        color: Colors.white,
-                      ),
-                      label: Text(
-                        'Edit Profile',
-                        style: TextStyle(color: Colors.white, fontSize: 15),
-                      ),
-                    ),
-                    //Icon(Icons.edit),
-                  ],
-                ),
-                Positioned(
-                  right: 0,
-                  child: Container(
-                    padding: EdgeInsets.all(1),
-                    constraints: BoxConstraints(
-                      minWidth: 12,
-                      minHeight: 12,
-                    ),
-                  ),
-                )
-              ],
-            ),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => EditProfilePage()));
+            },
           )
         ],
+        
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -160,8 +124,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     color: Theme.of(context).colorScheme.secondary,
                     child: const Center(child: Text('Entry C')),
                   ),
-
-                  
                 ],
               ),
             ),

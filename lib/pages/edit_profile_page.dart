@@ -40,28 +40,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   Theme.of(context).colorScheme.secondary,
                 ])),
           ),
-          //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
-          /*actions: [
-            Container(
-              margin: EdgeInsets.only(
-                top: 16,
-                right: 16,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                size: 30,
+                Icons.done,
+                color: Colors.white,
               ),
-              child: Stack(
-                children: <Widget>[
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
-                    },
-                    child: Icon(Icons.done),
-                  )
-                ],
-              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
             )
-          ],*/
+          ],
+          //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
+          
         ),
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
