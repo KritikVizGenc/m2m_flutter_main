@@ -6,6 +6,7 @@ import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/appbar_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
+import 'package:m2m_flutter_main/square.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
@@ -50,16 +51,16 @@ class _ProfilePageState extends State<ProfilePage> {
           Container(
             margin: EdgeInsets.only(
               top: 16,
-              right: 16,
-              bottom: 10,
+              right: 10,
+              bottom: 15,
             ),
             child: Stack(
               children: <Widget>[
                 Column(
                   children: [
-                    /*Padding(
-                      //adding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                    ),*/
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 40, 0),
+                    ),
                     TextButton.icon(
                       onPressed: () {
                         Navigator.push(
@@ -68,12 +69,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                 builder: (context) => EditProfilePage()));
                       },
                       icon: Icon(
+                        size: 20,
                         Icons.edit,
                         color: Colors.white,
                       ),
                       label: Text(
                         'Edit Profile',
-                        style: TextStyle(color: Colors.white, fontSize: 10),
+                        style: TextStyle(color: Colors.white, fontSize: 15),
                       ),
                     ),
                     //Icon(Icons.edit),
@@ -94,24 +96,90 @@ class _ProfilePageState extends State<ProfilePage> {
           )
         ],
       ),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          const SizedBox(height: 24),
-          ProfileWidget(
-            imagePath: user.imagePath,
-            onClicked: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => EditProfilePage()));
-            },
-          ),
-          const SizedBox(height: 24),
-          buildName(user),
-          const SizedBox(height: 24),
-          NumbersWidget(),
-          const SizedBox(height: 48),
-          buildAbout(user),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              child: ListView(
+                primary: false, //??
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                children: [
+                  const SizedBox(height: 24),
+                  ProfileWidget(
+                    imagePath: user.imagePath,
+                    onClicked: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EditProfilePage()));
+                    },
+                  ),
+                  const SizedBox(height: 24),
+                  buildName(user),
+                  const SizedBox(height: 24),
+                  NumbersWidget(),
+                  const SizedBox(height: 48),
+                  buildAbout(user),
+                  const SizedBox(height: 24),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
+                    child: Text(
+                      'Comments',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: 30,
+                      right: 16,
+                    ),
+                    height: 50,
+                    color: Theme.of(context).colorScheme.secondary,
+                    child: const Center(child: Text('Entry A')),
+                  ),
+                  const SizedBox(height: 15),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: 30,
+                      right: 16,
+                    ),
+                    height: 50,
+                    color: Theme.of(context).colorScheme.secondary,
+                    child: const Center(child: Text('Entry B')),
+                  ),
+                  const SizedBox(height: 15),
+                  Container(
+                    margin: EdgeInsets.only(
+                      left: 30,
+                      right: 16,
+                    ),
+                    height: 50,
+                    color: Theme.of(context).colorScheme.secondary,
+                    child: const Center(child: Text('Entry C')),
+                  ),
+
+                  /*Container(
+                  //color: Color.fromARGB(255, 69, 41, 67),
+
+                  height: 150,
+                  child: GridView.builder(
+                    itemCount: 25,
+                    gridDelegate:
+                        SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 1),
+                    itemBuilder: (context, index) {
+                      return MySquare(child: Text("Comments"));
+                    },
+                  ),
+                ),*/
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -129,9 +197,16 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 4,
           ),
           Text(
-            user.email,
+            user.major,
             style: TextStyle(color: Colors.grey),
-          )
+          ),
+          const SizedBox(
+            height: 4,
+          ),
+          Text(
+            user.city,
+            style: TextStyle(color: Colors.grey),
+          ),
         ],
       );
 

@@ -3,15 +3,15 @@ import 'dart:convert';
 class User {
   final String imagePath;
   final String name;
-  final String email;
+  final String city;
   final String about;
-  final bool isDarkMode;
+  final String major;
 
   const User({
     required this.imagePath,
     required this.name,
-    required this.email,
+    required this.city,
     required this.about,
-    required this.isDarkMode,
+    required this.major
   });
 }
