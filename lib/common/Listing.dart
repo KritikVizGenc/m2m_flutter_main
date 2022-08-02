@@ -5,9 +5,11 @@
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/model/Mentee_list_model.dart';
 import '../pages/main_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/mentor_page.dart';
+import 'package:http/http.dart';
 
 class ListDisplay extends StatefulWidget {
   const ListDisplay({Key? key}) : super(key: key);
@@ -17,6 +19,29 @@ class ListDisplay extends StatefulWidget {
 }
 
 class _ListDisplayState extends State<ListDisplay> {
+  final url = Uri.parse('http://localhost:5000/api/getByRole');
+  var counter;
+  var personelResult;
+
+  Future ListingALL() async {
+    try {
+      final response = await get(url);
+      if (response == 200) {
+        var result = menteeListFromJson(response.body);
+        if (mounted)
+          setState(() {
+            counter = 15;
+            personelResult = result;
+          });
+        return result;
+      } else {
+        print(response);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   TextEditingController editingController = TextEditingController();
   final duplicateItems = List<String>.generate(10000, (i) => "Eleman $i");
 
@@ -24,6 +49,7 @@ class _ListDisplayState extends State<ListDisplay> {
   void initState() {
     list.addAll(duplicateItems);
     super.initState();
+    ListingALL();
   }
 
   void filterSearchResults(String query) {
@@ -65,7 +91,7 @@ class _ListDisplayState extends State<ListDisplay> {
               controller: editingController,
               decoration: InputDecoration(
                   labelText: "Search",
-                  hintText: "Sınavı olduğun tarihi yaz",
+                  hintText: "Arama yapmak istediğiniz etiketi giriniz.",
                   prefixIcon: Icon(Icons.search),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10.0)))),
@@ -76,13 +102,18 @@ class _ListDisplayState extends State<ListDisplay> {
           new Expanded(
             child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 20,
+              itemCount: counter,
               itemBuilder: (context, index) {
                 return ListTile(
                   //***normalde tıklandığında profil sayfasına gidecek ama daha oluşturulmadı.***
                   onTap: () => Navigator.push(context,
                       MaterialPageRoute(builder: (context) => MainPage())),
-                  title: Text('Listedeki ${list[index]}'),
+
+                  title: Text(pers),
+                  subtitle: Text(""),
+                  leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          "https://images.unsplash.com/photo-1547721064-da6cfb341d50")),
                 );
               },
             ),
