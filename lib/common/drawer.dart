@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
+import 'package:m2m_flutter_main/service/shared_service.dart';
 import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/splash_screen.dart';
@@ -231,7 +232,7 @@ class _DrawerState extends State<DrawerHelp> {
                   color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              SystemNavigator.pop();
+              SharedService.logout(context);
             },
           ),
         ],
