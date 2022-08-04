@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/circle.dart';
 import 'package:m2m_flutter_main/square.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'add_task_bar_page.dart';
 import 'login_page.dart';
 import 'mentee_page.dart';
 import 'mentor_page.dart';
@@ -28,11 +30,16 @@ class MainPage extends StatelessWidget {
     'fav 4',
     'fav 5',
   ];
+ 
+
+ 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
+      
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
       appBar: AppBar(
@@ -212,8 +219,11 @@ class MainPage extends StatelessWidget {
                   child: _stories[index],
                 );
               }),
+              
         ),
+        
       ],
+      
     );
   }
 }

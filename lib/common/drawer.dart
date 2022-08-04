@@ -12,6 +12,7 @@ import '../pages/registiration_page.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
 
+
 class DrawerHelp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -141,6 +142,10 @@ class _DrawerState extends State<DrawerHelp> {
                   MaterialPageRoute(
                       builder: (context) =>
                           MeetPages()));
+<<<<<<< Updated upstream
+=======
+             //Get.to(MeetPage());
+>>>>>>> Stashed changes
             },
           ),
           ListTile(
