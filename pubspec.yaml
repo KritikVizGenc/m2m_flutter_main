@@ -40,8 +40,14 @@ dependencies:
   api_cache_manager: ^1.0.2
   snippet_coder_utils: ^1.0.12
   table_calendar: ^3.0.6
-  http: ^0.13.4
-  #google_fonts: ^3.0.1
+  provider: ^4.3.3
+  google_fonts: ^3.0.1
+  date_picker_timeline : ^1.2.3
+  syncfusion_flutter_datepicker: ^20.2.40
+  intl: ^0.17.0
+ 
+   
+   
 
 dev_dependencies:
   flutter_test:

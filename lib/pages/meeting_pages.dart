@@ -1,170 +1,199 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:m2m_flutter_main/pages/event.dart';
-import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
+import 'package:m2m_flutter_main/common/theme_helper.dart';
+import 'package:m2m_flutter_main/pages/add_task_bar_page.dart';
+import 'package:m2m_flutter_main/pages/widgets/button.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 
-class MeetPage extends StatefulWidget {
-  @override
-  _MeetPageState createState() => _MeetPageState();
+
+
+
+class MeetPages extends StatefulWidget {
+  const MeetPages({ Key? key }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
-  }
+  MeetPagesState createState() => MeetPagesState();
 }
 
-class _MeetPageState extends State<MeetPage> {
-  late Map<DateTime, List<Event>> selectedEvents;
-  CalendarFormat format = CalendarFormat.month;
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
-
-  TextEditingController _eventController = TextEditingController();
-
-  @override
-  void initState() {
-    selectedEvents = {};
-    super.initState();
-  }
-
-  List<Event> _getEventsfromDay(DateTime date) {
-    return selectedEvents[date] ?? [];
-  }
-
-  @override
-  void dispose() {
-    _eventController.dispose();
-    super.dispose();
-  }
-
-  @override
+class MeetPagesState extends State<MeetPages> {
+ DateTime _selectedDate = DateTime.now();
+ 
+ @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
-      appBar: AppBar(
-        title: Text("ARRANGE MEET"),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          TableCalendar(
-            focusedDay: selectedDay,
-            firstDay: DateTime(1990),
-            lastDay: DateTime(2050),
-            calendarFormat: format,
-            onFormatChanged: (CalendarFormat _format) {
-              setState(() {
-                format = _format;
-              });
-            },
-            startingDayOfWeek: StartingDayOfWeek.sunday,
-            daysOfWeekVisible: true,
-
-            //Day Changed
-            onDaySelected: (DateTime selectDay, DateTime focusDay) {
-              setState(() {
-                selectedDay = selectDay;
-                focusedDay = focusDay;
-              });
-              print(focusedDay);
-            },
-            selectedDayPredicate: (DateTime date) {
-              return isSameDay(selectedDay, date);
-            },
-
-            eventLoader: _getEventsfromDay,
-
-            //To style the Calendar
-            calendarStyle: CalendarStyle(
-              isTodayHighlighted: true,
-              selectedDecoration: BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              selectedTextStyle: TextStyle(color: Colors.white),
-              todayDecoration: BoxDecoration(
-                color: Color.fromARGB(255, 9, 36, 58),
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              defaultDecoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              weekendDecoration: BoxDecoration(
-                shape: BoxShape.rectangle,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-            ),
-            headerStyle: HeaderStyle(
-              formatButtonVisible: true,
-              titleCentered: true,
-              formatButtonShowsNext: false,
-              formatButtonDecoration: BoxDecoration(
-                color: Colors.pink,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              formatButtonTextStyle: TextStyle(
-                color: Colors.white,
-              ),
-            ),
+        bottomNavigationBar: BottomBar(),
+       
+       appBar: AppBar(
+          title: Text(
+            "EVENT Page",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          ..._getEventsfromDay(selectedDay).map(
-            (Event event) => ListTile(
-              title: Text(
-                event.title,
-              ),
+           elevation: 0.5,
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
+        //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
+        actions: [
+          Container(
+            margin: EdgeInsets.only(
+              top: 16,
+              right: 16,
             ),
-          ),
+            
+          )
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () => showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text("Add Event"),
-            content: TextFormField(
-              controller: _eventController,
-            ),
-            actions: [
-              TextButton(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
-              ),
-              TextButton(
-                child: Text("Ok"),
-                onPressed: () {
-                  if (_eventController.text.isEmpty) {
-                  } else {
-                    if (selectedEvents[selectedDay] != null) {
-                      selectedEvents[selectedDay]?.add(
-                        Event(title: _eventController.text),
-                      );
-                    } else {
-                      selectedEvents[selectedDay] = [
-                        Event(title: _eventController.text)
-                      ];
-                    }
-                  }
-                  Navigator.pop(context);
-                  _eventController.clear();
-                  setState(() {});
-                  return;
-                },
-              ),
-            ],
-          ),
-        ),
-        label: Text("Add Event"),
-        icon: Icon(Icons.add),
-      ),
-    );
+       
+      body: Column(
+        
+        children: [
+_addTaskBar(),
+
+_addDateBAr(),
+
+
+  
+  ],
+  
+
+  
+  ),
+);
   }
+
+_addDateBAr(){
+  return Container(
+  margin: const EdgeInsets.only(top: 20,left:20 ),
+  child: DatePicker(
+  DateTime.now(),
+  height: 100,
+  width: 80,
+  initialSelectedDate: DateTime.now(),
+  selectionColor: Color.fromARGB(255, 62, 35, 60),
+  selectedTextColor: Colors.white,
+  dateTextStyle: GoogleFonts.lato(
+textStyle: TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+  color: Colors.grey
+),
+  ),
+dayTextStyle: GoogleFonts.lato(
+textStyle: TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+  color: Colors.grey
+),
+),
+monthTextStyle: GoogleFonts.lato(
+textStyle: TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.w600,
+  color: Colors.grey
+),
+  ),
+  onDateChange: (date){
+_selectedDate =date;
+  },
+  ),
+  
+  );
 }
+
+
+
+
+
+    _addTaskBar(){
+return Container(
+  margin:const EdgeInsets.only(left:20,right: 20,top: 10) ,
+  child:   Row(
+  
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    children: [
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    Container(
+  
+      
+  
+      
+  
+      child: Column(
+  
+        crossAxisAlignment: CrossAxisAlignment.start,
+  
+        children: [
+  
+         Text(DateFormat.yMMMMd().format(DateTime.now()),
+  
+         style: subHeadingStyle,
+  
+         
+  
+         ),
+  
+         Text("Today",
+  
+         style: HeadingStyle,
+  
+         )
+  
+        ],
+  
+      ),
+  
+    ),
+  
+  
+  MyButton(label: "+ Add Task", onTap:() => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          AddTaskPage())))
+  
+  
+  
+  
+  
+  
+  
+  ],
+  
+
+  
+  ),
+);
+
+      
+    }
+  }

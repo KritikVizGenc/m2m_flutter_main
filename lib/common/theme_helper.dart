@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 class ThemeHelper {
   InputDecoration textInputDecoration(
       [String lableText = "", String hintText = ""]) {
@@ -99,3 +99,23 @@ class ThemeHelper {
 }
 
 class LoginFormStyle {}
+ TextStyle get subHeadingStyle{
+  return GoogleFonts.lato(
+// ignore: prefer_const_constructors
+textStyle: TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold
+)
+  );
+ }
+ TextStyle get HeadingStyle{
+  return GoogleFonts.lato(
+// ignore: prefer_const_constructors
+textStyle: TextStyle(
+  fontSize: 30,
+  fontWeight: FontWeight.bold
+)
+  );
+ }
+ 
+ 

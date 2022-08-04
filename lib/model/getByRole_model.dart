@@ -1,18 +1,18 @@
 // To parse this JSON data, do
 //
-//     final getUsersAllModel = getUsersAllModelFromJson(jsonString);
+//     final getByRoleModel = getByRoleModelFromJson(jsonString);
 
 import 'dart:convert';
 
-List<GetUsersAllModel> getUsersAllModelFromJson(String str) =>
-    List<GetUsersAllModel>.from(
-        json.decode(str).map((x) => GetUsersAllModel.fromJson(x)));
+List<GetByRoleModel> getByRoleModelFromJson(String str) =>
+    List<GetByRoleModel>.from(
+        json.decode(str).map((x) => GetByRoleModel.fromJson(x)));
 
-String getUsersAllModelToJson(List<GetUsersAllModel> data) =>
+String getByRoleModelToJson(List<GetByRoleModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class GetUsersAllModel {
-  GetUsersAllModel({
+class GetByRoleModel {
+  GetByRoleModel({
     required this.id,
     required this.name,
     required this.surname,
@@ -32,8 +32,7 @@ class GetUsersAllModel {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory GetUsersAllModel.fromJson(Map<String, dynamic> json) =>
-      GetUsersAllModel(
+  factory GetByRoleModel.fromJson(Map<String, dynamic> json) => GetByRoleModel(
         id: json["id"],
         name: json["name"],
         surname: json["surname"],
