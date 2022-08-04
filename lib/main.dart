@@ -62,7 +62,6 @@ class MyApp extends StatelessWidget {
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
-<<<<<<< Updated upstream
      // home: SplashScreen(title: 'Flutter Login'),
       //home: LoginPage(),
       routes: {
@@ -71,10 +70,6 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginPage(),
         '/register': (context) => RegistrationPage(),
       },
-=======
-      // home: SplashScreen(title: 'Flutter Login'),
-      home: MainPage(),
->>>>>>> Stashed changes
     );
   }
 }

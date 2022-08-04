@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:m2m_flutter_main/pages/mentee_page.dart';
+import 'package:m2m_flutter_main/pages/profile_page.dart';
 
 class MyCircle extends StatelessWidget {
   final child;
@@ -27,7 +28,7 @@ class MyCircle extends StatelessWidget {
           ),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => MenteePage()));
+                context, MaterialPageRoute(builder: (context) => ProfilePage()));
           },
         ),
       ),

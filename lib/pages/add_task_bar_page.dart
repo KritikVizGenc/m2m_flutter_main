@@ -148,28 +148,16 @@ _getDateFromUser() async {
 
      }
 }
-<<<<<<< Updated upstream
-_getTimeFromUSer({required bool isStartTime}){
- 
- var pickedTime= _showTimePicker();
- String formatedTime =pickedTime.format(context);
-=======
 _getTimeFromUSer({required bool isStartTime}) async {
  
  var pickedTime= await _showTimePicker();
  String _formatedTime =pickedTime.format(context);
->>>>>>> Stashed changes
 
 
 
 if(pickedTime==null){
 print("time cancel");
 }else if(isStartTime==true){
-<<<<<<< Updated upstream
-_startTime=formatedTime;
-}else if(isStartTime==false){
-  _endTime=formatedTime;
-=======
 setState(() {
   
 });
@@ -177,7 +165,6 @@ setState(() {
  setState(() {
    
  });
->>>>>>> Stashed changes
 
 }
 
@@ -189,14 +176,9 @@ _showTimePicker(){
   initialEntryMode: TimePickerEntryMode.input,
   context: context,
    initialTime: TimeOfDay(
-<<<<<<< Updated upstream
-    hour: int.parse(_startTime),
-    minute: 10)
-=======
     hour: int.parse(_startTime.split(":")[0]),
     minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
     ),
->>>>>>> Stashed changes
     
     
     );

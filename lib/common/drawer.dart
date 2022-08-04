@@ -142,10 +142,6 @@ class _DrawerState extends State<DrawerHelp> {
                   MaterialPageRoute(
                       builder: (context) =>
                           MeetPages()));
-<<<<<<< Updated upstream
-=======
-             //Get.to(MeetPage());
->>>>>>> Stashed changes
             },
           ),
           ListTile(

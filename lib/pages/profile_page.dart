@@ -2,11 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/model/user.dart';
-<<<<<<< Updated upstream
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
-=======
-import 'package:m2m_flutter_main/pages/widgets/appbar_widget.dart';
->>>>>>> Stashed changes
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/square.dart';
@@ -48,7 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 Theme.of(context).colorScheme.secondary,
               ])),
         ),
-<<<<<<< Updated upstream
         actions: <Widget>[
           IconButton(
             icon: Icon(
@@ -123,25 +118,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     margin: EdgeInsets.only(
                       left: 30,
                       right: 16,
-=======
-        //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
-        actions: [
-          Container(
-            margin: EdgeInsets.only(
-              top: 16,
-              right: 16,
-            ),
-            child: Stack(
-              children: <Widget>[
-                Icon(Icons.edit),
-                Positioned(
-                  right: 0,
-                  child: Container(
-                    padding: EdgeInsets.all(1),
-                    constraints: BoxConstraints(
-                      minWidth: 12,
-                      minHeight: 12,
->>>>>>> Stashed changes
                     ),
                     height: 50,
                     color: Theme.of(context).colorScheme.secondary,
@@ -150,29 +126,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ],
               ),
             ),
-<<<<<<< Updated upstream
           ],
         ),
-=======
-          )
-        ],
-      ),
-      body: ListView(
-        physics: BouncingScrollPhysics(),
-        children: [
-          const SizedBox(height: 24),
-          ProfileWidget(
-            imagePath: user.imagePath,
-            onClicked: () async {},
-          ),
-          const SizedBox(height: 24),
-          buildName(user),
-          const SizedBox(height: 24),
-          NumbersWidget(),
-          const SizedBox(height: 48),
-          buildAbout(user),
-        ],
->>>>>>> Stashed changes
       ),
     );
   }
