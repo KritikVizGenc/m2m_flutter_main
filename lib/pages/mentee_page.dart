@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
+import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/registiration_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +25,7 @@ class MenteePage extends StatefulWidget {
 
 class _MenteePageState extends State<MenteePage> {
   TextEditingController editingController = TextEditingController();
+  TextEditingController editingController1 = TextEditingController();
 
   final url = "http://10.0.2.2:5000/api/getByRole/mentee";
 
@@ -57,16 +59,28 @@ class _MenteePageState extends State<MenteePage> {
 
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       home: Scaffold(
         body: FutureBuilder<List<GetByRoleModel>>(
           future: futureGetByRoleModel,
           builder: (context, i) {
             if (i.hasData) {
+              // TextFormField(
+              //   controller: editingController,
+              // );
+              // TextFormField(
+              //   controller: editingController1,
+              // );
+
               return ListView.builder(
                   itemCount: i.data?.length,
                   itemBuilder: (context, index) {
                     return ListTile(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfilePage()));
+                        },
                         title: Text('${i.data?[index].name}' +
                             '   ' +
                             '${i.data?[index].surname}' +

@@ -18,9 +18,7 @@ class ListDisplay extends StatefulWidget {
 }
 
 class _ListDisplayState extends State<ListDisplay> {
-  final url = Uri.parse('http://localhost:5000/api/getByRole');
   var counter;
-  var personelResult;
 
   TextEditingController editingController = TextEditingController();
   final duplicateItems = List<String>.generate(10000, (i) => "Eleman $i");
