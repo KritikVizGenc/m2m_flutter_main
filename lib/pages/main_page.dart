@@ -16,13 +16,19 @@ import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'registiration_page.dart';
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
   final List _posts = [
     'post 1',
     'post 2 ',
     'post 3',
     'post 4',
   ];
+
   final List _stories = [
     'fav 1',
     'fav 2 ',
@@ -30,16 +36,11 @@ class MainPage extends StatelessWidget {
     'fav 4',
     'fav 5',
   ];
- 
-
- 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
-      
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
       appBar: AppBar(
@@ -219,11 +220,8 @@ class MainPage extends StatelessWidget {
                   child: _stories[index],
                 );
               }),
-              
         ),
-        
       ],
-      
     );
   }
 }

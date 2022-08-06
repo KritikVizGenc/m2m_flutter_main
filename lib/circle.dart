@@ -23,12 +23,12 @@ class MyCircle extends StatelessWidget {
             //elevation: 3,
           ),
           child: Text(
-            '1',
+            '',
             style: TextStyle(fontSize: 40.0),
           ),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => ProfilePage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ProfilePage()));
           },
         ),
       ),
