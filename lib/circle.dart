@@ -9,27 +9,35 @@ class MyCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Container(
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Theme.of(context).colorScheme.secondary,
-        ),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            primary: Theme.of(context).colorScheme.secondary,
-            minimumSize: Size(MediaQuery.of(context).size.width * 0.2,
-                MediaQuery.of(context).size.height * 0.2),
-            //elevation: 3,
+      padding: const EdgeInsets.all(10.0),
+      child: InkWell(
+        //constraints: ,
+        child: Ink(
+          decoration: BoxDecoration(
+            /*image: DecorationImage(
+                image: NetworkImage(
+                    'https://media.istockphoto.com/photos/cool-cat-with-shades-picture-id1249884596?k=20&m=1249884596&s=612x612&w=0&h=16nnd8JAJW2MdEghUJnaAiZfPezWoVUTAW9bwOE3Z7E='),
+                fit: BoxFit.contain),*/
+            borderRadius: BorderRadius.circular(10),
+            shape: BoxShape.rectangle,
+            color: Colors.white,
           ),
-          child: Text(
-            '1',
-            style: TextStyle(fontSize: 40.0),
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Colors.white,
+              minimumSize: Size(MediaQuery.of(context).size.width * 0.2,
+                  MediaQuery.of(context).size.height * 0.2),
+              //elevation: 3,
+            ),
+            child: Text(
+              '1',
+              style: TextStyle(fontSize: 40.0),
+            ),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfilePage()));
+            },
           ),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => ProfilePage()));
-          },
         ),
       ),
     );

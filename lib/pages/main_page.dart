@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/circle.dart';
+import 'package:m2m_flutter_main/deneme.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'add_task_bar_page.dart';
@@ -30,16 +31,11 @@ class MainPage extends StatelessWidget {
     'fav 4',
     'fav 5',
   ];
- 
-
- 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
-      
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
       appBar: AppBar(
@@ -90,6 +86,15 @@ class MainPage extends StatelessWidget {
       ),
       body: ListView(
         children: [
+          /* CircleAvatar(
+            radius: 22,
+            backgroundColor: Colors.amber,
+            child: CircleAvatar(
+              backgroundColor: Color.fromARGB(255, 255, 255, 255),
+              radius: 20,
+              child: Icon(Icons.add, color: Colors.black),
+            ),
+          ),*/
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             child: Column(
@@ -113,15 +118,15 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  color: Color.fromARGB(255, 69, 41, 67),
-                  height: 150,
+                  color: Color.fromARGB(255, 235, 230, 240),
+                  height: 200,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 25,
+                    itemCount: 20,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 1),
                     itemBuilder: (context, index) {
-                      return MyCircle(child: Text("1"));
+                      return Deneme(child: Text("1"));
                     },
                   ),
                 ),
@@ -151,13 +156,14 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  color: Color.fromARGB(255, 69, 41, 67),
-                  height: 150,
+                  color: Color.fromARGB(255, 231, 236, 251),
+                  height: 200,
                   child: GridView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 25,
+                    itemCount: 20,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1),
+                      crossAxisCount: 1,
+                    ),
                     itemBuilder: (context, index) {
                       return MyCircle(child: Text("1"));
                     },
@@ -189,41 +195,6 @@ class MainPage extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-
-  Column ss() {
-    return Column(
-      children: [
-        Container(
-          //padding: const EdgeInsets.symmetric(vertical: 8.0),
-          height: 150,
-          color: Color.fromARGB(255, 231, 236, 251),
-          child: ListView.builder(
-              itemCount: _stories.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return MyCircle(
-                  child: _stories[index],
-                );
-              }),
-        ),
-        Container(
-          height: 150,
-          color: Color.fromARGB(255, 231, 236, 251),
-          child: ListView.builder(
-              itemCount: _stories.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return MyCircle(
-                  child: _stories[index],
-                );
-              }),
-              
-        ),
-        
-      ],
-      
     );
   }
 }
