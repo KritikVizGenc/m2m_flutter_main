@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:m2m_flutter_main/common/theme_helper.dart';
@@ -70,9 +69,9 @@ _addTaskBar(),
 
 _addDateBAr(),
 
- taskWidget(Color(0xfff96860),"Meeting with ...","9:30 AM" ),
-   taskWidget(Color.fromARGB(255, 79, 66, 104),"Meeting with ...","9:30 AM"),
-    taskWidget(Color.fromARGB(255, 233, 219, 91),"Meeting with ...","9:30 AM"),
+ // taskWidget(Color(0xfff96860),"Meeting with ...","9:30 AM" ),
+ //   taskWidget(Color.fromARGB(255, 79, 66, 104),"Meeting with ...","9:30 AM"),
+ //    taskWidget(Color.fromARGB(255, 233, 219, 91),"Meeting with ...","9:30 AM"),
   
   ],
    
@@ -221,59 +220,59 @@ return Container(
       
     }
  
- Slidable taskWidget(Color color,String title,String time){
-  return Slidable(
-  actionPane:SlidableDrawerActionPane(),
-  actionExtentRatio:0.3 ,
-  child:Container(
-height: 80,
-margin:EdgeInsets.symmetric(horizontal: 20,vertical: 10) ,
-decoration: BoxDecoration(
-  color: Colors.white,
-  boxShadow: [BoxShadow(
-    color: Colors.black.withOpacity(0.03),
-    offset: Offset(0,9),
-    blurRadius: 20,
-    spreadRadius: 1
-
-  )]
-),
-
-child: Row(children: [
-  Container(
-    margin:EdgeInsets.symmetric(horizontal:20 ) ,
-  height: 25,
-  width: 25,
-  decoration: BoxDecoration(
-color: Colors.white,
-shape: BoxShape.circle,
-border: Border.all(color:color,width: 4)
-
-  ),
-  
-  
-  ),
-  Column(
-crossAxisAlignment: CrossAxisAlignment.start,
-mainAxisAlignment: MainAxisAlignment.center,
-children: [
-  Text(title, style:TextStyle(
-    color: Colors.black,
-  ) ,)
-],
-
-  ),
-
-
-
-
-
-]),
-  ) ,
-
-
-  );
-}
+//  Slidable taskWidget(Color color,String title,String time){
+//   return Slidable(
+//   actionPane:SlidableDrawerActionPane(),
+//   actionExtentRatio:0.3 ,
+//   child:Container(
+// height: 80,
+// margin:EdgeInsets.symmetric(horizontal: 20,vertical: 10) ,
+// decoration: BoxDecoration(
+//   color: Colors.white,
+//   boxShadow: [BoxShadow(
+//     color: Colors.black.withOpacity(0.03),
+//     offset: Offset(0,9),
+//     blurRadius: 20,
+//     spreadRadius: 1
+//
+//   )]
+// ),
+//
+// child: Row(children: [
+//   Container(
+//     margin:EdgeInsets.symmetric(horizontal:20 ) ,
+//   height: 25,
+//   width: 25,
+//   decoration: BoxDecoration(
+// color: Colors.white,
+// shape: BoxShape.circle,
+// border: Border.all(color:color,width: 4)
+//
+//   ),
+//
+//
+//   ),
+//   Column(
+// crossAxisAlignment: CrossAxisAlignment.start,
+// mainAxisAlignment: MainAxisAlignment.center,
+// children: [
+//   Text(title, style:TextStyle(
+//     color: Colors.black,
+//   ) ,)
+// ],
+//
+//   ),
+//
+//
+//
+//
+//
+// ]),
+//   ) ,
+//
+//
+//   );
+// }
  
  
  
