@@ -66,6 +66,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             )
           ],
           //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
+          
         ),
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
