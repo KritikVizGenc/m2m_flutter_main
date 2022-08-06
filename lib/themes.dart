@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class MyThemes {
   static final primary = Colors.blue;
-  static final primaryColor = Colors.blue.shade300;
+  static final primaryColor = Color.fromARGB(255, 235, 186, 224);
 
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: Colors.grey.shade900,

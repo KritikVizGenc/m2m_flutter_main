@@ -1,3 +1,6 @@
+
+
+
 import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
@@ -10,6 +13,7 @@ import 'pages/login_page.dart';
 import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
+
 
 Widget _defaultHome = const LoginPage();
 
@@ -39,7 +43,7 @@ class MyApp extends StatelessWidget {
     800: Color.fromARGB(255, 94, 62, 92), //90%
     900: Color.fromARGB(255, 62, 35, 60), //100%
   };
-  Color _primaryColor = Color.fromARGB(255, 69, 41, 67);
+  Color _primaryColor = Color.fromARGB(255, 233, 180, 229);
   Color accentColor = Color.fromARGB(255, 29, 33, 63);
   Color backColor = Color.fromARGB(255, 231, 236, 251);
   MaterialColor primeColor = MaterialColor(0xFF3399FF, color);
@@ -53,12 +57,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Login',
       theme: ThemeData(
         dividerColor: Colors.black,
-        //drawerTheme: DrawerThemeData(
-          //  backgroundColor: _primaryColor, scrimColor: accentColor),
+        drawerTheme: DrawerThemeData(
+         backgroundColor: Colors.white, ),
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
-        primaryColor: Color.fromARGB(255, 62, 35, 60),
+       primaryColor: Color.fromARGB(255, 62, 35, 60),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
-        //scaffoldBackgroundColor: Color.fromARGB(255, 29, 33, 63),
+        scaffoldBackgroundColor: Color.fromARGB(255, 29, 33, 63),
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),

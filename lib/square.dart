@@ -7,18 +7,25 @@ class MySquare extends StatelessWidget {
   MySquare({required this.child});
   @override
   Widget build(BuildContext context) {
+       backgroundColor:Colors.white;
     return Padding(
+   
       padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 35),
       child: Container(
+        height:200,
         decoration: BoxDecoration(
+          borderRadius:BorderRadius.circular(50.0) ,
           shape: BoxShape.rectangle,
-          color: Theme.of(context).colorScheme.secondary,
+          color: Colors.deepPurple[400],
+          
         ),
         child: ElevatedButton(
+        
           style: ElevatedButton.styleFrom(
+         
             primary: Theme.of(context).colorScheme.secondary,
             minimumSize: Size(MediaQuery.of(context).size.width * 0.5,
-                MediaQuery.of(context).size.height * 0.5),
+                MediaQuery.of(context).size.height * 0.9),
             //elevation: 3,
           ),
           child: Text(

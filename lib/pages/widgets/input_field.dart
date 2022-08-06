@@ -46,7 +46,10 @@ child:Row(
         readOnly: widget==null?false:true,
         autofocus: false,
         controller: controller,
+        style: subHeadingStyle,
         decoration: InputDecoration(
+          hintStyle: subHeadingStyle,
+          hintText: hint,
           focusedBorder: UnderlineInputBorder(
 borderSide: BorderSide(
 color: Colors.white,
@@ -63,7 +66,7 @@ width: 0
       ) ,
     
     ),
-    widget==null?Container():Container(child: widget,)
+    widget==null?Container():Container(child: widget),
    
   
   ],
