@@ -58,103 +58,101 @@ class _MenteePageState extends State<MenteePage> {
   void filterSearchResults(String query) {}
 
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        body: FutureBuilder<List<GetByRoleModel>>(
-          future: futureGetByRoleModel,
-          builder: (context, i) {
-            if (i.hasData) {
-              // TextFormField(
-              //   controller: editingController,
-              // );
-              // TextFormField(
-              //   controller: editingController1,
-              // );
+    return Scaffold(
+      body: FutureBuilder<List<GetByRoleModel>>(
+        future: futureGetByRoleModel,
+        builder: (context, i) {
+          if (i.hasData) {
+            // TextFormField(
+            //   controller: editingController,
+            // );
+            // TextFormField(
+            //   controller: editingController1,
+            // );
 
-              return ListView.builder(
-                  itemCount: i.data?.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ProfilePage()));
-                        },
-                        title: Text('${i.data?[index].name}' +
-                            '   ' +
-                            '${i.data?[index].surname}' +
-                            ' \n ' +
-                            '${i.data?[index].userRole}'),
-                        subtitle: Text('${i.data?[index].email}'),
-                        leading: CircleAvatar(
-                          child: Text('${i.data?[index].name[0]}'),
-                        ));
-                  });
-            } else if (i.hasError) {
-              return Text('${i.error}');
-            }
+            return ListView.builder(
+                itemCount: i.data?.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage()));
+                      },
+                      title: Text('${i.data?[index].name}' +
+                          '   ' +
+                          '${i.data?[index].surname}' +
+                          ' \n ' +
+                          '${i.data?[index].userRole}'),
+                      subtitle: Text('${i.data?[index].email}'),
+                      leading: CircleAvatar(
+                        child: Text('${i.data?[index].name[0]}'),
+                      ));
+                });
+          } else if (i.hasError) {
+            return Text('${i.error}');
+          }
 
-            // By default, show a loading spinner.
-            return const CircularProgressIndicator();
-          },
-        ),
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            "Mentee Page",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).colorScheme.secondary,
-                ])),
-          ),
-          // actions: [
-          //   IconButton(
-          //     icon: const Icon(Icons.search),
-          //     onPressed: () {
-          //       showSearch(context: context, delegate: MySearchDelegate());
-          //     },
-          //   ),
-          // ],
-        ),
-        drawer: DrawerHelp(),
-        bottomNavigationBar: BottomBar(),
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
+        },
       ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          "Mentee Page",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        elevation: 0.5,
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.search),
+        //     onPressed: () {
+        //       showSearch(context: context, delegate: MySearchDelegate());
+        //     },
+        //   ),
+        // ],
+      ),
+      drawer: DrawerHelp(),
+      bottomNavigationBar: BottomBar(),
     );
   }
 }
 
-class MySearchDelegate extends SearchDelegate {
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    throw UnimplementedError();
-  }
+// class MySearchDelegate extends SearchDelegate {
+//   @override
+//   List<Widget>? buildActions(BuildContext context) {
+//     // TODO: implement buildActions
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    throw UnimplementedError();
-  }
+//   @override
+//   Widget? buildLeading(BuildContext context) {
+//     // TODO: implement buildLeading
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
-  }
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     // TODO: implement buildResults
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
-  }
-}
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     // TODO: implement buildSuggestions
+//     throw UnimplementedError();
+//   }
+// }

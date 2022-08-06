@@ -102,23 +102,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const SizedBox(height: 24),
                         ProfileWidget(
-                          imagePath: user.imagePath,
+                          imagePath: '${i.data?[1].avatar}',
                           onClicked: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => EditProfilePage()));
                           },
                         ),
                         const SizedBox(height: 24),
-                        Text('${i.data?[1].name}'),
+                        buildName('${i.data?[1].name}', '${i.data?[1].surname}',
+                            '${i.data?[1].work}', '${i.data?[1].city}'),
                         const SizedBox(height: 24),
                         NumbersWidget(),
                         const SizedBox(height: 48),
-                        Text('${i.data?[1].surname}'),
-                        const SizedBox(height: 24),
-                        Text('${i.data?[1].city}'),
-                        const SizedBox(height: 24),
-                        Text('${i.data?[1].name}'),
-                        const SizedBox(height: 24),
+                        buildAbout('${i.data?[1].aboutMe}'),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
                           child: Text(
@@ -170,69 +166,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   return const CircularProgressIndicator();
                 },
               ),
-              // child: ListView(
-              //   primary: false, //??
-              //   shrinkWrap: true,
-              //   physics: NeverScrollableScrollPhysics(),
-              //   children: [
-              //     const SizedBox(height: 24),
-              //     ProfileWidget(
-              //       imagePath: user.imagePath,
-              //       onClicked: () {
-              //         Navigator.of(context).push(MaterialPageRoute(
-              //             builder: (context) => EditProfilePage()));
-              //       },
-              //     ),
-              //     const SizedBox(height: 24),
-              //     Text(''),
-              //     const SizedBox(height: 24),
-              //     NumbersWidget(),
-              //     const SizedBox(height: 48),
-              //     buildAbout(user),
-              //     const SizedBox(height: 24),
-              //     Container(
-              //       padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
-              //       child: Text(
-              //         'Comments',
-              //         style: TextStyle(
-              //           fontWeight: FontWeight.bold,
-              //           fontSize: 24,
-              //         ),
-              //         textAlign: TextAlign.center,
-              //       ),
-              //     ),
-              //     const SizedBox(height: 10),
-              //     Container(
-              //       margin: EdgeInsets.only(
-              //         left: 30,
-              //         right: 16,
-              //       ),
-              //       height: 50,
-              //       color: Theme.of(context).colorScheme.secondary,
-              //       child: const Center(child: Text('Entry A')),
-              //     ),
-              //     const SizedBox(height: 15),
-              //     Container(
-              //       margin: EdgeInsets.only(
-              //         left: 30,
-              //         right: 16,
-              //       ),
-              //       height: 50,
-              //       color: Theme.of(context).colorScheme.secondary,
-              //       child: const Center(child: Text('Entry B')),
-              //     ),
-              //     const SizedBox(height: 15),
-              //     Container(
-              //       margin: EdgeInsets.only(
-              //         left: 30,
-              //         right: 16,
-              //       ),
-              //       height: 50,
-              //       color: Theme.of(context).colorScheme.secondary,
-              //       child: const Center(child: Text('Entry C')),
-              //     ),
-              //   ],
-              // ),
             ),
           ],
         ),
@@ -240,10 +173,16 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget buildName(User user) => Column(
+  Widget buildName(
+    String name,
+    String surname,
+    String major,
+    String city,
+  ) =>
+      Column(
         children: [
           Text(
-            user.name,
+            name,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
@@ -253,20 +192,20 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 4,
           ),
           Text(
-            user.major,
+            major,
             style: TextStyle(color: Colors.grey),
           ),
           const SizedBox(
             height: 4,
           ),
           Text(
-            user.city,
+            city,
             style: TextStyle(color: Colors.grey),
           ),
         ],
       );
 
-  Widget buildAbout(User user) => Container(
+  Widget buildAbout(String about) => Container(
         padding: EdgeInsets.symmetric(horizontal: 40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,10 +218,31 @@ class _ProfilePageState extends State<ProfilePage> {
               height: 4,
             ),
             Text(
-              user.about,
+              about,
               style: TextStyle(fontSize: 16, height: 1.4),
             ),
           ],
         ),
       );
 }
+// comment kısmı için widget
+// Widget buildComment(list ) => Container(
+//         padding: EdgeInsets.symmetric(horizontal: 40),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               'About',
+//               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//             ),
+//             const SizedBox(
+//               height: 4,
+//             ),
+//             Text(
+//               about,
+//               style: TextStyle(fontSize: 16, height: 1.4),
+//             ),
+//           ],
+//         ),
+//       );
+// }
