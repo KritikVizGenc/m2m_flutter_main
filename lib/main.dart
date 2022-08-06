@@ -15,10 +15,8 @@ Widget _defaultHome = const LoginPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   bool result = await SharedService.isLoggedIn();
-  print("--------------------------------------------------");
-  print(result);
   if(result) {
     _defaultHome = MainPage();
   }

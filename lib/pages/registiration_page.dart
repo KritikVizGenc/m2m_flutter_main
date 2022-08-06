@@ -286,13 +286,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 APIService.register(model).then((response) => {
                                       if (response.newUser != null)
                                         {
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MainPage()),
-                                                  (Route<dynamic> route) =>
-                                                      false)
+                                          Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/home',
+                                                (route) => false,
+                                          )
                                         }
                                       else
                                         {

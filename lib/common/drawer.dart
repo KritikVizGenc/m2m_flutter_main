@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/pages/categories_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
@@ -118,7 +119,7 @@ class _DrawerState extends State<DrawerHelp> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+                          CategoriesPage()));
             },
           ),
           Divider(
