@@ -23,7 +23,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final url = "http://10.0.2.2:5000/api/GetByIdModel/2";
+  final url = "http://10.0.2.2:5000/api/GetById/2";
 
   List<GetByIdModel> productsResponseFromJson(String str) =>
       List<GetByIdModel>.from(

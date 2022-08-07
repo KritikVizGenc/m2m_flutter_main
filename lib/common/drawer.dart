@@ -6,14 +6,14 @@ import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
-import 'package:m2m_flutter_main/themes.dart';
+import '../pages/categories_page.dart';
 import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
+import '../pages/profile_page.dart';
 import '../pages/splash_screen.dart';
 import '../pages/registiration_page.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
-
 
 class DrawerHelp extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _DrawerState extends State<DrawerHelp> {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: MyThemes.primaryColor,
+              color: Theme.of(context).copyWith().primaryColor,
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
@@ -44,49 +44,53 @@ class _DrawerState extends State<DrawerHelp> {
                 ],
               ),
             ),
-            
-              child: Container(
-                height: 40,
-                alignment: Alignment.center,
-                
-                child: Column(
-                  children: [
-                    Container(
-                      
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(width: 5, color: Colors.white),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 20,
-                            offset: const Offset(5, 5),
+            child: Container(
+              margin: const EdgeInsets.all(0),
+              alignment: Alignment.bottomCenter,
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage()));
+                    },
+                    child: Container(
+                      child: CircleAvatar(
+                        backgroundColor: Color.fromARGB(255, 62, 35, 60),
+                        radius: 33,
+                        child: CircleAvatar(
+                          radius: 80,
+                          backgroundImage: NetworkImage(
+                              'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg'),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Column(
+                    children: [
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfilePage()));
+                          },
+                          child: Text(
+                            '\nName Surname',
+                            style: TextStyle(
+                                fontSize: 23,
+                                color: Theme.of(context).colorScheme.onPrimary),
                           ),
-                        ],
+                        ),
                       ),
-                      child: Icon(
-                        Icons.person,
-                        size: 45,
-                        color: Colors.grey.shade300,
-                      ),
-                    ),
-                    Text(
-                      '\nName Surname',
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Theme.of(context).colorScheme.onPrimary),
-                    ),
-                    /*onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MenteePage()));
-                  },*/
-                  ],
-                  
-                ),
+                    ],
+                  ),
+                ],
               ),
-            
+            ),
           ),
           ListTile(
             leading: Icon(
@@ -116,11 +120,8 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          CategoriesPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CategoriesPage()));
             },
           ),
           Divider(
@@ -139,11 +140,8 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          MeetPages()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MeetPages()));
             },
           ),
           ListTile(
