@@ -25,6 +25,7 @@ class GetMyMentorsModel {
     required this.myMentorsEmail,
     required this.myMentorsPassword,
     required this.myMentorsUserRole,
+    required this.myMentorsRatingAverage,
     required this.myMentorsRating,
     required this.myMentorsCreatedAt,
     required this.myMentorsUpdatedAt,
@@ -42,6 +43,7 @@ class GetMyMentorsModel {
   String myMentorsEmail;
   String myMentorsPassword;
   int myMentorsUserRole;
+  double myMentorsRatingAverage;
   List<dynamic> myMentorsRating;
   DateTime myMentorsCreatedAt;
   DateTime myMentorsUpdatedAt;
@@ -60,6 +62,7 @@ class GetMyMentorsModel {
         myMentorsEmail: json["myMentors.email"],
         myMentorsPassword: json["myMentors.password"],
         myMentorsUserRole: json["myMentors.user_role"],
+        myMentorsRatingAverage: json["myMentors.ratingAverage"].toDouble(),
         myMentorsRating:
         List<dynamic>.from(json["myMentors.rating"].map((x) => x)),
         myMentorsCreatedAt: DateTime.parse(json["myMentors.createdAt"]),
@@ -79,6 +82,7 @@ class GetMyMentorsModel {
     "myMentors.email": myMentorsEmail,
     "myMentors.password": myMentorsPassword,
     "myMentors.user_role": myMentorsUserRole,
+    "myMentors.ratingAverage": myMentorsRatingAverage,
     "myMentors.rating": List<dynamic>.from(myMentorsRating.map((x) => x)),
     "myMentors.createdAt": myMentorsCreatedAt.toIso8601String(),
     "myMentors.updatedAt": myMentorsUpdatedAt.toIso8601String(),

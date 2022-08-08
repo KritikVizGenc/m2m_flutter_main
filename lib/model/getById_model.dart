@@ -4,10 +4,11 @@
 
 import 'dart:convert';
 
-GetByIdModel getByIdModelFromJson(String str) =>
-    GetByIdModel.fromJson(json.decode(str));
+List<GetByIdModel> getByIdModelFromJson(String str) => List<GetByIdModel>.from(
+    json.decode(str).map((x) => GetByIdModel.fromJson(x)));
 
-String getByIdModelToJson(GetByIdModel data) => json.encode(data.toJson());
+String getByIdModelToJson(List<GetByIdModel> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class GetByIdModel {
   GetByIdModel({
@@ -18,6 +19,8 @@ class GetByIdModel {
     required this.password,
     required this.userRole,
     required this.avatar,
+    required this.ratingAverage,
+    required this.rating,
     required this.aboutMe,
     required this.city,
     required this.work,
@@ -32,6 +35,8 @@ class GetByIdModel {
   String password;
   int userRole;
   String avatar;
+  double ratingAverage;
+  List<dynamic> rating;
   String aboutMe;
   String city;
   String work;
@@ -46,6 +51,8 @@ class GetByIdModel {
     password: json["password"],
     userRole: json["user_role"],
     avatar: json["avatar"],
+    ratingAverage: json["ratingAverage"].toDouble(),
+    rating: List<dynamic>.from(json["rating"].map((x) => x)),
     aboutMe: json["about_me"],
     city: json["city"],
     work: json["work"],
@@ -61,6 +68,8 @@ class GetByIdModel {
     "password": password,
     "user_role": userRole,
     "avatar": avatar,
+    "ratingAverage": ratingAverage,
+    "rating": List<dynamic>.from(rating.map((x) => x)),
     "about_me": aboutMe,
     "city": city,
     "work": work,

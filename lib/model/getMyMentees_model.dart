@@ -25,6 +25,7 @@ class GetMyMenteesModel {
     required this.myMenteesEmail,
     required this.myMenteesPassword,
     required this.myMenteesUserRole,
+    required this.myMenteesRatingAverage,
     required this.myMenteesRating,
     required this.myMenteesCreatedAt,
     required this.myMenteesUpdatedAt,
@@ -42,6 +43,7 @@ class GetMyMenteesModel {
   String myMenteesEmail;
   String myMenteesPassword;
   int myMenteesUserRole;
+  double myMenteesRatingAverage;
   List<int> myMenteesRating;
   DateTime myMenteesCreatedAt;
   DateTime myMenteesUpdatedAt;
@@ -60,6 +62,7 @@ class GetMyMenteesModel {
         myMenteesEmail: json["myMentees.email"],
         myMenteesPassword: json["myMentees.password"],
         myMenteesUserRole: json["myMentees.user_role"],
+        myMenteesRatingAverage: json["myMentees.ratingAverage"].toDouble(),
         myMenteesRating: List<int>.from(json["myMentees.rating"].map((x) => x)),
         myMenteesCreatedAt: DateTime.parse(json["myMentees.createdAt"]),
         myMenteesUpdatedAt: DateTime.parse(json["myMentees.updatedAt"]),
@@ -80,6 +83,7 @@ class GetMyMenteesModel {
     "myMentees.email": myMenteesEmail,
     "myMentees.password": myMenteesPassword,
     "myMentees.user_role": myMenteesUserRole,
+    "myMentees.ratingAverage": myMenteesRatingAverage,
     "myMentees.rating": List<dynamic>.from(myMenteesRating.map((x) => x)),
     "myMentees.createdAt": myMenteesCreatedAt.toIso8601String(),
     "myMentees.updatedAt": myMenteesUpdatedAt.toIso8601String(),

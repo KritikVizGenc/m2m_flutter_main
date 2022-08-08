@@ -51,10 +51,10 @@ class _DrawerState extends State<DrawerHelp> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => ProfilePage()));
                     },
                     child: Container(
                       child: CircleAvatar(
@@ -76,7 +76,7 @@ class _DrawerState extends State<DrawerHelp> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProfilePage()));
+                                    builder: (context) => ProfilePage(nereyeId: 2,)));
                           },
                           child: Text(
                             '\nName Surname',

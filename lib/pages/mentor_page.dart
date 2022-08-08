@@ -70,7 +70,7 @@ class _MentorPageState extends State<MentorPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ProfilePage()));
+                                builder: (context) => const ProfilePage(nereyeId: 5)));
                       },
                       title: Text('${i.data?[index].name}' +
                           '   ' +

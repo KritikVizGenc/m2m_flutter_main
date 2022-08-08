@@ -60,8 +60,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                //
+                Navigator.pop(context);
               },
             )
           ],
@@ -75,11 +75,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
             const SizedBox(
               height: 24,
             ),
-            ProfileWidget(
-              imagePath: user.imagePath,
-              isEdit: true,
-              onClicked: () => pickImage(ImageSource.gallery),
-            ),
+            // ProfileWidget(
+            //   imagePath: user.imagePath,
+            //   isEdit: true,
+            //   onClicked: () => pickImage(ImageSource.gallery),
+            // ),
             const SizedBox(
               height: 24,
             ),
@@ -138,7 +138,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
+                                builder: (context) => ProfilePage(nereyeId: 2,)));
                       },
                     ),
                   )
