@@ -59,6 +59,7 @@ class _MenteePageState extends State<MenteePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< Updated upstream
       body: FutureBuilder<List<GetByRoleModel>>(
         future: futureGetByRoleModel,
         builder: (context, i) {
@@ -97,12 +98,60 @@ class _MenteePageState extends State<MenteePage> {
           // By default, show a loading spinner.
           return const CircularProgressIndicator();
         },
+=======
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              onChanged: (value) {},
+              controller: editingController,
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Arama yapmak istediğiniz etiketi giriniz.",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+            ),
+          ),
+          Container(
+            child: FutureBuilder<List<GetByRoleModel>>(
+              future: futureGetByRoleModel,
+              builder: (context, i) {
+                if (i.hasData) {
+                  return ListView.builder(
+                      itemCount: i.data?.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            title: Text('${i.data?[index].name}' +
+                                '   ' +
+                                '${i.data?[index].surname}' +
+                                ' \n ' +
+                                '${i.data?[index].userRole}'),
+                            subtitle: Text('${i.data?[index].email}'),
+                            leading: CircleAvatar(
+                              child: Text('${i.data?[index].name[0]}'),
+                            ));
+                      });
+                } else if (i.hasError) {
+                  return Text('${i.error}');
+                }
+
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
+          ),
+        ]),
+>>>>>>> Stashed changes
       ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           "Mentee Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+<<<<<<< Updated upstream
         ),
         elevation: 0.5,
         iconTheme: IconThemeData(color: Colors.white),
@@ -116,6 +165,21 @@ class _MenteePageState extends State<MenteePage> {
                 Theme.of(context).colorScheme.secondary,
               ])),
         ),
+=======
+        ),
+        // elevation: 0.5,
+        // iconTheme: IconThemeData(color: Colors.white),
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //       gradient: LinearGradient(
+        //           begin: Alignment.topLeft,
+        //           end: Alignment.bottomRight,
+        //           colors: <Color>[
+        //         //Theme.of(context).primaryColor,
+        //         //Theme.of(context).colorScheme.secondary,
+        //       ])),
+        // ),
+>>>>>>> Stashed changes
         // actions: [
         //   IconButton(
         //     icon: const Icon(Icons.search),
@@ -128,6 +192,10 @@ class _MenteePageState extends State<MenteePage> {
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
     );
+<<<<<<< Updated upstream
+=======
+    // );
+>>>>>>> Stashed changes
   }
 }
 

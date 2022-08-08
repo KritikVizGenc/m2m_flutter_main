@@ -54,10 +54,12 @@ class _MentorPageState extends State<MentorPage> {
   void filterSearchResults(String query) {
 //search kısmı dolacak
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
+<<<<<<< Updated upstream
       body: FutureBuilder<List<GetByRoleModel>>(
         future: futureGetByRoleModel,
         builder: (context, i) {
@@ -85,10 +87,60 @@ class _MentorPageState extends State<MentorPage> {
           } else if (i.hasError) {
             return Text('${i.error}');
           }
+=======
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: TextField(
+              onChanged: (value) {},
+              controller: editingController,
+              decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Arama yapmak istediğiniz etiketi giriniz.",
+                  prefixIcon: Icon(Icons.search),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)))),
+            ),
+          ),
+          Container(
+            child: FutureBuilder<List<GetByRoleModel>>(
+              future: futureGetByRoleModel,
+              builder: (context, i) {
+                if (i.hasData) {
+                  return ListView.builder(
+                      itemCount: i.data?.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ProfilePage(nereyeId: 5)));
+                            },
+                            title: Text('${i.data?[index].name}' +
+                                '   ' +
+                                '${i.data?[index].surname}' +
+                                ' \n ' +
+                                '${i.data?[index].userRole}'),
+                            subtitle: Text('${i.data?[index].email}'),
+                            leading: CircleAvatar(
+                              child: Text('${i.data?[index].name[0]}'),
+                            ));
+                      });
+                } else if (i.hasError) {
+                  return Text('${i.error}');
+                }
+>>>>>>> Stashed changes
 
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
+          ),
+        ]),
       ),
       backgroundColor: Colors.white,
       appBar: AppBar(

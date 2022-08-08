@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
+import 'package:m2m_flutter_main/model/getComment_model.dart';
 import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
@@ -42,11 +43,37 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
+  List<GetCommentModel> productsResponseFromJson1(String str) =>
+      List<GetCommentModel>.from(
+          json.decode(str).map((x) => GetCommentModel.fromJson(x)));
+
+  late Future<List<GetCommentModel>> futureGetCommentModel;
+  Future<List<GetCommentModel>> fetchGetCommentModel(nereyeId) async {
+    Uri url1 = Uri.http(
+      '10.0.2.2:5000',
+      '/api/getComment/${jsonEncode(nereyeId)}',
+    );
+    final response = await get(Uri.parse(url1.toString()));
+
+    if (response.statusCode == 200) {
+      return productsResponseFromJson1(response.body);
+    } else {
+      throw Exception('Failed to load album');
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+<<<<<<< Updated upstream
     futureGetByIdModel = fetchGetByIdModel() as Future<List<GetByIdModel>>;
+=======
+    futureGetByIdModel =
+        fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
+    futureGetCommentModel =
+        fetchGetCommentModel(widget.nereyeId) as Future<List<GetCommentModel>>;
+>>>>>>> Stashed changes
   }
 
   @override
@@ -114,6 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(height: 24),
                         NumbersWidget(),
                         const SizedBox(height: 48),
+<<<<<<< Updated upstream
                         buildAbout('${i.data?[1].aboutMe}'),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
@@ -156,17 +184,41 @@ class _ProfilePageState extends State<ProfilePage> {
                           color: Theme.of(context).colorScheme.secondary,
                           child: Text('${i.data?[1].name}'),
                         ),
+=======
+                        buildAbout('${i.data?[0].aboutMe}'),
+>>>>>>> Stashed changes
                       ],
                     );
                   } else if (i.hasError) {
                     return Text('${i.error}');
                   }
-
                   // By default, show a loading spinner.
                   return const CircularProgressIndicator();
                 },
               ),
             ),
+            Container(
+              child: FutureBuilder<List<GetCommentModel>>(
+                future: futureGetCommentModel,
+                builder: (context, i) {
+                  if (i.hasData) {
+                    return GridView.builder(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1),
+                        scrollDirection: Axis.vertical,
+                        itemCount: i.data?.length,
+                        itemBuilder: (context, index) {
+                          return buildComment(
+                              '${i.data?[index].commentContent}');
+                        });
+                  } else if (i.hasError) {
+                    return Text('${i.error}');
+                  }
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
+              ),
+            )
           ],
         ),
       ),
@@ -224,6 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       );
+<<<<<<< Updated upstream
 }
 // comment kısmı için widget
 // Widget buildComment(list ) => Container(
@@ -246,3 +299,29 @@ class _ProfilePageState extends State<ProfilePage> {
 //         ),
 //       );
 // }
+=======
+}
+
+Widget buildComment(String comment) {
+  return Container(
+    padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
+    child: Text(
+      'Comments',
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+      ),
+      textAlign: TextAlign.center,
+    ),
+  );
+  Container(
+    margin: EdgeInsets.only(
+      left: 30,
+      right: 16,
+    ),
+    height: 50,
+    color: Color.fromARGB(255, 255, 255, 255),
+    child: Text(comment),
+  );
+}
+>>>>>>> Stashed changes
