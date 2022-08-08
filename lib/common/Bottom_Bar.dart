@@ -37,6 +37,7 @@ class BottomBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat),
+        
           label: 'Chats',
         ),
       ],
@@ -52,6 +53,7 @@ class BottomBar extends StatelessWidget {
   void _onTap(int index) {
     _selectedIndex = index;
     setState(() {});
+    onTap:(index);
   }
 
   void setState(Null Function() param0) {}

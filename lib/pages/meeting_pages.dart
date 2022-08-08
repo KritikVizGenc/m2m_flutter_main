@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:m2m_flutter_main/common/theme_helper.dart';
 import 'package:m2m_flutter_main/pages/add_task_bar_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/button.dart';
+import 'package:m2m_flutter_main/themes.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
@@ -20,7 +22,13 @@ class MeetPages extends StatefulWidget {
 
 class MeetPagesState extends State<MeetPages> {
  DateTime _selectedDate = DateTime.now();
- 
+  List<String> tasks = [
+    'post 1',
+    'post 2 ',
+    'post 3',
+    'post 4',
+  ];
+  String text=' ';
  @override
   Widget build(BuildContext context) {
     
@@ -57,39 +65,95 @@ class MeetPagesState extends State<MeetPages> {
           )
         ],
       ),
-
-
-
-       
-     
-      body: Column(
-        
-        children: [
+     body: Column(
+children: [
 _addTaskBar(),
-
 _addDateBAr(),
 
- // taskWidget(Color(0xfff96860),"Meeting with ...","9:30 AM" ),
- //   taskWidget(Color.fromARGB(255, 79, 66, 104),"Meeting with ...","9:30 AM"),
- //    taskWidget(Color.fromARGB(255, 233, 219, 91),"Meeting with ...","9:30 AM"),
+ Expanded(
+   child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              
+               Text('Events'),
+               ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              
+                  shrinkWrap: true,
+                  itemCount:tasks.length,
+                  itemBuilder: (context,index){
+                 //var containers=  tasks.map((tasks)=> Container(
+                  // height: 90,
+                  // width: 50,
+                  // margin: EdgeInsets.all(5),
+               //   color: MyThemes.primaryColor,child: Text(tasks))).toList()
+                                        
+                 
+              //   child: Padding( padding:EdgeInsets.all(8),
+             return Card(  
+                 
+child: ListTile(
   
-  ],
-   
-
-  
-
-
-
-
-
-
-
-
-
-
-
+  title: Text(tasks[index]),
+  trailing: Container(
+    width: 70,
+    child: Row(
+      children: 
+      [
+        Expanded(
+        child: IconButton(onPressed: (){
+showDialog(context: context, builder:(context) => SimpleDialog(
+children: [
+  TextField(
+onChanged: (value){
+  setState(() {
+    text=value;
+  });
+}
 
   ),
+  ElevatedButton(onPressed: (() {
+    setState(() {
+      tasks[index]=text;
+    });
+    Navigator.pop(context);
+  }), child: Text('update'))
+],
+),);
+
+        }, icon:Icon(Icons.edit))),
+      Expanded(child: IconButton(onPressed: (){
+
+setState(() {
+  tasks.removeAt(index);
+});
+
+      }, icon:Icon(Icons.delete)))
+      ],
+      
+    ),
+  ),
+),
+                 );
+                    
+                   // return  containers[index];
+                    
+                  },
+                 
+                  
+                  ),
+            ],
+          ),
+        ),
+ )
+],
+
+
+
+     ),
 
 
 
@@ -102,6 +166,9 @@ _addDateBAr(){
   margin: const EdgeInsets.only(top: 20,left:20 ),
   child: DatePicker(
   DateTime.now(),
+
+
+
   height: 100,
   width: 80,
   initialSelectedDate: DateTime.now(),
@@ -135,10 +202,6 @@ _selectedDate =date;
   
   );
 }
-
-
-
-
 
     _addTaskBar(){
 return Container(
@@ -219,65 +282,13 @@ return Container(
 
       
     }
- 
-//  Slidable taskWidget(Color color,String title,String time){
-//   return Slidable(
-//   actionPane:SlidableDrawerActionPane(),
-//   actionExtentRatio:0.3 ,
-//   child:Container(
-// height: 80,
-// margin:EdgeInsets.symmetric(horizontal: 20,vertical: 10) ,
-// decoration: BoxDecoration(
-//   color: Colors.white,
-//   boxShadow: [BoxShadow(
-//     color: Colors.black.withOpacity(0.03),
-//     offset: Offset(0,9),
-//     blurRadius: 20,
-//     spreadRadius: 1
-//
-//   )]
-// ),
-//
-// child: Row(children: [
-//   Container(
-//     margin:EdgeInsets.symmetric(horizontal:20 ) ,
-//   height: 25,
-//   width: 25,
-//   decoration: BoxDecoration(
-// color: Colors.white,
-// shape: BoxShape.circle,
-// border: Border.all(color:color,width: 4)
-//
-//   ),
-//
-//
-//   ),
-//   Column(
-// crossAxisAlignment: CrossAxisAlignment.start,
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-//   Text(title, style:TextStyle(
-//     color: Colors.black,
-//   ) ,)
-// ],
-//
-//   ),
-//
-//
-//
-//
-//
-// ]),
-//   ) ,
-//
-//
-//   );
-// }
+
+_removeTask(index){}
+
+}
+  
  
  
  
  
- 
- 
- 
-  }
+  
