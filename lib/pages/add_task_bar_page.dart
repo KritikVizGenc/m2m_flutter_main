@@ -1,13 +1,15 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/common/theme_helper.dart';
+import 'package:m2m_flutter_main/pages/widgets/button.dart';
+import 'package:m2m_flutter_main/themes.dart';
 import 'widgets/input_field.dart';
 import 'package:intl/intl.dart';
 import '../common/Bottom_Bar.dart';
-import 'package:flutter/src/material/date_picker.dart';
+//import 'package:flutter/src/material/date_picker.dart';
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
 
@@ -19,9 +21,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
   DateTime _selectedDate = DateTime.now();
   String _endTime ="9:30 PM";
   String _startTime =DateFormat("hh:mm a").format(DateTime.now()).toString();
+  int _selectedColor=0;
+   List<String> items = [
+    'post 1',
+    'post 2 ',
+    'post 3',
+    'post 4',
+  ];
+  String? selectedItem='post 1';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+         backgroundColor: Colors.white,
  drawer: DrawerHelp(),
         bottomNavigationBar: BottomBar(),
        
@@ -53,83 +65,273 @@ class _AddTaskPageState extends State<AddTaskPage> {
           )
         ],
       ),
-body: Container(
-  padding: const EdgeInsets.only(left: 20,right: 20),
-child: SingleChildScrollView(
-  child:   Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-  Text("Program Yarat",
-  style:HeadingStyle ,
-  ),
+      
+body: Center(
+
   
-  MyInputField(title: "Title",
-  hint: "Enter your title"
-  ),
-  MyInputField(title: "Note",
-  hint: "Enter your note"
-  ),
-   MyInputField(title: "Mente Name",
-  hint: "Enter your mentee"
-  ),
+   child: Container(
   
-  MyInputField(title: "Date",
-  hint: DateFormat.yMd().format( _selectedDate),
-  widget: IconButton(
-    icon:Icon(Icons.calendar_today_outlined),
+
+    padding: const EdgeInsets.only(left: 20,right: 20),
+  
+  child: SingleChildScrollView(
+  
+    child:   Column(
+  
+    crossAxisAlignment: CrossAxisAlignment.start,
+  
+      children: [
+
+  
+  
+    Text("Program Yarat",
+  
+    style:HeadingStyle ,
+  
+    ),
+  
     
-    onPressed: () {
-      _getDateFromUser() ;
-    },
-  ),
- 
-  ), 
-   Row(
-    children: [
-      Expanded(
-        child:MyInputField(
-title: "StartDate",
-hint: _startTime,
-widget: IconButton(
-  onPressed:(){
-_getTimeFromUSer(isStartTime: true);
-  } , 
-  icon: Icon(
-    Icons.access_time_rounded,
-    
-  ),
-),
-        ) ,
-      ),
-   SizedBox(width:12,),
+  
+    MyInputField(title: "Title-Note",
+  
+    hint: "Enter your title"
+  
+    ),
+  Text("Mentee",style: subHeadingStyle,),
+    Padding(
+      padding: const EdgeInsets.fromLTRB
+      
+      (3,30,5,2),
+     
+      child: Container(
+        width: 1200,
+        decoration: BoxDecoration(
+          
+                 borderRadius:BorderRadius.all(Radius.circular(10),),
+                 border:Border.all(color: MyThemes.primaryColor),
+        ),
+        child: DropdownButtonFormField<String>( 
+         
+           isExpanded: true,
+          dropdownColor: Colors.white,
+       
+     // underline: Container(),
+        value: selectedItem,
+        
+        onChanged: (String? newValue){
+          setState(() {
+            selectedItem=newValue!;
+          });
+        },
+        items: items.map<DropdownMenuItem<String>>(
+          (String value){
+            return DropdownMenuItem<String>(
+           
+              value:value,
+              child: Text(value),
+            );
+          },
+        ).toList()
    
-      Expanded(
-        child:MyInputField(
-title: "End Date",
-hint: _endTime,
-widget: IconButton(
-  onPressed:(){
-_getTimeFromUSer(isStartTime: false);
-  } , 
-  icon: Icon(
-    Icons.access_time_rounded,
-    
-  ),
-),
-        ) ,
+   
+   ),
       ),
-    ],
-  )
-    ],
+    ),
+  
+  //  MyInputField(title: "Mentee name",
+  
+
+    //hint: "Enter your note"
+  
+    //),
+  
+  //   MyInputField(title: "Mentee surname",
+  
+   // hint: "Enter your mentee"
+  
+    //),
+  
+    MyInputField(title: "Date",
+  
+    hint: DateFormat.yMd().format( _selectedDate),
+  
+    widget: IconButton(
+  
+      icon:Icon(Icons.calendar_today_outlined),
+  
+      onPressed: () {
+  
+        _getDateFromUser() ;
+  
+      },
+  
+    ),
+  
+   
+  
+    ), 
+  
+     Row(
+  
+      children: [
+  
+        Expanded(
+  
+          child:MyInputField(
+  
+  title: "StartDate",
+  
+  hint: _startTime,
+  
+  widget: IconButton(
+  
+    onPressed:(){
+  
+  _getTimeFromUSer(isStartTime: true);
+  
+    } , 
+  
+    icon: Icon(
+  
+      Icons.access_time_rounded,
+
+    ),
   
   ),
-),
+  
+          ) ,
+  
+        ),
+  
+     SizedBox(width:12,),
+  
+        Expanded(
+  
+          child:MyInputField(
+  
+  title: "End Date",
+  
+  hint: _endTime,
+  
+  widget: IconButton(
+  
+    onPressed:(){
+  
+  _getTimeFromUSer(isStartTime: false);
+  
+    } , 
+    icon: Icon(
+  
+      Icons.access_time_rounded,
+    ),
+  
+  ),
+  
+          ) ,
+  
+        ),
+  
+      ],
+  
+    ),
+      SizedBox(height:18 ,),
+  
+      Row(
+  
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  
+        crossAxisAlignment:CrossAxisAlignment.center ,
+  
+        children: [
+  
+  
+  
+  _colorPalete(),
+  
+  MyButton(label: "Create Task", onTap: ()=>null,)
+  
+  
+  
+  
+  
+  
+  
+      ],
+  
+      
+  
+      ),
 
+      ],
+  
+    
+  
+    ),
+  
+  ),
+  
+  
 
-)
+  
+  
+  ),
 
-    );
+   )
+
+);
+    
   }
+_colorPalete(){
+  return Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  
+  children: [
+Text("Color",
+style: subHeadingStyle,
+
+
+),
+SizedBox(height: 8.0,),
+Wrap(
+  children: List<Widget>.generate(
+  3,(int index){
+return GestureDetector(
+onTap: () {
+  setState(() {
+    _selectedColor=index;
+  });
+  
+},
+
+  child:   Padding(
+  
+    padding: const EdgeInsets.only(right:8.0),
+  
+    child:   CircleAvatar (
+    radius: 14,
+    backgroundColor: index==0?MyThemes.primaryColor:index==1?MyThemes.primaryColor:Colors.pink,
+  child: _selectedColor==index?Icon(Icons.done,
+  color: Colors.white,
+  size: 16,
+  
+  ):Container(
+
+  ),
+    
+  
+    ),
+  
+  ),
+);
+  }
+)
+)
+],
+);
+
+}
+
+
 _getDateFromUser() async {
   DateTime? _pickerDate = await showDatePicker(
     context: context, 
@@ -159,11 +361,11 @@ if(pickedTime==null){
 print("time cancel");
 }else if(isStartTime==true){
 setState(() {
-  
+  _startTime=_formatedTime;
 });
 }else if(isStartTime==false){
  setState(() {
-   
+   _endTime=_formatedTime;
  });
 
 }

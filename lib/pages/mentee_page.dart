@@ -65,12 +65,6 @@ class _MenteePageState extends State<MenteePage> {
           .toList();
     }
 
-    // Refresh the UI
-    setState(() {
-      List _foundUsers = results;
-    });
-  }
-
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
@@ -193,4 +187,4 @@ class _MenteePageState extends State<MenteePage> {
 //     // TODO: implement buildSuggestions
 //     throw UnimplementedError();
 //   }
-// }
+//}

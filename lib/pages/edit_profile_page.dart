@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/animation/animation_controller.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/ticker_provider.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
@@ -21,12 +24,15 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController surnameController = TextEditingController();
-  final TextEditingController majorController = TextEditingController();
-  final TextEditingController cityController = TextEditingController();
-  final TextEditingController aboutController = TextEditingController();
-  final TextEditingController avatarController = TextEditingController();
+  File? image;
+
+  Future pickImage(ImageSource source) async {
+    final image = await ImagePicker().pickImage(source: source);
+    if (image == null) return;
+    final imageTemporary = File(image.path);
+    setState(() => this.image = imageTemporary);
+  }
+
   User user = UserPreferences.myUser;
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -74,11 +80,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
             const SizedBox(
               height: 24,
             ),
-            ProfileWidget(
-              imagePath: user.imagePath,
-              isEdit: true,
-              onClicked: () async {},
-            ),
+            // ProfileWidget(
+            //   imagePath: user.imagePath,
+            //   isEdit: true,
+            //   onClicked: () => pickImage(ImageSource.gallery),
+            // ),
             const SizedBox(
               height: 24,
             ),

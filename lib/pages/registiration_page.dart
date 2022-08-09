@@ -16,10 +16,11 @@ class RegistrationPage extends StatefulWidget {
   }
 }
 
-enum SingingCharacter { mentor, mentee }
+enum SingingCharacter { mentee, mentor }
 
 class _RegistrationPageState extends State<RegistrationPage> {
-  SingingCharacter? _character = SingingCharacter.mentor;
+  SingingCharacter? _character = SingingCharacter.mentee;
+  int userRole = 2;
 
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
@@ -164,22 +165,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 Column(
                                   children: <Widget>[
                                     RadioListTile<SingingCharacter>(
-                                      title: const Text('Mentor'),
-                                      value: SingingCharacter.mentor,
-                                      groupValue: _character,
-                                      onChanged: (SingingCharacter? value) {
-                                        setState(() {
-                                          _character = value;
-                                        });
-                                      },
-                                    ),
-                                    RadioListTile<SingingCharacter>(
                                       title: const Text('Mentee'),
                                       value: SingingCharacter.mentee,
                                       groupValue: _character,
                                       onChanged: (SingingCharacter? value) {
                                         setState(() {
                                           _character = value;
+                                          userRole = 2;
+                                        });
+                                      },
+                                    ),
+                                    RadioListTile<SingingCharacter>(
+                                      title: const Text('Mentor'),
+                                      value: SingingCharacter.mentor,
+                                      groupValue: _character,
+                                      onChanged: (SingingCharacter? value) {
+                                        setState(() {
+                                          _character = value;
+                                          userRole = 1;
                                         });
                                       },
                                     ),
@@ -269,10 +272,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                   //isAPIcallProcess = true;
                                 });
 
-                                print(nameController.text);
-                                print(surnameController.text);
-                                print(emailController.text);
-                                print(passwordController.text);
+                                print(userRole.toString());
+
 
                                 RegisterRequestModel model =
                                     RegisterRequestModel(
@@ -280,18 +281,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                         surname: surnameController.text,
                                         email: emailController.text,
                                         password: passwordController.text,
-                                        userRole: 1);
+                                        userRole: userRole);
 
                                 APIService.register(model).then((response) => {
                                       if (response.newUser != null)
                                         {
-                                          Navigator.of(context)
-                                              .pushAndRemoveUntil(
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          MainPage()),
-                                                  (Route<dynamic> route) =>
-                                                      false)
+                                          Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            '/home',
+                                                (route) => false,
+                                          )
                                         }
                                       else
                                         {

@@ -100,13 +100,13 @@ class _MainPageState extends State<MainPage> {
     // TODO: implement initState
     super.initState();
     futureGetByRoleModel =
-        fetchGetByRoleModel() as Future<List<GetMyMenteesModel>>;
+    fetchGetByRoleModel() as Future<List<GetMyMenteesModel>>;
 
     futureGetByRoleModel2 =
-        fetchGetByRoleModel2() as Future<List<GetMyMentorsModel>>;
+    fetchGetByRoleModel2() as Future<List<GetMyMentorsModel>>;
 
     futureGetByRoleModel3 =
-        fetchGetByRoleModel3() as Future<List<GetAllTagsModel>>;
+    fetchGetByRoleModel3() as Future<List<GetAllTagsModel>>;
   }
 
   Widget _userCard(
@@ -200,9 +200,9 @@ class _MainPageState extends State<MainPage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Theme.of(context).primaryColor,
-                Theme.of(context).colorScheme.secondary,
-              ])),
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).colorScheme.secondary,
+                  ])),
         ),
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
@@ -281,8 +281,8 @@ class _MainPageState extends State<MainPage> {
                       return GridView.builder(
                           padding: const EdgeInsets.all(0.0),
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1),
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1),
                           scrollDirection: Axis.horizontal,
                           itemCount: i.data?.length,
                           itemBuilder: (context, index) {
@@ -421,10 +421,10 @@ class _MainPageState extends State<MainPage> {
                   if (i.hasData) {
                     return GridView.builder(
                         gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 95,
-                                crossAxisSpacing: 5,
-                                mainAxisSpacing: 0),
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: 95,
+                            crossAxisSpacing: 5,
+                            mainAxisSpacing: 0),
                         itemCount: i.data?.length,
                         itemBuilder: (context, index) {
                           return Container(
@@ -579,4 +579,5 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+<<<<<<< HEAD
 }

@@ -1,17 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/pages/categories_page.dart';
+import 'package:m2m_flutter_main/pages/chat_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
+import '../pages/categories_page.dart';
 import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
+import '../pages/profile_page.dart';
 import '../pages/splash_screen.dart';
 import '../pages/registiration_page.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
-import '';
 
 class DrawerHelp extends StatefulWidget {
   @override
@@ -43,40 +46,51 @@ class _DrawerState extends State<DrawerHelp> {
               ),
             ),
             child: Container(
-              height: 40,
-              alignment: Alignment.center,
+              margin: const EdgeInsets.all(0),
+              alignment: Alignment.bottomCenter,
               child: Column(
                 children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(width: 5, color: Colors.white),
-                      color: Colors.white,
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 20,
-                          offset: const Offset(5, 5),
+                  GestureDetector(
+                    onTap: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => ProfilePage()));
+                    },
+                    child: Container(
+                      child: CircleAvatar(
+                        backgroundColor: Color.fromARGB(255, 243, 178, 239),
+                        radius: 33,
+                        child: CircleAvatar(
+                          radius: 80,
+                          backgroundImage: NetworkImage(
+                              'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg'),
                         ),
-                      ],
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      size: 45,
-                      color: Colors.grey.shade300,
+                      ),
                     ),
                   ),
-                  Text(
-                    '\nName Surname',
-                    style: TextStyle(
-                        fontSize: 26,
-                        color: Theme.of(context).colorScheme.onPrimary),
+                  Column(
+                    children: [
+                      Container(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ProfilePage(
+                                          nereyeId: 2,
+                                        )));
+                          },
+                          child: Text(
+                            '\nName Surname',
+                            style: TextStyle(
+                                fontSize: 23,
+                                color: Theme.of(context).colorScheme.onPrimary),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  /*onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MenteePage()));
-                  },*/
                 ],
               ),
             ),
@@ -109,11 +123,8 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CategoriesPage()));
             },
           ),
           Divider(
@@ -200,16 +211,13 @@ class _DrawerState extends State<DrawerHelp> {
               color: Theme.of(context).colorScheme.secondary,
             ),
             title: Text(
-              'Help',
+              'Chat',
               style: TextStyle(
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+                  context, MaterialPageRoute(builder: (context) => ChatPage()));
             },
           ),
           ListTile(
