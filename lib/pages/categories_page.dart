@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/model/getAllTags_model.dart';
+import 'package:m2m_flutter_main/model/getById_model.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
+import '../service/shared_service.dart';
 
 class CategoriesPage extends StatefulWidget {
   @override
@@ -11,65 +16,86 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends State<CategoriesPage> {
 
+  Future<List<GetAllTagsModel>?> futureTagsModel = APIService.getAllTags();
+
+
+  int? selectedChip;
+
+  @override
+  void initState() {
+    super.initState();
+
+  }
+
 
 
 
 
   @override
   Widget build(BuildContext context) {
-    List<String> categoryList = <String>[];
-    categoryList.add("PHP");
-    categoryList.add("HTML");
-    categoryList.add("CSS");
-    categoryList.add("JAVASCRIPT");
-    categoryList.add("FLUTTER");
-    categoryList.add("KOTLIN");
-    categoryList.add("JAVA");
-    categoryList.add("SWIFT");
-    categoryList.add("PYTHON");
-    categoryList.add("LINUX");
-    categoryList.add("DATABASE MANAGEMENT");
 
     
 
     return Scaffold(
+      backgroundColor: Colors.white,
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text("Categories"),
         centerTitle: false,
       ),
-      body: Center(
-        child: GridView.builder(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 65,
-
-                crossAxisSpacing: 5,
-                mainAxisSpacing: 0),
-            itemCount: categoryList.length,
-            itemBuilder: (BuildContext ctx, index) {
-              return Container(
-                child: _buildChip(categoryList[index], Colors.purple),
+      body:  FutureBuilder<List<GetAllTagsModel>?>(
+        future: futureTagsModel,
+        builder: (context, i) {
+          if (i.hasData) {
+            if(i.data != null && i.data!.isNotEmpty) {
+              return Wrap(
+                  children: List.generate(i.data!.length, (index) =>
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedChip = i.data?[index].id;
+                          });
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: _buildChip(
+                              '${i.data?[index].tagName}', Colors.purple),
+                        ),
+                      ),
+                  )
               );
-            }),
+            }
 
+          } else if (i.hasError) {
+            return Text('${i.error}');
+          }
+
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
+        },
       ),
     );
   }
 
+
+
+
+
   Widget _buildChip(String label, Color color) {
     return Chip(
-      labelPadding: EdgeInsets.all(2.0),
-      label: Text(
-        label,
-        style: const TextStyle(
-          color: Colors.white,
+      label: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
         ),
       ),
       backgroundColor: color,
       elevation: 6.0,
       shadowColor: Colors.grey[60],
-      padding: EdgeInsets.all(8.0),
     );
   }
 
