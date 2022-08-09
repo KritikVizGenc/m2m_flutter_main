@@ -105,22 +105,6 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     right: 15.0,
                     bottom: 30.0,
                   ),
-                  /* decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(20),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(300),
-                      topRight: Radius.circular(300),
-                      bottomLeft: Radius.circular(300),
-                      bottomRight: Radius.circular(300),
-                    ),
-                    border: Border.all(width: 7, color: Colors.white),
-                  ),*/
-                  /*child: Icon(
-                    Icons.widgets,
-                    color: Color.fromARGB(255, 16, 12, 12),
-                    size: 50.0,
-                  )*/
-                  //child: Image.asset('assets/image/m2m.png'),
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
                       image: AssetImage("assets/image/m2m.png"),

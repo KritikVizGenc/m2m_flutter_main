@@ -82,7 +82,7 @@ class _MainPageState extends State<MainPage> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: Color.fromARGB(255, 231, 236, 251),
+            color: Color.fromARGB(255, 241, 236, 244),
             width: 4,
           )),
       child: Column(
@@ -149,9 +149,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 231, 236, 251),
+      backgroundColor: Color.fromARGB(255, 248, 237, 245),
+      //Color.fromARGB(255, 241, 236, 244),
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           "Main Page",
@@ -235,7 +236,7 @@ class _MainPageState extends State<MainPage> {
             child: Padding(
               padding: const EdgeInsets.all(0.0),
               child: Container(
-                color: Color.fromARGB(255, 231, 236, 251),
+                color: Color.fromARGB(255, 241, 236, 244),
                 margin: EdgeInsets.all(5.0),
                 height: 155,
                 width: 800,
@@ -297,7 +298,7 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Container(
-              color: Color.fromARGB(255, 231, 236, 251),
+              color: Color.fromARGB(255, 241, 236, 244),
               margin: EdgeInsets.all(5.0),
               height: 155,
               child: FutureBuilder<List<GetMyMenteesModel>?>(

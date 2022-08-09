@@ -20,7 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  double _headerHeight = 350;
+  double _headerHeight = 300;
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 231, 236, 251),
+      backgroundColor: Color.fromARGB(255, 245, 245, 245),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -42,14 +42,14 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SafeArea(
               child: Container(
-                  padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
                   margin: EdgeInsets.fromLTRB(
                       20, 10, 20, 10), // This will be the login form
                   child: Column(
                     //crossAxisAlignment: Alignment(0.5, 0.5),
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 50, 0, 35),
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
                         child: Text(
                           'Hi There!',
                           style: TextStyle(
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30.0),
+                      SizedBox(height: 20.0),
                       Form(
                           key: _formKey,
                           child: Column(
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
                               ),
-                              SizedBox(height: 30.0),
+                              SizedBox(height: 20.0),
                               Container(
                                 child: TextFormField(
                                   obscureText: true,

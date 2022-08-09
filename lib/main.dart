@@ -28,18 +28,18 @@ void main() async {
 class MyApp extends StatelessWidget {
   static Map<int, Color> color = {
     50: Color.fromARGB(255, 111, 116, 165), //10%
-    100: Color.fromARGB(255, 7, 11, 47), //20%
-    200: Color.fromARGB(255, 13, 20, 79), //30%
-    300: Color.fromARGB(255, 22, 30, 110), //40%
-    400: Color.fromARGB(255, 36, 42, 99), //50%
-    500: Color.fromARGB(255, 31, 38, 99), //60%
+    100: Color.fromARGB(255, 203, 205, 223), //20%
+    200: Color.fromARGB(255, 176, 179, 201), //30%
+    300: Color.fromARGB(255, 219, 220, 231), //40%
+    400: Color.fromARGB(255, 142, 144, 165), //50%
+    500: Color.fromARGB(255, 106, 107, 117), //60%
     600: Color.fromARGB(255, 84, 88, 125), //70%
-    700: Color.fromARGB(255, 48, 54, 106), //80%
-    800: Color.fromARGB(255, 94, 62, 92), //90%
+    700: Color.fromARGB(255, 88, 90, 110), //80%
+    800: Color.fromARGB(255, 136, 103, 134), //90%
     900: Color.fromARGB(255, 62, 35, 60), //100%
   };
-  Color _primaryColor = Color.fromARGB(255, 233, 180, 229);
-  Color accentColor = Color.fromARGB(255, 29, 33, 63);
+  Color _primaryColor = Color.fromARGB(255, 194, 167, 192);
+  Color accentColor = Color.fromARGB(255, 101, 105, 136);
   Color backColor = Color.fromARGB(255, 231, 236, 251);
   MaterialColor primeColor = MaterialColor(0xFF3399FF, color);
 
@@ -56,9 +56,9 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
-        primaryColor: Color.fromARGB(255, 114, 86, 113),
+        primaryColor: Color.fromARGB(255, 190, 168, 189),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
-        scaffoldBackgroundColor: Color.fromARGB(255, 114, 120, 163),
+        scaffoldBackgroundColor: Color.fromARGB(255, 199, 202, 222),
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),

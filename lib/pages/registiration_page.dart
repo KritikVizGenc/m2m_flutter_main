@@ -43,7 +43,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(25, 50, 25, 10),
+              margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               alignment: Alignment.center,
               child: Column(
@@ -56,33 +56,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           child: Stack(
                             children: [
                               Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  border:
-                                      Border.all(width: 5, color: Colors.white),
-                                  color: Colors.white,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black12,
-                                      blurRadius: 20,
-                                      offset: const Offset(5, 5),
-                                    ),
-                                  ],
+                                height: 120,
+                                decoration: new BoxDecoration(
+                                  image: new DecorationImage(
+                                    image: AssetImage("assets/image/m2m.png"),
+                                  ),
                                 ),
-                                child: Icon(
-                                  Icons.person,
-                                  color: Colors.grey.shade300,
-                                  size: 80.0,
-                                ),
-                              ),
-                              Container(
-                                padding: EdgeInsets.fromLTRB(80, 80, 0, 0),
-                                child: Icon(
-                                  Icons.add_circle,
-                                  color: Colors.grey.shade700,
-                                  size: 25.0,
-                                ),
+                                // padding: EdgeInsets.all(20),
                               ),
                             ],
                           ),
@@ -274,7 +254,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                                 print(userRole.toString());
 
-
                                 RegisterRequestModel model =
                                     RegisterRequestModel(
                                         name: nameController.text,
@@ -289,7 +268,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                           Navigator.pushNamedAndRemoveUntil(
                                             context,
                                             '/home',
-                                                (route) => false,
+                                            (route) => false,
                                           )
                                         }
                                       else
