@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,7 +8,9 @@ import 'package:m2m_flutter_main/pages/chat_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
+import '../model/getById_model.dart';
 import '../pages/categories_page.dart';
 import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
@@ -27,6 +31,7 @@ class _DrawerState extends State<DrawerHelp> {
   double _drawerIconSize = 24;
   double _drawerFontSize = 17;
 
+  Future<GetByIdModel> futureUser = APIService.getCurrentUser();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -52,10 +57,12 @@ class _DrawerState extends State<DrawerHelp> {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => ProfilePage()));
+                      SharedService.loginDetails().then((value) =>
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProfilePage(nereyeId: value)))
+                      );
                     },
                     child: Container(
                       child: CircleAvatar(
@@ -74,17 +81,40 @@ class _DrawerState extends State<DrawerHelp> {
                       Container(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ProfilePage(nereyeId: 2,)));
+                            SharedService.loginDetails().then((value) =>
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ProfilePage(nereyeId: value)))
+                            );
+
+
                           },
-                          child: Text(
-                            '\nName Surname',
-                            style: TextStyle(
-                                fontSize: 23,
-                                color: Theme.of(context).colorScheme.onPrimary),
-                          ),
+                          child: FutureBuilder<GetByIdModel> (
+                            future: futureUser,
+                            builder: (context, i) {
+                              if(i.hasData){
+                                if(i.data != null){
+                                  return Text(
+                                    i.data!.name,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                }
+                              }
+                              return Text(
+                                'Connection Problem',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              );
+
+
+                            },
+                          )
                         ),
                       ),
                     ],

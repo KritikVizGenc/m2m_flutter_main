@@ -8,6 +8,7 @@ import 'package:m2m_flutter_main/model/getMyMentees_model.dart';
 import 'package:m2m_flutter_main/model/getMyMentors_model.dart';
 import 'package:m2m_flutter_main/pages/categories_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'add_task_bar_page.dart';
@@ -44,39 +45,13 @@ class _MainPageState extends State<MainPage> {
     'fav 5',
   ];
 
-  final url = "http://10.0.2.2:5000/api/myMentees/17";
 
-  List<GetMyMenteesModel> productsResponseFromJson(String str) =>
-      List<GetMyMenteesModel>.from(
-          json.decode(str).map((x) => GetMyMenteesModel.fromJson(x)));
+  Future<List<GetMyMenteesModel>?> futureMyMentees = APIService.getMyMentees();
+  Future<List<GetMyMentorsModel>?> futureMyMentors = APIService.getMyMentors();
 
-  late Future<List<GetMyMenteesModel>> futureGetByRoleModel;
-  Future<List<GetMyMenteesModel>> fetchGetByRoleModel() async {
-    final response = await get(Uri.parse(url));
 
-    if (response.statusCode == 200) {
-      return productsResponseFromJson(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
 
-  final url2 = "http://10.0.2.2:5000/api/myMentors/13";
 
-  List<GetMyMentorsModel> productsResponseFromJson2(String str) =>
-      List<GetMyMentorsModel>.from(
-          json.decode(str).map((x) => GetMyMentorsModel.fromJson(x)));
-
-  late Future<List<GetMyMentorsModel>> futureGetByRoleModel2;
-  Future<List<GetMyMentorsModel>> fetchGetByRoleModel2() async {
-    final response = await get(Uri.parse(url2));
-
-    if (response.statusCode == 200) {
-      return productsResponseFromJson2(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
 
   final url3 = "http://10.0.2.2:5000/api/getAllTag";
 
@@ -99,14 +74,10 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureGetByRoleModel =
-    fetchGetByRoleModel() as Future<List<GetMyMenteesModel>>;
 
-    futureGetByRoleModel2 =
-    fetchGetByRoleModel2() as Future<List<GetMyMentorsModel>>;
 
     futureGetByRoleModel3 =
-    fetchGetByRoleModel3() as Future<List<GetAllTagsModel>>;
+        fetchGetByRoleModel3() as Future<List<GetAllTagsModel>>;
   }
 
   Widget _userCard(
@@ -200,9 +171,9 @@ class _MainPageState extends State<MainPage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                    Theme.of(context).primaryColor,
-                    Theme.of(context).colorScheme.secondary,
-                  ])),
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
         ),
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
@@ -274,15 +245,15 @@ class _MainPageState extends State<MainPage> {
                 margin: EdgeInsets.all(5.0),
                 height: 155,
                 width: 800,
-                child: FutureBuilder<List<GetMyMentorsModel>>(
-                  future: futureGetByRoleModel2,
+                child: FutureBuilder<List<GetMyMentorsModel>?>(
+                  future: futureMyMentors,
                   builder: (context, i) {
                     if (i.hasData) {
                       return GridView.builder(
                           padding: const EdgeInsets.all(0.0),
                           gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 1),
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1),
                           scrollDirection: Axis.horizontal,
                           itemCount: i.data?.length,
                           itemBuilder: (context, index) {
@@ -305,32 +276,27 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 175, 0),
+              Text(
+                'Top Mentors',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 50, 28, 49),
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold),
+              ),
+              TextButton(
                 child: Text(
-                  'Top Mentors',
+                  'See all',
                   style: TextStyle(
                       color: Color.fromARGB(255, 50, 28, 49),
-                      fontSize: 19,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: TextButton(
-                  child: Text(
-                    'See all',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 50, 28, 49),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MentorPage()));
-                  },
-                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MentorPage()));
+                },
               ),
             ],
           ),
@@ -340,8 +306,8 @@ class _MainPageState extends State<MainPage> {
               color: Color.fromARGB(255, 255, 255, 255),
               margin: EdgeInsets.all(5.0),
               height: 155,
-              child: FutureBuilder<List<GetMyMenteesModel>>(
-                future: futureGetByRoleModel,
+              child: FutureBuilder<List<GetMyMenteesModel>?>(
+                future: futureMyMentees,
                 builder: (context, i) {
                   if (i.hasData) {
                     return GridView.builder(
@@ -421,10 +387,10 @@ class _MainPageState extends State<MainPage> {
                   if (i.hasData) {
                     return GridView.builder(
                         gridDelegate:
-                        const SliverGridDelegateWithMaxCrossAxisExtent(
-                            maxCrossAxisExtent: 95,
-                            crossAxisSpacing: 5,
-                            mainAxisSpacing: 0),
+                            const SliverGridDelegateWithMaxCrossAxisExtent(
+                                maxCrossAxisExtent: 95,
+                                crossAxisSpacing: 5,
+                                mainAxisSpacing: 0),
                         itemCount: i.data?.length,
                         itemBuilder: (context, index) {
                           return Container(

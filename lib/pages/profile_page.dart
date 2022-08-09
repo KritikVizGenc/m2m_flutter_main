@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:m2m_flutter_main/model/ConnectRequestModel.dart';
+import 'package:m2m_flutter_main/model/ConnectResponseModel.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
 import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
+import 'package:m2m_flutter_main/service/shared_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
 import '../common/theme_helper.dart';
@@ -26,37 +31,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  List<GetByIdModel> productsResponseFromJson(String str) =>
-      List<GetByIdModel>.from(
-          json.decode(str).map((x) => GetByIdModel.fromJson(x)));
 
-  late Future<List<GetByIdModel>> futureGetByIdModel;
-  Future<List<GetByIdModel>> fetchGetByIdModel(nereyeId) async {
-    Uri url = Uri.http(
-      '10.0.2.2:5000',
-      '/api/getById/${jsonEncode(nereyeId)}',
-    );
 
-    final response = await get(Uri.parse(url.toString()));
 
-    if (response.statusCode == 200) {
-      return productsResponseFromJson(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
+  Future<GetByIdModel> futureGetByIdModel = APIService.getCurrentUser();
+
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureGetByIdModel =
-    fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
   }
 
   @override
   Widget build(BuildContext context) {
-    final user = UserPreferences.myUser;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
       //appBar: buildAppBar(context),
@@ -96,12 +84,12 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: [
             Container(
-              child: FutureBuilder<List<GetByIdModel>>(
+              child: FutureBuilder<GetByIdModel>(
                 future: futureGetByIdModel,
                 builder: (context, i) {
                   if (i.hasData) {
                     Uint8List _bytes;
-                    _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
+                    _bytes = Base64Decoder().convert('${i.data?.avatar}');
                     return ListView(
                       primary: false, //??
                       shrinkWrap: true,
@@ -116,12 +104,64 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                         ),
                         const SizedBox(height: 24),
-                        buildName('${i.data?[0].name}', '${i.data?[0].surname}',
-                            '${i.data?[0].work}', '${i.data?[0].city}'),
+                        buildName('${i.data?.name}', '${i.data?.surname}',
+                            '${i.data?.work}', '${i.data?.city}'),
                         const SizedBox(height: 24),
-                        NumbersWidget(average: i.data?[0].ratingAverage),
+                        TextButton(
+                            style: ButtonStyle(
+                              foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.blue),
+                              overlayColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                                    (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered))
+                                    return Colors.blue.withOpacity(0.04);
+                                  if (states.contains(MaterialState.focused) ||
+                                      states.contains(MaterialState.pressed))
+                                    return Colors.blue.withOpacity(0.12);
+                                  return null; // Defer to the widget's default.
+                                },
+                              ),
+                            ),
+                            onPressed: () {
+                              ConnectRequestModel model =
+                              ConnectRequestModel(userId: i.data!.id);
+
+                              print(model.userId);
+
+                              APIService.connectUser(model).then((response) => {
+                                if (response.follow != null)
+                                  {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/home',
+                                          (route) => false,
+                                    )
+                                  }
+                                else
+                                  {
+                                    //Hata mesajı gösterilecek
+                                    FormHelper.showSimpleAlertDialog(
+                                        context,
+                                        "Error",
+                                        response.msg!,
+                                        "OK", () {
+                                      Navigator.pop(context);
+                                    })
+                                  }
+                              });
+
+                              // if (_formKey.currentState!.validate()) {
+                              //   Navigator.of(context).pushAndRemoveUntil(
+                              //       MaterialPageRoute(
+                              //           builder: (context) => MainPage()),
+                              //       (Route<dynamic> route) => false);
+                              // }
+                            },
+                            child: Text('Follow')),
+                        NumbersWidget(average: i.data?.ratingAverage),
                         const SizedBox(height: 48),
-                        buildAbout('${i.data?[0].aboutMe}'),
+                        buildAbout('${i.data?.aboutMe}'),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
                           child: Text(
@@ -141,7 +181,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           height: 50,
                           color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[0].name}'),
+                          child: Text('${i.data?.name}'),
                         ),
                         const SizedBox(height: 15),
                         Container(
@@ -151,7 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           height: 50,
                           color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[0].name}'),
+                          child: Text('${i.data?.name}'),
                         ),
                         const SizedBox(height: 15),
                         Container(
@@ -161,7 +201,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           height: 50,
                           color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[0].name}'),
+                          child: Text('${i.data?.name}'),
                         ),
                       ],
                     );
@@ -232,6 +272,7 @@ class _ProfilePageState extends State<ProfilePage> {
     ),
   );
 }
+
 // comment kısmı için widget
 // Widget buildComment(list ) => Container(
 //         padding: EdgeInsets.symmetric(horizontal: 40),
