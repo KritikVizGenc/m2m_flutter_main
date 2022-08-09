@@ -29,6 +29,7 @@ class MeetPagesState extends State<MeetPages> {
     'post 4',
   ];
   String text=' ';
+  
  @override
   Widget build(BuildContext context) {
     
@@ -39,7 +40,7 @@ class MeetPagesState extends State<MeetPages> {
        
        appBar: AppBar(
           title: Text(
-            "EVENT Page",
+            "EVENT PAGE",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
            elevation: 0.5,
@@ -78,7 +79,7 @@ _addDateBAr(),
       mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               
-               Text('Events'),
+               Text('Events',style: subHeadingStyle),
                ListView.builder(
               physics: NeverScrollableScrollPhysics(),
               

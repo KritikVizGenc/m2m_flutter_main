@@ -22,11 +22,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
   String _endTime ="9:30 PM";
   String _startTime =DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedColor=0;
-  
-  
+   List<String> items = [
+    'post 1',
+    'post 2 ',
+    'post 3',
+    'post 4',
+  ];
+  String? selectedItem='post 1';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
          backgroundColor: Colors.white,
  drawer: DrawerHelp(),
         bottomNavigationBar: BottomBar(),
@@ -59,106 +65,221 @@ class _AddTaskPageState extends State<AddTaskPage> {
           )
         ],
       ),
-body: Container(
-  padding: const EdgeInsets.only(left: 20,right: 20),
-child: SingleChildScrollView(
-  child:   Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-  Text("Program Yarat",
-  style:HeadingStyle ,
-  ),
+      
+body: Center(
+
   
-  MyInputField(title: "Title-Note",
-  hint: "Enter your title"
-  ),
-  MyInputField(title: "Mentee name",
-  hint: "Enter your note"
-  ),
-   MyInputField(title: "Mentee surname",
-  hint: "Enter your mentee"
-  ),
+   child: Container(
   
-  MyInputField(title: "Date",
-  hint: DateFormat.yMd().format( _selectedDate),
-  widget: IconButton(
-    icon:Icon(Icons.calendar_today_outlined),
-    
-    onPressed: () {
-      _getDateFromUser() ;
-    },
-  ),
- 
-  ), 
-   Row(
-    children: [
-      Expanded(
-        child:MyInputField(
-title: "StartDate",
-hint: _startTime,
-widget: IconButton(
-  onPressed:(){
-_getTimeFromUSer(isStartTime: true);
-  } , 
-  icon: Icon(
-    Icons.access_time_rounded,
-    
-  ),
-),
-        ) ,
-      ),
-   SizedBox(width:12,),
-   
-      Expanded(
-        child:MyInputField(
-title: "End Date",
-hint: _endTime,
-widget: IconButton(
-  onPressed:(){
-_getTimeFromUSer(isStartTime: false);
-  } , 
-  icon: Icon(
-    Icons.access_time_rounded,
-    
-  ),
-),
-        ) ,
-      ),
-    ],
-  ),
-    
-    
-    
-    SizedBox(height:18 ,),
-    Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment:CrossAxisAlignment.center ,
+
+    padding: const EdgeInsets.only(left: 20,right: 20),
+  
+  child: SingleChildScrollView(
+  
+    child:   Column(
+  
+    crossAxisAlignment: CrossAxisAlignment.start,
+  
       children: [
 
-_colorPalete(),
-MyButton(label: "Create Task", onTap: ()=>null,)
-
-
-
-    ],
-    
+  
+  
+    Text("Program Yarat",
+  
+    style:HeadingStyle ,
+  
     ),
+  
     
-    
-    
-    
-    
-    
-    
-    ],
+  
+    MyInputField(title: "Title-Note",
+  
+    hint: "Enter your title"
+  
+    ),
+  Text("Mentee",style: subHeadingStyle,),
+    Padding(
+      padding: const EdgeInsets.fromLTRB
+      
+      (3,30,5,2),
+     
+      child: Container(
+        width: 1200,
+        decoration: BoxDecoration(
+          
+                 borderRadius:BorderRadius.all(Radius.circular(10),),
+                 border:Border.all(color: MyThemes.primaryColor),
+        ),
+        child: DropdownButtonFormField<String>( 
+         
+           isExpanded: true,
+          dropdownColor: Colors.white,
+       
+     // underline: Container(),
+        value: selectedItem,
+        
+        onChanged: (String? newValue){
+          setState(() {
+            selectedItem=newValue!;
+          });
+        },
+        items: items.map<DropdownMenuItem<String>>(
+          (String value){
+            return DropdownMenuItem<String>(
+           
+              value:value,
+              child: Text(value),
+            );
+          },
+        ).toList()
+   
+   
+   ),
+      ),
+    ),
+  
+  //  MyInputField(title: "Mentee name",
+  
+
+    //hint: "Enter your note"
+  
+    //),
+  
+  //   MyInputField(title: "Mentee surname",
+  
+   // hint: "Enter your mentee"
+  
+    //),
+  
+    MyInputField(title: "Date",
+  
+    hint: DateFormat.yMd().format( _selectedDate),
+  
+    widget: IconButton(
+  
+      icon:Icon(Icons.calendar_today_outlined),
+  
+      onPressed: () {
+  
+        _getDateFromUser() ;
+  
+      },
+  
+    ),
+  
+   
+  
+    ), 
+  
+     Row(
+  
+      children: [
+  
+        Expanded(
+  
+          child:MyInputField(
+  
+  title: "StartDate",
+  
+  hint: _startTime,
+  
+  widget: IconButton(
+  
+    onPressed:(){
+  
+  _getTimeFromUSer(isStartTime: true);
+  
+    } , 
+  
+    icon: Icon(
+  
+      Icons.access_time_rounded,
+
+    ),
   
   ),
-),
+  
+          ) ,
+  
+        ),
+  
+     SizedBox(width:12,),
+  
+        Expanded(
+  
+          child:MyInputField(
+  
+  title: "End Date",
+  
+  hint: _endTime,
+  
+  widget: IconButton(
+  
+    onPressed:(){
+  
+  _getTimeFromUSer(isStartTime: false);
+  
+    } , 
+    icon: Icon(
+  
+      Icons.access_time_rounded,
+    ),
+  
+  ),
+  
+          ) ,
+  
+        ),
+  
+      ],
+  
+    ),
+      SizedBox(height:18 ,),
+  
+      Row(
+  
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  
+        crossAxisAlignment:CrossAxisAlignment.center ,
+  
+        children: [
+  
+  
+  
+  _colorPalete(),
+  
+  MyButton(label: "Create Task", onTap: ()=>null,)
+  
+  
+  
+  
+  
+  
+  
+      ],
+  
+      
+  
+      ),
 
+      ],
+  
+    
+  
+    ),
+  
+  ),
+  
+  
 
-)
+  
+  
+  ),
 
-    );
+   )
+
+);
+    
   }
 _colorPalete(){
   return Column(
@@ -209,12 +330,6 @@ onTap: () {
 );
 
 }
-
-
-
-
-
-
 
 
 _getDateFromUser() async {

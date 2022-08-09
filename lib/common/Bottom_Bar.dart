@@ -56,5 +56,9 @@ class BottomBar extends StatelessWidget {
     onTap:(index);
   }
 
-  void setState(Null Function() param0) {}
+  void setState(Null Function() param0) {
+
+
+
+  }
 }
