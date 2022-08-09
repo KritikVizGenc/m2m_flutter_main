@@ -12,20 +12,28 @@ import '../common/theme_helper.dart';
 import '../model/user.dart';
 
 class EditProfilePage extends StatefulWidget {
-  const EditProfilePage({Key? key}) : super(key: key);
+  final int? nereyeId;
+
+  const EditProfilePage({Key? key, required this.nereyeId}) : super(key: key);
 
   @override
   State<EditProfilePage> createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController surnameController = TextEditingController();
+  final TextEditingController majorController = TextEditingController();
+  final TextEditingController cityController = TextEditingController();
+  final TextEditingController aboutController = TextEditingController();
+  final TextEditingController avatarController = TextEditingController();
   User user = UserPreferences.myUser;
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Color.fromARGB(255, 231, 236, 251),
         appBar: AppBar(
           title: Text(
-            "Profile Page",
+            "Edit",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           elevation: 0.5,
@@ -48,13 +56,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfilePage(
+                              nereyeId: 2,
+                            )));
               },
             )
           ],
           //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
-          
         ),
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
@@ -126,7 +137,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
+                                builder: (context) => ProfilePage(
+                                      nereyeId: 2,
+                                    )));
                       },
                     ),
                   )

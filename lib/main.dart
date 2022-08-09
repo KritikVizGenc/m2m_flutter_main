@@ -11,18 +11,18 @@ import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
 
-Widget _defaultHome = const LoginPage();
+Widget _defaultHome = MainPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   bool result = await SharedService.isLoggedIn();
   print("--------------------------------------------------");
   print(result);
-  if(result) {
+  if (result) {
     _defaultHome = MainPage();
   }
-  
+
   runApp(MyApp());
 }
 
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         dividerColor: Colors.black,
         //drawerTheme: DrawerThemeData(
-          //  backgroundColor: _primaryColor, scrimColor: accentColor),
+        //  backgroundColor: _primaryColor, scrimColor: accentColor),
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
         primaryColor: Color.fromARGB(255, 62, 35, 60),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
-     // home: SplashScreen(title: 'Flutter Login'),
+      // home: SplashScreen(title: 'Flutter Login'),
       //home: LoginPage(),
       routes: {
         '/': (context) => _defaultHome,
