@@ -55,31 +55,48 @@ class _MenteePageState extends State<MenteePage> {
   @override
   double _drawerIconSize = 24;
   double _drawerFontSize = 17;
-  void filterSearchResults(String query) {}
+  void _runFilter(String enteredKeyword, List<GetByRoleModel> x) {
+    List results = [];
+    if (enteredKeyword.isEmpty) {
+      results = x;
+    } else {
+      results = x
+          .where((x) => x.name.contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+
+    // Refresh the UI
+    setState(() {
+      List _foundUsers = results;
+    });
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              onChanged: (value) {},
-              controller: editingController,
-              decoration: InputDecoration(
-                  labelText: "Search",
-                  hintText: "Arama yapmak istediğiniz etiketi giriniz.",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10.0)))),
-            ),
-          ),
           Container(
             child: FutureBuilder<List<GetByRoleModel>>(
               future: futureGetByRoleModel,
               builder: (context, i) {
                 if (i.hasData) {
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: TextField(
+                      onChanged: (value) {
+                        _runFilter(value, <GetByRoleModel>[]);
+                      },
+                      controller: editingController,
+                      decoration: InputDecoration(
+                          labelText: "Search",
+                          hintText: "Arama yapmak istediğiniz etiketi giriniz.",
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)))),
+                    ),
+                  );
                   return ListView.builder(
                       itemCount: i.data?.length,
                       itemBuilder: (context, index) {
