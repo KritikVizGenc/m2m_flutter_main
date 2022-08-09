@@ -136,28 +136,6 @@ class _MenteePageState extends State<MenteePage> {
                 ])),
           ),
         ),
-        // elevation: 0.5,
-        // iconTheme: IconThemeData(color: Colors.white),
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(
-        //       gradient: LinearGradient(
-        //           begin: Alignment.topLeft,
-        //           end: Alignment.bottomRight,
-        //           colors: <Color>[
-        //         //Theme.of(context).primaryColor,
-        //         //Theme.of(context).colorScheme.secondary,
-        //       ])),
-        // ),
-
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.search),
-        //     onPressed: () {
-        //       showSearch(context: context, delegate: MySearchDelegate());
-        //     },
-        //   ),
-        // ],
-
         drawer: DrawerHelp(),
         bottomNavigationBar: BottomBar(),
       );
@@ -170,29 +148,3 @@ class _MenteePageState extends State<MenteePage> {
     throw UnimplementedError();
   }
 }
-
-// class MySearchDelegate extends SearchDelegate {
-//   @override
-//   List<Widget>? buildActions(BuildContext context) {
-//     // TODO: implement buildActions
-//     throw UnimplementedError();
-//   }
-
-//   @override
-//   Widget? buildLeading(BuildContext context) {
-//     // TODO: implement buildLeading
-//     throw UnimplementedError();
-//   }
-
-//   @override
-//   Widget buildResults(BuildContext context) {
-//     // TODO: implement buildResults
-//     throw UnimplementedError();
-//   }
-
-//   @override
-//   Widget buildSuggestions(BuildContext context) {
-//     // TODO: implement buildSuggestions
-//     throw UnimplementedError();
-//   }
-//}

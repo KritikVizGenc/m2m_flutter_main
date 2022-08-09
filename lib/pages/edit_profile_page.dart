@@ -101,8 +101,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: TextFormField(
                 controller: nameController,
                 decoration: ThemeHelper()
-                    .textInputDecoration('First Name', 'Enter your first name'),
-                onChanged: (name) {},
+                    .textInputDecoration('Name', 'Enter Your Name'),
               ),
             ),
 
@@ -113,8 +112,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: TextFormField(
                 controller: surnameController,
                 decoration: ThemeHelper()
-                    .textInputDecoration('First Name', 'Enter your first name'),
-                onChanged: (name) {},
+                    .textInputDecoration(' Surname', 'Enter Your Surname'),
               ),
             ),
 
@@ -124,9 +122,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             Container(
               child: TextFormField(
                 controller: aboutMeController,
-                decoration: ThemeHelper()
-                    .textInputDecoration('First Name', 'Enter your first name'),
-                onChanged: (name) {},
+                decoration: ThemeHelper().textInputDecoration('About Me!'),
               ),
             ),
 
@@ -138,7 +134,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 controller: cityController,
                 decoration: ThemeHelper()
                     .textInputDecoration('First Name', 'Enter your first name'),
-                onChanged: (name) {},
               ),
             ),
             Container(
@@ -146,7 +141,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 controller: workController,
                 decoration: ThemeHelper()
                     .textInputDecoration('First Name', 'Enter your first name'),
-                onChanged: (name) {},
               ),
             ),
 

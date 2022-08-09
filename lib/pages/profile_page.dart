@@ -7,6 +7,7 @@ import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
+import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
 import '../common/Bottom_Bar.dart';
@@ -31,6 +32,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  final commentController = TextEditingController();
   List<GetByIdModel> productsResponseFromJson(String str) =>
       List<GetByIdModel>.from(
           json.decode(str).map((x) => GetByIdModel.fromJson(x)));
@@ -194,6 +196,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 // By default, show a loading spinner.
                 return const CircularProgressIndicator();
               },
+            ),
+          ),
+          Container(
+            child: TextFormField(
+              maxLines: 4,
+              maxLength: 255,
+              controller: commentController,
+              decoration: ThemeHelper().textInputDecoration(
+                  'Comment..', 'Enter Your Comment to This Mentor! '),
             ),
           )
         ]),
