@@ -65,101 +65,109 @@ class _MenteePageState extends State<MenteePage> {
           .toList();
     }
 
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(children: [
-          Container(
-            child: FutureBuilder<List<GetByRoleModel>>(
-              future: futureGetByRoleModel,
-              builder: (context, i) {
-                if (i.hasData) {
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: TextField(
-                      onChanged: (value) {
-                        _runFilter(value, <GetByRoleModel>[]);
-                      },
-                      controller: editingController,
-                      decoration: InputDecoration(
-                          labelText: "Search",
-                          hintText: "Arama yapmak istediğiniz etiketi giriniz.",
-                          prefixIcon: Icon(Icons.search),
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10.0)))),
-                    ),
-                  );
-                  return ListView.builder(
-                      itemCount: i.data?.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                            title: Text('${i.data?[index].name}' +
-                                '   ' +
-                                '${i.data?[index].surname}' +
-                                ' \n ' +
-                                '${i.data?[index].userRole}'),
-                            subtitle: Text('${i.data?[index].email}'),
-                            leading: CircleAvatar(
-                              child: Text('${i.data?[index].name[0]}'),
-                            ));
-                      });
-                } else if (i.hasError) {
-                  return Text('${i.error}');
-                }
+    Widget build(BuildContext context) {
+      return Scaffold(
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(children: [
+            Container(
+              child: FutureBuilder<List<GetByRoleModel>>(
+                future: futureGetByRoleModel,
+                builder: (context, i) {
+                  if (i.hasData) {
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                        onChanged: (value) {
+                          _runFilter(value, <GetByRoleModel>[]);
+                        },
+                        controller: editingController,
+                        decoration: InputDecoration(
+                            labelText: "Search",
+                            hintText:
+                                "Arama yapmak istediğiniz etiketi giriniz.",
+                            prefixIcon: Icon(Icons.search),
+                            border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)))),
+                      ),
+                    );
+                    return ListView.builder(
+                        itemCount: i.data?.length,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                              title: Text('${i.data?[index].name}' +
+                                  '   ' +
+                                  '${i.data?[index].surname}' +
+                                  ' \n ' +
+                                  '${i.data?[index].userRole}'),
+                              subtitle: Text('${i.data?[index].email}'),
+                              leading: CircleAvatar(
+                                child: Text('${i.data?[index].name[0]}'),
+                              ));
+                        });
+                  } else if (i.hasError) {
+                    return Text('${i.error}');
+                  }
 
-                // By default, show a loading spinner.
-                return const CircularProgressIndicator();
-              },
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
+              ),
             ),
+          ]),
+        ),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            "Mentee Page",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-        ]),
-      ),
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text(
-          "Mentee Page",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          elevation: 0.5,
+          iconTheme: IconThemeData(color: Colors.white),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                  Theme.of(context).primaryColor,
+                  Theme.of(context).colorScheme.secondary,
+                ])),
+          ),
         ),
-        elevation: 0.5,
-        iconTheme: IconThemeData(color: Colors.white),
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: <Color>[
-                Theme.of(context).primaryColor,
-                Theme.of(context).colorScheme.secondary,
-              ])),
-        ),
-      ),
-      // elevation: 0.5,
-      // iconTheme: IconThemeData(color: Colors.white),
-      // flexibleSpace: Container(
-      //   decoration: BoxDecoration(
-      //       gradient: LinearGradient(
-      //           begin: Alignment.topLeft,
-      //           end: Alignment.bottomRight,
-      //           colors: <Color>[
-      //         //Theme.of(context).primaryColor,
-      //         //Theme.of(context).colorScheme.secondary,
-      //       ])),
-      // ),
+        // elevation: 0.5,
+        // iconTheme: IconThemeData(color: Colors.white),
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //       gradient: LinearGradient(
+        //           begin: Alignment.topLeft,
+        //           end: Alignment.bottomRight,
+        //           colors: <Color>[
+        //         //Theme.of(context).primaryColor,
+        //         //Theme.of(context).colorScheme.secondary,
+        //       ])),
+        // ),
 
-      // actions: [
-      //   IconButton(
-      //     icon: const Icon(Icons.search),
-      //     onPressed: () {
-      //       showSearch(context: context, delegate: MySearchDelegate());
-      //     },
-      //   ),
-      // ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.search),
+        //     onPressed: () {
+        //       showSearch(context: context, delegate: MySearchDelegate());
+        //     },
+        //   ),
+        // ],
 
-      drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
-    );
+        drawer: DrawerHelp(),
+        bottomNavigationBar: BottomBar(),
+      );
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
   }
 }
 
