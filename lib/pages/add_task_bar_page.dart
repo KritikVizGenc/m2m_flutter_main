@@ -20,7 +20,7 @@ class AddTaskPage extends StatefulWidget {
 class _AddTaskPageState extends State<AddTaskPage> {
   DateTime _selectedDate = DateTime.now();
   String _endTime ="9:30 PM";
-  String _startTime =DateFormat("hh:mm a").format(DateTime.now()).toString();
+  String _startTime =DateFormat("hh:mm ").format(DateTime.now()).toString();
   int _selectedColor=0;
    List<String> items = [
     'post 1',

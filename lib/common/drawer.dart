@@ -8,6 +8,7 @@ import 'package:m2m_flutter_main/pages/chat_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
+import 'package:m2m_flutter_main/pages/settings_page.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
 import '../model/getById_model.dart';
@@ -229,7 +230,7 @@ class _DrawerState extends State<DrawerHelp> {
                   context,
                   MaterialPageRoute(
                       builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+                          SettingPage()));
             },
           ),
           ListTile(
