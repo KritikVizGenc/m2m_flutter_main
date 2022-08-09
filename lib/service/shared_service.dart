@@ -11,20 +11,20 @@ import '../model/login_response_model.dart';
 class SharedService {
   static Future<bool> isLoggedIn() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    if(preferences.getString("login_details") != null){
+    if(preferences.getInt("login_details") != null){
       return true;
     } else {
       return false;
     }
   }
 
-  static Future<String> loginDetails() async {
+  static Future<int?> loginDetails() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    String? user = preferences.getString("login_details");
+    int? user = preferences.getInt("login_details");
     if(user != null){
       return user;
     } else {
-      return "";
+      return null;
     }
   }
 
@@ -33,14 +33,9 @@ class SharedService {
       ) async {
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString("login_details", jsonEncode(model));
-
-    // async {
-    //   APICacheDBModel cacheDBModel = APICacheDBModel(
-    //       key: "login_details",
-    //       syncData: jsonEncode(model.toJson()));
-    //
-    //   await APICacheManager().addCacheData(cacheDBModel);
+    if(model.userWithEmail?.id != null){
+      preferences.setInt("login_details", model.userWithEmail!.id);
+    }
   }
 
   static Future<void> logout(BuildContext context) async {
