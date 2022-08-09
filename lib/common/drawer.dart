@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/pages/categories_page.dart';
+import 'package:m2m_flutter_main/pages/feedback.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
@@ -15,6 +15,8 @@ import '../pages/splash_screen.dart';
 import '../pages/registiration_page.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
+
+import 'Bottom_Bar.dart';
 
 class DrawerHelp extends StatefulWidget {
   @override
@@ -207,21 +209,20 @@ class _DrawerState extends State<DrawerHelp> {
           ),
           ListTile(
             leading: Icon(
-              Icons.help_center,
+              Icons.feedback_rounded,
               size: _drawerIconSize,
               color: Theme.of(context).colorScheme.secondary,
             ),
             title: Text(
-              'Help',
+              'Feedbaack',
               style: TextStyle(
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+                context,
+                MaterialPageRoute(builder: (context) => FeedBack()),
+              );
             },
           ),
           ListTile(

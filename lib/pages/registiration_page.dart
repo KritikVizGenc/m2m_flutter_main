@@ -43,7 +43,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
               child: HeaderWidget(150, false, Icons.person_add_alt_1_rounded),
             ),
             Container(
-              margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+              margin: EdgeInsets.fromLTRB(25, 0, 25, 10),
               padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
               alignment: Alignment.center,
               child: Column(

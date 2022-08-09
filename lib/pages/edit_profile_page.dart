@@ -122,32 +122,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 top: 16,
                 right: 16,
               ),
-              // child: Stack(
-              //   children: <Widget>[
-              //   //   Container(
-              //   //     decoration: ThemeHelper().buttonBoxDecoration(context),
-              //   //     // child: ElevatedButton(
-              //   //     //   style: ThemeHelper().buttonStyle(),
-              //   //     //   child: Padding(
-              //   //     //     padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-              //   //     //     child: Text(
-              //   //     //       'Save',
-              //   //     //       style: TextStyle(
-              //   //     //         fontSize: 30.0,
-              //   //     //         color: Color.fromARGB(255, 255, 255, 255),
-              //   //     //       ),
-              //   //     //     ),
-              //   //     //   ),
-              //   //       // onPressed: () {
-              //   //       //   Navigator.push(
-              //   //       //       context,
-              //   //       //       MaterialPageRoute(
-              //   //       //           builder: (context) => ProfilePage()));
-              //   //       // },
-              //   //   //   ),
-              //   //   // )
-              //   // ],
-              // ),
             )
           ],
         ),
