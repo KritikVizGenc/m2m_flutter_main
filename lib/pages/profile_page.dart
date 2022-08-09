@@ -1,10 +1,7 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
-import 'package:m2m_flutter_main/model/getComment_model.dart';
 import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
@@ -14,27 +11,34 @@ import 'package:m2m_flutter_main/utils/user_preferences.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
 import '../common/theme_helper.dart';
-import '../model/GetById_model.dart';
+import '../model/getComment_model.dart';
+
 import 'package:http/http.dart';
+import 'dart:typed_data';
 import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final int? nereyeId;
+
+  const ProfilePage({Key? key, required this.nereyeId}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final url = "http://10.0.2.2:5000/api/GetByIdModel/2";
-
   List<GetByIdModel> productsResponseFromJson(String str) =>
       List<GetByIdModel>.from(
           json.decode(str).map((x) => GetByIdModel.fromJson(x)));
 
   late Future<List<GetByIdModel>> futureGetByIdModel;
-  Future<List<GetByIdModel>> fetchGetByIdModel() async {
-    final response = await get(Uri.parse(url));
+  Future<List<GetByIdModel>> fetchGetByIdModel(nereyeId) async {
+    Uri url = Uri.http(
+      '10.0.2.2:5000',
+      '/api/getById/${jsonEncode(nereyeId)}',
+    );
+
+    final response = await get(Uri.parse(url.toString()));
 
     if (response.statusCode == 200) {
       return productsResponseFromJson(response.body);
@@ -43,12 +47,12 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  List<GetCommentModel> productsResponseFromJson1(String str) =>
-      List<GetCommentModel>.from(
-          json.decode(str).map((x) => GetCommentModel.fromJson(x)));
+  List<CommentModel> productsResponseFromJson1(String str) =>
+      List<CommentModel>.from(
+          json.decode(str).map((x) => CommentModel.fromJson(x)));
 
-  late Future<List<GetCommentModel>> futureGetCommentModel;
-  Future<List<GetCommentModel>> fetchGetCommentModel(nereyeId) async {
+  late Future<List<CommentModel>> futureCommentModel;
+  Future<List<CommentModel>> fetchCommentModel(nereyeId) async {
     Uri url1 = Uri.http(
       '10.0.2.2:5000',
       '/api/getComment/${jsonEncode(nereyeId)}',
@@ -66,14 +70,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-<<<<<<< Updated upstream
-    futureGetByIdModel = fetchGetByIdModel() as Future<List<GetByIdModel>>;
-=======
     futureGetByIdModel =
         fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
-    futureGetCommentModel =
-        fetchGetCommentModel(widget.nereyeId) as Future<List<GetCommentModel>>;
->>>>>>> Stashed changes
   }
 
   @override
@@ -108,8 +106,12 @@ class _ProfilePageState extends State<ProfilePage> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => EditProfilePage(
+                            nereyeId: 2,
+                          )));
             },
           )
         ],
@@ -122,84 +124,58 @@ class _ProfilePageState extends State<ProfilePage> {
                 future: futureGetByIdModel,
                 builder: (context, i) {
                   if (i.hasData) {
+                    Uint8List _bytes;
+                    _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
                     return ListView(
-                      primary: false, //??
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        const SizedBox(height: 24),
-                        ProfileWidget(
-                          imagePath: '${i.data?[1].avatar}',
-                          onClicked: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditProfilePage()));
-                          },
-                        ),
-                        const SizedBox(height: 24),
-                        buildName('${i.data?[1].name}', '${i.data?[1].surname}',
-                            '${i.data?[1].work}', '${i.data?[1].city}'),
-                        const SizedBox(height: 24),
-                        NumbersWidget(),
-                        const SizedBox(height: 48),
-<<<<<<< Updated upstream
-                        buildAbout('${i.data?[1].aboutMe}'),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
-                          child: Text(
-                            'Comments',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                            textAlign: TextAlign.center,
+                        primary: false, //??
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          const SizedBox(height: 24),
+                          ProfileWidget(
+                            imagePath: '$_bytes',
+                            onClicked: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => EditProfilePage(
+                                        nereyeId: 2,
+                                      )));
+                            },
                           ),
-                        ),
-                        const SizedBox(height: 10),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 30,
-                            right: 16,
-                          ),
-                          height: 50,
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[1].name}'),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 30,
-                            right: 16,
-                          ),
-                          height: 50,
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[1].name}'),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 30,
-                            right: 16,
-                          ),
-                          height: 50,
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[1].name}'),
-                        ),
-=======
-                        buildAbout('${i.data?[0].aboutMe}'),
->>>>>>> Stashed changes
-                      ],
-                    );
+                          const SizedBox(height: 24),
+                          buildName(
+                              '${i.data?[0].name}',
+                              '${i.data?[0].surname}',
+                              '${i.data?[0].work}',
+                              '${i.data?[0].city}'),
+                          const SizedBox(height: 24),
+                          NumbersWidget(average: i.data?[0].ratingAverage),
+                          const SizedBox(height: 48),
+                          buildAbout('${i.data?[0].aboutMe}'),
+                        ]);
                   } else if (i.hasError) {
                     return Text('${i.error}');
                   }
+
                   // By default, show a loading spinner.
                   return const CircularProgressIndicator();
                 },
               ),
             ),
             Container(
-              child: FutureBuilder<List<GetCommentModel>>(
-                future: futureGetCommentModel,
+              padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
+              child: Text(
+                'Comments',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              child: FutureBuilder<List<CommentModel>>(
+                future: futureCommentModel,
                 builder: (context, i) {
                   if (i.hasData) {
                     return GridView.builder(
@@ -234,7 +210,7 @@ class _ProfilePageState extends State<ProfilePage> {
       Column(
         children: [
           Text(
-            name,
+            name + ' ' + surname,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
@@ -252,7 +228,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Text(
             city,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.grey, fontSize: 18),
           ),
         ],
       );
@@ -276,45 +252,10 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         ),
       );
-<<<<<<< Updated upstream
-}
-// comment kısmı için widget
-// Widget buildComment(list ) => Container(
-//         padding: EdgeInsets.symmetric(horizontal: 40),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text(
-//               'About',
-//               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-//             ),
-//             const SizedBox(
-//               height: 4,
-//             ),
-//             Text(
-//               about,
-//               style: TextStyle(fontSize: 16, height: 1.4),
-//             ),
-//           ],
-//         ),
-//       );
-// }
-=======
 }
 
 Widget buildComment(String comment) {
   return Container(
-    padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
-    child: Text(
-      'Comments',
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 24,
-      ),
-      textAlign: TextAlign.center,
-    ),
-  );
-  Container(
     margin: EdgeInsets.only(
       left: 30,
       right: 16,
@@ -324,4 +265,3 @@ Widget buildComment(String comment) {
     child: Text(comment),
   );
 }
->>>>>>> Stashed changes
