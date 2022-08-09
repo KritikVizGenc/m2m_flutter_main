@@ -8,6 +8,9 @@ List<GetMyMenteesModel> getMyMenteesModelFromJson(String str) =>
     List<GetMyMenteesModel>.from(
         json.decode(str).map((x) => GetMyMenteesModel.fromJson(x)));
 
+GetMyMenteesModel myMenteesFromJson(String str) =>
+    GetMyMenteesModel.fromJson(json.decode(str));
+
 String getMyMenteesModelToJson(List<GetMyMenteesModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 

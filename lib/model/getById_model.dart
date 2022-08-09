@@ -7,6 +7,9 @@ import 'dart:convert';
 List<GetByIdModel> getByIdModelFromJson(String str) => List<GetByIdModel>.from(
     json.decode(str).map((x) => GetByIdModel.fromJson(x)));
 
+GetByIdModel userModelFromJson(String str) =>
+    GetByIdModel.fromJson(json.decode(str));
+
 String getByIdModelToJson(List<GetByIdModel> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
