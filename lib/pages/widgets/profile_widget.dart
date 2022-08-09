@@ -1,9 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final String imagePath;
+  final Uint8List imagePath;
   final bool isEdit;
   final VoidCallback onClicked;
 
@@ -33,7 +34,7 @@ class ProfileWidget extends StatelessWidget {
   }
 
   Widget buildImage() {
-    final image = NetworkImage(imagePath);
+    final image = NetworkImage(imagePath.toString());
 
     return ClipOval(
       child: Material(
@@ -43,7 +44,8 @@ class ProfileWidget extends StatelessWidget {
           fit: BoxFit.cover,
           width: 128,
           height: 128,
-          child: InkWell(onTap: onClicked),
+          child: Image.memory(imagePath),
+          // child: InkWell(onTap: onClicked),
         ),
       ),
     );

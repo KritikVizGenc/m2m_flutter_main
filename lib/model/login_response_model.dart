@@ -13,8 +13,10 @@ class LoginResponseModel {
   late final String? message;
   late final String? token;
 
-  LoginResponseModel.fromJson(Map<String, dynamic> json){
-    userWithEmail = json['userWithEmail'] != null ? UserWithEmail.fromJson(json['userWithEmail']) : null;
+  LoginResponseModel.fromJson(Map<String, dynamic> json) {
+    userWithEmail = json['userWithEmail'] != null
+        ? UserWithEmail.fromJson(json['userWithEmail'])
+        : null;
     message = json['message'];
     token = json['token'];
   }
@@ -48,7 +50,7 @@ class UserWithEmail {
   late final String createdAt;
   late final String updatedAt;
 
-  UserWithEmail.fromJson(Map<String, dynamic> json){
+  UserWithEmail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     surname = json['surname'];

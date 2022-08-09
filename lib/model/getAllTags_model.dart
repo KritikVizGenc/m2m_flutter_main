@@ -33,9 +33,9 @@ class GetAllTagsModel {
       );
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "tag_name": tagName,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-  };
+        "id": id,
+        "tag_name": tagName,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+      };
 }

@@ -274,6 +274,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
                                 print(userRole.toString());
 
+
                                 RegisterRequestModel model =
                                     RegisterRequestModel(
                                         name: nameController.text,
@@ -288,7 +289,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                           Navigator.pushNamedAndRemoveUntil(
                                             context,
                                             '/home',
-                                            (route) => false,
+                                                (route) => false,
                                           )
                                         }
                                       else

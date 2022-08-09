@@ -13,25 +13,31 @@ import '../common/drawer.dart';
 import '../common/theme_helper.dart';
 
 import 'package:http/http.dart';
+import 'dart:typed_data';
 import 'dart:convert';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  final int? nereyeId;
+
+  const ProfilePage({Key? key, required this.nereyeId}) : super(key: key);
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  final url = "http://10.0.2.2:5000/api/GetById/2";
-
   List<GetByIdModel> productsResponseFromJson(String str) =>
       List<GetByIdModel>.from(
           json.decode(str).map((x) => GetByIdModel.fromJson(x)));
 
   late Future<List<GetByIdModel>> futureGetByIdModel;
-  Future<List<GetByIdModel>> fetchGetByIdModel() async {
-    final response = await get(Uri.parse(url));
+  Future<List<GetByIdModel>> fetchGetByIdModel(nereyeId) async {
+    Uri url = Uri.http(
+      '10.0.2.2:5000',
+      '/api/getById/${jsonEncode(nereyeId)}',
+    );
+
+    final response = await get(Uri.parse(url.toString()));
 
     if (response.statusCode == 200) {
       return productsResponseFromJson(response.body);
@@ -44,7 +50,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureGetByIdModel = fetchGetByIdModel() as Future<List<GetByIdModel>>;
+    futureGetByIdModel =
+        fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
   }
 
   @override
@@ -93,6 +100,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 future: futureGetByIdModel,
                 builder: (context, i) {
                   if (i.hasData) {
+                    Uint8List _bytes;
+                    _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
                     return ListView(
                       primary: false, //??
                       shrinkWrap: true,
@@ -100,19 +109,37 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const SizedBox(height: 24),
                         ProfileWidget(
-                          imagePath: '${i.data?[1].avatar}',
+                          imagePath: _bytes,
                           onClicked: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => EditProfilePage()));
                           },
                         ),
                         const SizedBox(height: 24),
-                        buildName('${i.data?[1].name}', '${i.data?[1].surname}',
-                            '${i.data?[1].work}', '${i.data?[1].city}'),
+                        buildName('${i.data?[0].name}', '${i.data?[0].surname}',
+                            '${i.data?[0].work}', '${i.data?[0].city}'),
                         const SizedBox(height: 24),
-                        NumbersWidget(),
+                        TextButton(
+                            style: ButtonStyle(
+                              foregroundColor:
+                                  MaterialStateProperty.all<Color>(Colors.blue),
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered))
+                                    return Colors.blue.withOpacity(0.04);
+                                  if (states.contains(MaterialState.focused) ||
+                                      states.contains(MaterialState.pressed))
+                                    return Colors.blue.withOpacity(0.12);
+                                  return null; // Defer to the widget's default.
+                                },
+                              ),
+                            ),
+                            onPressed: () {},
+                            child: Text('Follow')),
+                        NumbersWidget(average: i.data?[0].ratingAverage),
                         const SizedBox(height: 48),
-                        buildAbout('${i.data?[1].aboutMe}'),
+                        buildAbout('${i.data?[0].aboutMe}'),
                         Container(
                           padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
                           child: Text(
@@ -132,7 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           height: 50,
                           color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[1].name}'),
+                          child: Text('${i.data?[0].name}'),
                         ),
                         const SizedBox(height: 15),
                         Container(
@@ -142,7 +169,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           height: 50,
                           color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[1].name}'),
+                          child: Text('${i.data?[0].name}'),
                         ),
                         const SizedBox(height: 15),
                         Container(
@@ -152,7 +179,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           height: 50,
                           color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[1].name}'),
+                          child: Text('${i.data?[0].name}'),
                         ),
                       ],
                     );
@@ -180,7 +207,7 @@ class _ProfilePageState extends State<ProfilePage> {
       Column(
         children: [
           Text(
-            name,
+            name + ' ' + surname,
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24,
@@ -198,7 +225,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           Text(
             city,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.grey, fontSize: 18),
           ),
         ],
       );

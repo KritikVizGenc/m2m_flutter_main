@@ -124,7 +124,6 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
                       image: AssetImage("assets/image/m2m.png"),
-                      
                     ),
                   ),
                 ),

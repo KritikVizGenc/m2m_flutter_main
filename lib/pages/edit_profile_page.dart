@@ -32,6 +32,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   User user = UserPreferences.myUser;
+
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Color.fromARGB(255, 231, 236, 251),
@@ -60,13 +61,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ProfilePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfilePage(
+                              nereyeId: 37,
+                            )));
               },
             )
           ],
           //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
-          
         ),
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: 32),
@@ -75,11 +79,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
             const SizedBox(
               height: 24,
             ),
-            ProfileWidget(
-              imagePath: user.imagePath,
-              isEdit: true,
-              onClicked: () => pickImage(ImageSource.gallery),
-            ),
+            // ProfileWidget(
+            //   imagePath: user.imagePath,
+            //   isEdit: true,
+            //   onClicked: () => pickImage(ImageSource.gallery),
+            // ),
             const SizedBox(
               height: 24,
             ),
@@ -118,32 +122,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 top: 16,
                 right: 16,
               ),
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    decoration: ThemeHelper().buttonBoxDecoration(context),
-                    child: ElevatedButton(
-                      style: ThemeHelper().buttonStyle(),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                        child: Text(
-                          'Save',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            color: Color.fromARGB(255, 255, 255, 255),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
-                      },
-                    ),
-                  )
-                ],
-              ),
+              // child: Stack(
+              //   children: <Widget>[
+              //   //   Container(
+              //   //     decoration: ThemeHelper().buttonBoxDecoration(context),
+              //   //     // child: ElevatedButton(
+              //   //     //   style: ThemeHelper().buttonStyle(),
+              //   //     //   child: Padding(
+              //   //     //     padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+              //   //     //     child: Text(
+              //   //     //       'Save',
+              //   //     //       style: TextStyle(
+              //   //     //         fontSize: 30.0,
+              //   //     //         color: Color.fromARGB(255, 255, 255, 255),
+              //   //     //       ),
+              //   //     //     ),
+              //   //     //   ),
+              //   //       // onPressed: () {
+              //   //       //   Navigator.push(
+              //   //       //       context,
+              //   //       //       MaterialPageRoute(
+              //   //       //           builder: (context) => ProfilePage()));
+              //   //       // },
+              //   //   //   ),
+              //   //   // )
+              //   // ],
+              // ),
             )
           ],
         ),

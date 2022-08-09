@@ -20,7 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  double _headerHeight = 650;
+  double _headerHeight = 350;
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   bool checkboxValue = false;
@@ -158,29 +158,31 @@ class _LoginPageState extends State<LoginPage> {
                                               password:
                                                   passwordController.text);
 
-                                      APIService.login(model).then((response) =>
-                                          {
-                                            if (response.userWithEmail != null)
-                                              {
-                                        Navigator.pushNamedAndRemoveUntil(
-                                        context,
-                                        '/home',
-                                            (route) => false,
-                                      )
-
-                                              }
-                                            else
-                                              {
-                                                //Hata mesajı gösterilecek
-                                                FormHelper.showSimpleAlertDialog(
-                                                    context,
-                                                    "Error",
-                                                    response.message!,
-                                                    "OK", () {
-                                                  Navigator.pop(context);
-                                                })
-                                              }
-                                          });
+                                      APIService.login(model)
+                                          .then((response) => {
+                                                if (response.userWithEmail !=
+                                                    null)
+                                                  {
+                                                    Navigator
+                                                        .pushNamedAndRemoveUntil(
+                                                      context,
+                                                      '/home',
+                                                      (route) => false,
+                                                    )
+                                                  }
+                                                else
+                                                  {
+                                                    //Hata mesajı gösterilecek
+                                                    FormHelper
+                                                        .showSimpleAlertDialog(
+                                                            context,
+                                                            "Error",
+                                                            response.message!,
+                                                            "OK", () {
+                                                      Navigator.pop(context);
+                                                    })
+                                                  }
+                                              });
                                     }
                                     // if (_formKey.currentState!.validate()) {
                                     //   Navigator.of(context).pushAndRemoveUntil(

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/pages/categories_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
@@ -54,7 +55,9 @@ class _DrawerState extends State<DrawerHelp> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ProfilePage()));
+                              builder: (context) => ProfilePage(
+                                    nereyeId: 37,
+                                  )));
                     },
                     child: Container(
                       child: CircleAvatar(
@@ -76,7 +79,8 @@ class _DrawerState extends State<DrawerHelp> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ProfilePage()));
+                                    builder: (context) =>
+                                        ProfilePage(nereyeId: 37)));
                           },
                           child: Text(
                             '\nName Surname',
@@ -104,8 +108,8 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => MainPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => BottomBar()));
             },
           ),
           ListTile(

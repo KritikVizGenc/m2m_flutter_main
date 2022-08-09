@@ -25,6 +25,7 @@ class GetMyMenteesModel {
     required this.myMenteesEmail,
     required this.myMenteesPassword,
     required this.myMenteesUserRole,
+    required this.myMenteesRatingAverage,
     required this.myMenteesRating,
     required this.myMenteesCreatedAt,
     required this.myMenteesUpdatedAt,
@@ -42,6 +43,7 @@ class GetMyMenteesModel {
   String myMenteesEmail;
   String myMenteesPassword;
   int myMenteesUserRole;
+  double myMenteesRatingAverage;
   List<int> myMenteesRating;
   DateTime myMenteesCreatedAt;
   DateTime myMenteesUpdatedAt;
@@ -60,6 +62,7 @@ class GetMyMenteesModel {
         myMenteesEmail: json["myMentees.email"],
         myMenteesPassword: json["myMentees.password"],
         myMenteesUserRole: json["myMentees.user_role"],
+        myMenteesRatingAverage: json["myMentees.ratingAverage"].toDouble(),
         myMenteesRating: List<int>.from(json["myMentees.rating"].map((x) => x)),
         myMenteesCreatedAt: DateTime.parse(json["myMentees.createdAt"]),
         myMenteesUpdatedAt: DateTime.parse(json["myMentees.updatedAt"]),
@@ -68,20 +71,21 @@ class GetMyMenteesModel {
   get myMentorsId => null;
 
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "user_id": userId,
-    "rel_id": relId,
-    "createdAt": createdAt.toIso8601String(),
-    "updatedAt": updatedAt.toIso8601String(),
-    "userTableId": userTableId,
-    "myMentees.id": myMenteesId,
-    "myMentees.name": myMenteesName,
-    "myMentees.surname": myMenteesSurname,
-    "myMentees.email": myMenteesEmail,
-    "myMentees.password": myMenteesPassword,
-    "myMentees.user_role": myMenteesUserRole,
-    "myMentees.rating": List<dynamic>.from(myMenteesRating.map((x) => x)),
-    "myMentees.createdAt": myMenteesCreatedAt.toIso8601String(),
-    "myMentees.updatedAt": myMenteesUpdatedAt.toIso8601String(),
-  };
+        "id": id,
+        "user_id": userId,
+        "rel_id": relId,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "userTableId": userTableId,
+        "myMentees.id": myMenteesId,
+        "myMentees.name": myMenteesName,
+        "myMentees.surname": myMenteesSurname,
+        "myMentees.email": myMenteesEmail,
+        "myMentees.password": myMenteesPassword,
+        "myMentees.user_role": myMenteesUserRole,
+        "myMentees.ratingAverage": myMenteesRatingAverage,
+        "myMentees.rating": List<dynamic>.from(myMenteesRating.map((x) => x)),
+        "myMentees.createdAt": myMenteesCreatedAt.toIso8601String(),
+        "myMentees.updatedAt": myMenteesUpdatedAt.toIso8601String(),
+      };
 }

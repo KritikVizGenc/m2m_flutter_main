@@ -6,7 +6,9 @@ import 'package:m2m_flutter_main/circle.dart';
 import 'package:m2m_flutter_main/model/getAllTags_model.dart';
 import 'package:m2m_flutter_main/model/getMyMentees_model.dart';
 import 'package:m2m_flutter_main/model/getMyMentors_model.dart';
+import 'package:m2m_flutter_main/pages/categories_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'add_task_bar_page.dart';
@@ -43,39 +45,8 @@ class _MainPageState extends State<MainPage> {
     'fav 5',
   ];
 
-  final url = "http://192.168.141.65:5000/api/myMentees/5";
-
-  List<GetMyMenteesModel> productsResponseFromJson(String str) =>
-      List<GetMyMenteesModel>.from(
-          json.decode(str).map((x) => GetMyMenteesModel.fromJson(x)));
-
-  late Future<List<GetMyMenteesModel>> futureGetByRoleModel;
-  Future<List<GetMyMenteesModel>> fetchGetByRoleModel() async {
-    final response = await get(Uri.parse(url));
-
-    if (response.statusCode == 200) {
-      return productsResponseFromJson(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
-
-  final url2 = "http://192.168.141.65:5000/api/myMentors/6";
-
-  List<GetMyMentorsModel> productsResponseFromJson2(String str) =>
-      List<GetMyMentorsModel>.from(
-          json.decode(str).map((x) => GetMyMentorsModel.fromJson(x)));
-
-  late Future<List<GetMyMentorsModel>> futureGetByRoleModel2;
-  Future<List<GetMyMentorsModel>> fetchGetByRoleModel2() async {
-    final response = await get(Uri.parse(url2));
-
-    if (response.statusCode == 200) {
-      return productsResponseFromJson2(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
+  Future<List<GetMyMenteesModel>?> futureMyMentees = APIService.getMyMentees();
+  Future<List<GetMyMentorsModel>?> futureMyMentors = APIService.getMyMentors();
 
   final url3 = "http://10.0.2.2:5000/api/getAllTag";
 
@@ -98,20 +69,16 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureGetByRoleModel =
-        fetchGetByRoleModel() as Future<List<GetMyMenteesModel>>;
-
-    futureGetByRoleModel2 =
-        fetchGetByRoleModel2() as Future<List<GetMyMentorsModel>>;
 
     futureGetByRoleModel3 =
         fetchGetByRoleModel3() as Future<List<GetAllTagsModel>>;
   }
 
-  Widget _userCard(String imageUrl, String name, String surname) {
+  Widget _userCard(
+      String imageUrl, String name, String surname, double rating, int id) {
     return Container(
       margin: const EdgeInsets.all(0),
-      padding: const EdgeInsets.fromLTRB(10, 2, 10, 0),
+      padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
@@ -123,8 +90,10 @@ class _MainPageState extends State<MainPage> {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ProfilePage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ProfilePage(nereyeId: id)));
             },
             child: CircleAvatar(
               backgroundColor: Color.fromARGB(255, 62, 35, 60),
@@ -135,14 +104,19 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
+          Text(
+            (name) + (' ') + (surname),
+            style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                (name) + (' ') + (surname) + ('\n * * * * *'),
-                style: TextStyle(fontSize: 17.5, fontWeight: FontWeight.bold),
-              ),
-            ],
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(5, (index) {
+              return Icon(
+                index < rating ? Icons.star : Icons.star_border,
+                color: Color.fromARGB(255, 217, 169, 25),
+              );
+            }),
           )
         ],
       ),
@@ -261,12 +235,12 @@ class _MainPageState extends State<MainPage> {
             child: Padding(
               padding: const EdgeInsets.all(0.0),
               child: Container(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: Color.fromARGB(255, 231, 236, 251),
                 margin: EdgeInsets.all(5.0),
-                height: 140,
+                height: 155,
                 width: 800,
-                child: FutureBuilder<List<GetMyMentorsModel>>(
-                  future: futureGetByRoleModel2,
+                child: FutureBuilder<List<GetMyMentorsModel>?>(
+                  future: futureMyMentors,
                   builder: (context, i) {
                     if (i.hasData) {
                       return GridView.builder(
@@ -280,7 +254,9 @@ class _MainPageState extends State<MainPage> {
                             return _userCard(
                                 'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg',
                                 '${i.data?[index].myMentorsName}',
-                                '${i.data?[index].myMentorsSurname}');
+                                '${i.data?[index].myMentorsSurname}',
+                                i.data![index].myMentorsRatingAverage,
+                                i.data![index].myMentorsId);
                           });
                     } else if (i.hasError) {
                       return Text('${i.error}');
@@ -294,43 +270,38 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 175, 0),
+              Text(
+                'Top Mentors',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 50, 28, 49),
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold),
+              ),
+              TextButton(
                 child: Text(
-                  'Top Mentors',
+                  'See all',
                   style: TextStyle(
                       color: Color.fromARGB(255, 50, 28, 49),
-                      fontSize: 19,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: TextButton(
-                  child: Text(
-                    'See all',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 50, 28, 49),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MentorPage()));
-                  },
-                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => MentorPage()));
+                },
               ),
             ],
           ),
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Container(
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromARGB(255, 231, 236, 251),
               margin: EdgeInsets.all(5.0),
-              height: 140,
-              child: FutureBuilder<List<GetMyMenteesModel>>(
-                future: futureGetByRoleModel,
+              height: 155,
+              child: FutureBuilder<List<GetMyMenteesModel>?>(
+                future: futureMyMentees,
                 builder: (context, i) {
                   if (i.hasData) {
                     return GridView.builder(
@@ -342,7 +313,9 @@ class _MainPageState extends State<MainPage> {
                           return _userCard(
                               'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg',
                               '${i.data?[index].myMenteesName}',
-                              '${i.data?[index].myMenteesSurname}');
+                              '${i.data?[index].myMenteesSurname}',
+                              i.data![index].myMenteesRatingAverage,
+                              i.data![index].myMenteesId);
                         });
                   } else if (i.hasError) {
                     return Text('${i.error}');
@@ -354,15 +327,38 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 30, 240, 0),
-            child: Text(
-              'Categories',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 50, 28, 49),
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
-            ),
+
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(20, 30, 180, 0),
+                child: Text(
+                  'Categories',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 50, 28, 49),
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
+                child: TextButton(
+                  child: Text(
+                    'See all',
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 50, 28, 49),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CategoriesPage()));
+                  },
+                ),
+              ),
+            ],
           ),
           // Container(
           //   height: 150,
