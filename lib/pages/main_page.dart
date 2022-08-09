@@ -36,7 +36,6 @@ class _MainPageState extends State<MainPage> {
     'post 3',
     'post 4',
   ];
-
   final List _stories = [
     'fav 1',
     'fav 2 ',
@@ -44,7 +43,7 @@ class _MainPageState extends State<MainPage> {
     'fav 4',
     'fav 5',
   ];
-
+ 
 
   Future<List<GetMyMenteesModel>?> futureMyMentees = APIService.getMyMentees();
   Future<List<GetMyMentorsModel>?> futureMyMentors = APIService.getMyMentors();
@@ -156,6 +155,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
+      
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
       appBar: AppBar(
@@ -241,7 +241,7 @@ class _MainPageState extends State<MainPage> {
             child: Padding(
               padding: const EdgeInsets.all(0.0),
               child: Container(
-                color: Color.fromARGB(255, 255, 255, 255),
+                color: Color.fromARGB(255, 231, 236, 251),
                 margin: EdgeInsets.all(5.0),
                 height: 155,
                 width: 800,
@@ -303,7 +303,7 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Container(
-              color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromARGB(255, 231, 236, 251),
               margin: EdgeInsets.all(5.0),
               height: 155,
               child: FutureBuilder<List<GetMyMenteesModel>?>(

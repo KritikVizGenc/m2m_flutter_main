@@ -6,23 +6,23 @@ class NumbersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: <Widget>[
-      Column(
-        children: [
-          buildButton(context, average!, 'Ranking'),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: List.generate(5, (index) {
-              return Icon(index < average! ? Icons.star : Icons.star_border,
-                  color: Color.fromARGB(255, 217, 169, 25));
-            }),
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Column(
+            children: [
+              buildButton(context, average!, 'Ranking'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: List.generate(5, (index) {
+                  return Icon(index < average! ? Icons.star : Icons.star_border,
+                      color: Color.fromARGB(255, 217, 169, 25));
+                }),
+              ),
+            ],
           ),
         ],
-      ),
-    ],
-  );
+      );
 
   Widget buildButton(BuildContext context, double value, String text) =>
       MaterialButton(

@@ -2,6 +2,7 @@
 
 
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/common/Bottom_Bar.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
@@ -14,17 +15,16 @@ import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
 
-
 Widget _defaultHome = const LoginPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  bool result = await SharedService.isLoggedIn();
-  if(result) {
-    _defaultHome = MainPage();
-  }
   
+  bool result = await SharedService.isLoggedIn();
+  if (result) {
+    _defaultHome = BottomBar();
+  }
+
   runApp(MyApp());
 }
 
@@ -56,15 +56,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         dividerColor: Colors.black,
         drawerTheme: DrawerThemeData(
-         backgroundColor: Colors.white, ),
+          backgroundColor: Colors.white,
+        ),
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
-       primaryColor: Color.fromARGB(255, 62, 35, 60),
+        primaryColor: Color.fromARGB(255, 114, 86, 113),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
-        scaffoldBackgroundColor: Color.fromARGB(255, 29, 33, 63),
+        scaffoldBackgroundColor: Color.fromARGB(255, 114, 120, 163),
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
-     // home: SplashScreen(title: 'Flutter Login'),
+      // home: SplashScreen(title: 'Flutter Login'),
       //home: LoginPage(),
       routes: {
         '/': (context) => _defaultHome,

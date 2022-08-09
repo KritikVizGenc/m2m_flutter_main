@@ -79,6 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
             },
           )
         ],
+        
       ),
       body: SingleChildScrollView(
         child: Column(

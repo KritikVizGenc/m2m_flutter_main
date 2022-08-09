@@ -29,7 +29,7 @@ class MeetPagesState extends State<MeetPages> {
     'post 4',
   ];
   String text=' ';
-  
+
  @override
   Widget build(BuildContext context) {
     
@@ -78,11 +78,11 @@ _addDateBAr(),
               mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              
+
                Text('Events',style: subHeadingStyle),
                ListView.builder(
               physics: NeverScrollableScrollPhysics(),
-              
+
                   shrinkWrap: true,
                   itemCount:tasks.length,
                   itemBuilder: (context,index){
@@ -91,18 +91,18 @@ _addDateBAr(),
                   // width: 50,
                   // margin: EdgeInsets.all(5),
                //   color: MyThemes.primaryColor,child: Text(tasks))).toList()
-                                        
-                 
+
+
               //   child: Padding( padding:EdgeInsets.all(8),
-             return Card(  
-                 
+             return Card(
+
 child: ListTile(
-  
+
   title: Text(tasks[index]),
   trailing: Container(
     width: 70,
     child: Row(
-      children: 
+      children:
       [
         Expanded(
         child: IconButton(onPressed: (){
@@ -134,17 +134,17 @@ setState(() {
 
       }, icon:Icon(Icons.delete)))
       ],
-      
+
     ),
   ),
 ),
                  );
-                    
+
                    // return  containers[index];
-                    
+
                   },
-                 
-                  
+
+
                   ),
             ],
           ),
@@ -203,6 +203,10 @@ _selectedDate =date;
   
   );
 }
+
+
+
+
 
     _addTaskBar(){
 return Container(
@@ -287,9 +291,9 @@ return Container(
 _removeTask(index){}
 
 }
-  
- 
- 
- 
- 
-  
+
+
+
+
+
+

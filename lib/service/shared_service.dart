@@ -49,5 +49,4 @@ class SharedService {
             (route) => false
     );
   }
-
 }

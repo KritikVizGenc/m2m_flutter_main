@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
+import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/registiration_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:flutter/cupertino.dart';
@@ -56,6 +57,35 @@ class _MenteePageState extends State<MenteePage> {
   void filterSearchResults(String query) {}
 
   Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder<List<GetByRoleModel>>(
+        future: futureGetByRoleModel,
+        builder: (context, i) {
+          if (i.hasData) {
+            return ListView.builder(
+                itemCount: i.data?.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ProfilePage(nereyeId: i.data?[index].id)));
+                      },
+                      title: Text('${i.data?[index].name}' +
+                          '   ' +
+                          '${i.data?[index].surname}' +
+                          ' \n ' +
+                          '${i.data?[index].userRole}'),
+                      subtitle: Text('${i.data?[index].email}'),
+                      leading: CircleAvatar(
+                        child: Text('${i.data?[index].name[0]}'),
+                      ));
+                });
+          } else if (i.hasError) {
+            return Text('${i.error}');
+          }
     return  Scaffold(
         body: FutureBuilder<List<GetByRoleModel>>(
           future: futureGetByRoleModel,
@@ -114,6 +144,41 @@ class _MenteePageState extends State<MenteePage> {
         bottomNavigationBar: BottomBar(),
       );
    // );
+          // By default, show a loading spinner.
+          return const CircularProgressIndicator();
+        },
+      ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          "Mentee Page",
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        // elevation: 0.5,
+        // iconTheme: IconThemeData(color: Colors.white),
+        // flexibleSpace: Container(
+        //   decoration: BoxDecoration(
+        //       gradient: LinearGradient(
+        //           begin: Alignment.topLeft,
+        //           end: Alignment.bottomRight,
+        //           colors: <Color>[
+        //         //Theme.of(context).primaryColor,
+        //         //Theme.of(context).colorScheme.secondary,
+        //       ])),
+        // ),
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.search),
+        //     onPressed: () {
+        //       showSearch(context: context, delegate: MySearchDelegate());
+        //     },
+        //   ),
+        // ],
+      ),
+      drawer: DrawerHelp(),
+      bottomNavigationBar: BottomBar(),
+    );
+    // );
   }
 }
 
