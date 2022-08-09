@@ -1,13 +1,15 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/common/theme_helper.dart';
+import 'package:m2m_flutter_main/pages/widgets/button.dart';
+import 'package:m2m_flutter_main/themes.dart';
 import 'widgets/input_field.dart';
 import 'package:intl/intl.dart';
 import '../common/Bottom_Bar.dart';
-import 'package:flutter/src/material/date_picker.dart';
+//import 'package:flutter/src/material/date_picker.dart';
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
 
@@ -19,9 +21,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
   DateTime _selectedDate = DateTime.now();
   String _endTime ="9:30 PM";
   String _startTime =DateFormat("hh:mm a").format(DateTime.now()).toString();
+  int _selectedColor=0;
+  
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+         backgroundColor: Colors.white,
  drawer: DrawerHelp(),
         bottomNavigationBar: BottomBar(),
        
@@ -63,13 +69,13 @@ child: SingleChildScrollView(
   style:HeadingStyle ,
   ),
   
-  MyInputField(title: "Title",
+  MyInputField(title: "Title-Note",
   hint: "Enter your title"
   ),
-  MyInputField(title: "Note",
+  MyInputField(title: "Mentee name",
   hint: "Enter your note"
   ),
-   MyInputField(title: "Mente Name",
+   MyInputField(title: "Mentee surname",
   hint: "Enter your mentee"
   ),
   
@@ -119,7 +125,31 @@ _getTimeFromUSer(isStartTime: false);
         ) ,
       ),
     ],
-  )
+  ),
+    
+    
+    
+    SizedBox(height:18 ,),
+    Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment:CrossAxisAlignment.center ,
+      children: [
+
+_colorPalete(),
+MyButton(label: "Create Task", onTap: ()=>null,)
+
+
+
+    ],
+    
+    ),
+    
+    
+    
+    
+    
+    
+    
     ],
   
   ),
@@ -130,6 +160,63 @@ _getTimeFromUSer(isStartTime: false);
 
     );
   }
+_colorPalete(){
+  return Column(
+  crossAxisAlignment: CrossAxisAlignment.start,
+  
+  children: [
+Text("Color",
+style: subHeadingStyle,
+
+
+),
+SizedBox(height: 8.0,),
+Wrap(
+  children: List<Widget>.generate(
+  3,(int index){
+return GestureDetector(
+onTap: () {
+  setState(() {
+    _selectedColor=index;
+  });
+  
+},
+
+  child:   Padding(
+  
+    padding: const EdgeInsets.only(right:8.0),
+  
+    child:   CircleAvatar (
+    radius: 14,
+    backgroundColor: index==0?MyThemes.primaryColor:index==1?MyThemes.primaryColor:Colors.pink,
+  child: _selectedColor==index?Icon(Icons.done,
+  color: Colors.white,
+  size: 16,
+  
+  ):Container(
+
+  ),
+    
+  
+    ),
+  
+  ),
+);
+  }
+)
+)
+],
+);
+
+}
+
+
+
+
+
+
+
+
 _getDateFromUser() async {
   DateTime? _pickerDate = await showDatePicker(
     context: context, 
@@ -159,11 +246,11 @@ if(pickedTime==null){
 print("time cancel");
 }else if(isStartTime==true){
 setState(() {
-  
+  _startTime=_formatedTime;
 });
 }else if(isStartTime==false){
  setState(() {
-   
+   _endTime=_formatedTime;
  });
 
 }

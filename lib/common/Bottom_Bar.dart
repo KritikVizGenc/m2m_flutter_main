@@ -1,21 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:m2m_flutter_main/global.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 
-class BottomBar extends StatelessWidget {
-  int _selectedIndex = 0;
+class BottomBar extends StatefulWidget {
+  @override
+  State<BottomBar> createState() => _BottomBarState();
+}
 
+class _BottomBarState extends State<BottomBar> {
   @override
   Widget build(BuildContext context) {
-    Widget child;
-    switch (_selectedIndex) {
-      case 0:
-    }
+    return Scaffold(
+      body: Variable.sayfalar[Variable.bottomBarIndex],
+
+      bottomNavigationBar: bottomBar(),
+    );
+
+     
+  }
+
+  void _onTap(int index) {
+    print(index);
+    setState(() {
+      Variable.bottomBarIndex = index;
+    });
+  }
+  Widget bottomBar(){
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          backgroundColor: Color.fromARGB(255, 69, 41, 67),
+
+          backgroundColor: Color.fromARGB(245, 245, 245, 245),
           icon: Icon(Icons.home),
           label: 'Home',
         ),
@@ -40,7 +57,7 @@ class BottomBar extends StatelessWidget {
           label: 'Chats',
         ),
       ],
-      currentIndex: _selectedIndex,
+      currentIndex: Variable.bottomBarIndex,
       selectedItemColor: Colors.pink,
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.deepOrange,
@@ -48,11 +65,4 @@ class BottomBar extends StatelessWidget {
       elevation: 15,
     );
   }
-
-  void _onTap(int index) {
-    _selectedIndex = index;
-    setState(() {});
-  }
-
-  void setState(Null Function() param0) {}
 }

@@ -15,19 +15,23 @@ class MyButton extends StatelessWidget {
     return GestureDetector(
 onTap: onTap,
 child: Container(
+  padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
   width: 100,
-  height: 60,
+  height: 40,
   decoration: BoxDecoration(
     borderRadius: BorderRadius.circular(20),
     color: Color.fromARGB(255, 62, 35, 60)
   ),
 child: Text(
-  
+  textAlign: TextAlign.center,
+
   label,
+  
   style:TextStyle(
     
     
     color:Colors.white ,
+    
     ) ,
 ),
 

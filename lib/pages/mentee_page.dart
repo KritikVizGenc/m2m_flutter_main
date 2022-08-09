@@ -56,9 +56,7 @@ class _MenteePageState extends State<MenteePage> {
   void filterSearchResults(String query) {}
 
   Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      home: Scaffold(
+    return  Scaffold(
         body: FutureBuilder<List<GetByRoleModel>>(
           future: futureGetByRoleModel,
           builder: (context, i) {
@@ -91,18 +89,18 @@ class _MenteePageState extends State<MenteePage> {
             "Mentee Page",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).colorScheme.secondary,
-                ])),
-          ),
+          // elevation: 0.5,
+          // iconTheme: IconThemeData(color: Colors.white),
+          // flexibleSpace: Container(
+          //   decoration: BoxDecoration(
+          //       gradient: LinearGradient(
+          //           begin: Alignment.topLeft,
+          //           end: Alignment.bottomRight,
+          //           colors: <Color>[
+          //         //Theme.of(context).primaryColor,
+          //         //Theme.of(context).colorScheme.secondary,
+          //       ])),
+          // ),
           // actions: [
           //   IconButton(
           //     icon: const Icon(Icons.search),
@@ -114,33 +112,33 @@ class _MenteePageState extends State<MenteePage> {
         ),
         drawer: DrawerHelp(),
         bottomNavigationBar: BottomBar(),
-      ),
-    );
+      );
+   // );
   }
 }
 
-class MySearchDelegate extends SearchDelegate {
-  @override
-  List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    throw UnimplementedError();
-  }
+// class MySearchDelegate extends SearchDelegate {
+//   @override
+//   List<Widget>? buildActions(BuildContext context) {
+//     // TODO: implement buildActions
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    throw UnimplementedError();
-  }
+//   @override
+//   Widget? buildLeading(BuildContext context) {
+//     // TODO: implement buildLeading
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
-  }
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     // TODO: implement buildResults
+//     throw UnimplementedError();
+//   }
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
-  }
-}
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     // TODO: implement buildSuggestions
+//     throw UnimplementedError();
+//   }
+//}
