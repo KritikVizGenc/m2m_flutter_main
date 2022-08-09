@@ -59,35 +59,6 @@ class _MentorPageState extends State<MentorPage> {
     return Scaffold(
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
-<<<<<<< Updated upstream
-      body: FutureBuilder<List<GetByRoleModel>>(
-        future: futureGetByRoleModel,
-        builder: (context, i) {
-          if (i.hasData) {
-            return ListView.builder(
-                itemCount: i.data?.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfilePage()));
-                      },
-                      title: Text('${i.data?[index].name}' +
-                          '   ' +
-                          '${i.data?[index].surname}' +
-                          ' \n ' +
-                          '${i.data?[index].userRole}'),
-                      subtitle: Text('${i.data?[index].email}'),
-                      leading: CircleAvatar(
-                        child: Text('${i.data?[index].name[0]}'),
-                      ));
-                });
-          } else if (i.hasError) {
-            return Text('${i.error}');
-          }
-=======
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(children: [
@@ -133,7 +104,6 @@ class _MentorPageState extends State<MentorPage> {
                 } else if (i.hasError) {
                   return Text('${i.error}');
                 }
->>>>>>> Stashed changes
 
                 // By default, show a loading spinner.
                 return const CircularProgressIndicator();

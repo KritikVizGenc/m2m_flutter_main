@@ -59,46 +59,6 @@ class _MenteePageState extends State<MenteePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< Updated upstream
-      body: FutureBuilder<List<GetByRoleModel>>(
-        future: futureGetByRoleModel,
-        builder: (context, i) {
-          if (i.hasData) {
-            // TextFormField(
-            //   controller: editingController,
-            // );
-            // TextFormField(
-            //   controller: editingController1,
-            // );
-
-            return ListView.builder(
-                itemCount: i.data?.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage()));
-                      },
-                      title: Text('${i.data?[index].name}' +
-                          '   ' +
-                          '${i.data?[index].surname}' +
-                          ' \n ' +
-                          '${i.data?[index].userRole}'),
-                      subtitle: Text('${i.data?[index].email}'),
-                      leading: CircleAvatar(
-                        child: Text('${i.data?[index].name[0]}'),
-                      ));
-                });
-          } else if (i.hasError) {
-            return Text('${i.error}');
-          }
-
-          // By default, show a loading spinner.
-          return const CircularProgressIndicator();
-        },
-=======
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(children: [
@@ -144,14 +104,12 @@ class _MenteePageState extends State<MenteePage> {
             ),
           ),
         ]),
->>>>>>> Stashed changes
       ),
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
           "Mentee Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-<<<<<<< Updated upstream
         ),
         elevation: 0.5,
         iconTheme: IconThemeData(color: Colors.white),
@@ -165,37 +123,32 @@ class _MenteePageState extends State<MenteePage> {
                 Theme.of(context).colorScheme.secondary,
               ])),
         ),
-=======
-        ),
-        // elevation: 0.5,
-        // iconTheme: IconThemeData(color: Colors.white),
-        // flexibleSpace: Container(
-        //   decoration: BoxDecoration(
-        //       gradient: LinearGradient(
-        //           begin: Alignment.topLeft,
-        //           end: Alignment.bottomRight,
-        //           colors: <Color>[
-        //         //Theme.of(context).primaryColor,
-        //         //Theme.of(context).colorScheme.secondary,
-        //       ])),
-        // ),
->>>>>>> Stashed changes
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(Icons.search),
-        //     onPressed: () {
-        //       showSearch(context: context, delegate: MySearchDelegate());
-        //     },
-        //   ),
-        // ],
       ),
+      // elevation: 0.5,
+      // iconTheme: IconThemeData(color: Colors.white),
+      // flexibleSpace: Container(
+      //   decoration: BoxDecoration(
+      //       gradient: LinearGradient(
+      //           begin: Alignment.topLeft,
+      //           end: Alignment.bottomRight,
+      //           colors: <Color>[
+      //         //Theme.of(context).primaryColor,
+      //         //Theme.of(context).colorScheme.secondary,
+      //       ])),
+      // ),
+
+      // actions: [
+      //   IconButton(
+      //     icon: const Icon(Icons.search),
+      //     onPressed: () {
+      //       showSearch(context: context, delegate: MySearchDelegate());
+      //     },
+      //   ),
+      // ],
+
       drawer: DrawerHelp(),
       bottomNavigationBar: BottomBar(),
     );
-<<<<<<< Updated upstream
-=======
-    // );
->>>>>>> Stashed changes
   }
 }
 

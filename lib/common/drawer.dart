@@ -11,7 +11,7 @@ import '../pages/splash_screen.dart';
 import '../pages/registiration_page.dart';
 import '../main.dart';
 import 'package:flutter/services.dart';
-
+import '';
 
 class DrawerHelp extends StatefulWidget {
   @override
@@ -42,49 +42,44 @@ class _DrawerState extends State<DrawerHelp> {
                 ],
               ),
             ),
-            
-              child: Container(
-                height: 40,
-                alignment: Alignment.center,
-                
-                child: Column(
-                  children: [
-                    Container(
-                      
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(width: 5, color: Colors.white),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            blurRadius: 20,
-                            offset: const Offset(5, 5),
-                          ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.person,
-                        size: 45,
-                        color: Colors.grey.shade300,
-                      ),
+            child: Container(
+              height: 40,
+              alignment: Alignment.center,
+              child: Column(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(width: 5, color: Colors.white),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black12,
+                          blurRadius: 20,
+                          offset: const Offset(5, 5),
+                        ),
+                      ],
                     ),
-                    Text(
-                      '\nName Surname',
-                      style: TextStyle(
-                          fontSize: 26,
-                          color: Theme.of(context).colorScheme.onPrimary),
+                    child: Icon(
+                      Icons.person,
+                      size: 45,
+                      color: Colors.grey.shade300,
                     ),
-                    /*onPressed: () {
+                  ),
+                  Text(
+                    '\nName Surname',
+                    style: TextStyle(
+                        fontSize: 26,
+                        color: Theme.of(context).colorScheme.onPrimary),
+                  ),
+                  /*onPressed: () {
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => MenteePage()));
                   },*/
-                  ],
-                  
-                ),
+                ],
               ),
-            
+            ),
           ),
           ListTile(
             leading: Icon(
@@ -137,11 +132,8 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          MeetPages()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => MeetPages()));
             },
           ),
           ListTile(
