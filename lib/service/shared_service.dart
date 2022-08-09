@@ -11,7 +11,7 @@ import '../model/login_response_model.dart';
 class SharedService {
   static Future<bool> isLoggedIn() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    if(preferences.getInt("login_details") != null){
+    if (preferences.getInt("login_details") != null) {
       return true;
     } else {
       return false;
@@ -21,7 +21,7 @@ class SharedService {
   static Future<int?> loginDetails() async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     int? user = preferences.getInt("login_details");
-    if(user != null){
+    if (user != null) {
       return user;
     } else {
       return null;
@@ -29,11 +29,10 @@ class SharedService {
   }
 
   static Future<void> setLoginDetails(
-      LoginResponseModel model,
-      ) async {
-
+    LoginResponseModel model,
+  ) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    if(model.userWithEmail?.id != null){
+    if (model.userWithEmail?.id != null) {
       preferences.setInt("login_details", model.userWithEmail!.id);
     }
   }
@@ -41,9 +40,6 @@ class SharedService {
   static Future<void> logout(BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.remove("login_details");
-    Navigator.pushNamedAndRemoveUntil(
-        context,
-        '/login',
-            (route) => false
-    );
+    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
   }
+}

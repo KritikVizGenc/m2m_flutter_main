@@ -51,34 +51,6 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    futureGetByIdModel =
-        fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
-  }
-
-  List<GetByIdModel> productsResponseFromJson(String str) =>
-      List<GetByIdModel>.from(
-          json.decode(str).map((x) => GetByIdModel.fromJson(x)));
-
-  late Future<List<GetByIdModel>> futureGetByIdModel;
-  Future<List<GetByIdModel>> fetchGetByIdModel(nereyeId) async {
-    Uri url = Uri.http(
-      '10.0.2.2:5000',
-      '/api/getById/${jsonEncode(nereyeId)}',
-    );
-
-    final response = await get(Uri.parse(url.toString()));
-
-    if (response.statusCode == 200) {
-      return productsResponseFromJson(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
-
   List<CommentModel> productsResponseFromJson1(String str) =>
       List<CommentModel>.from(
           json.decode(str).map((x) => CommentModel.fromJson(x)));
@@ -104,6 +76,8 @@ class _ProfilePageState extends State<ProfilePage> {
     super.initState();
     futureGetByIdModel =
         fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
+    futureCommentModel =
+        fetchCommentModel(widget.nereyeId) as Future<List<CommentModel>>;
   }
 
   @override
@@ -149,89 +123,80 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              child: FutureBuilder<List<GetByIdModel>>(
-                future: futureGetByIdModel,
-                builder: (context, i) {
-                  if (i.hasData) {
-                    Uint8List _bytes;
-                    _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
-                    return ListView(
-                      primary: false, //??
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        const SizedBox(height: 24),
-                        ProfileWidget(
-                          imagePath: _bytes,
-                          onClicked: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => EditProfilePage()));
-                          },
-                        ),
-                        const SizedBox(height: 24),
-                        buildName('${i.data?[0].name}', '${i.data?[0].surname}',
-                            '${i.data?[0].work}', '${i.data?[0].city}'),
-                        const SizedBox(height: 24),
-                        NumbersWidget(average: i.data?[0].ratingAverage),
-                        const SizedBox(height: 48),
-                        buildAbout('${i.data?[0].aboutMe}'),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
-                          child: Text(
-                            'Comments',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 24,
-                            ),
-                            textAlign: TextAlign.center,
+        child: Column(children: [
+          Container(
+            child: FutureBuilder<List<GetByIdModel>>(
+              future: futureGetByIdModel,
+              builder: (context, i) {
+                if (i.hasData) {
+                  Uint8List _bytes;
+                  _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
+                  return ListView(
+                    primary: false, //??
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    children: [
+                      const SizedBox(height: 24),
+                      ProfileWidget(
+                        imagePath: _bytes,
+                        onClicked: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => EditProfilePage(
+                                    nereyeId: 2,
+                                  )));
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      buildName('${i.data?[0].name}', '${i.data?[0].surname}',
+                          '${i.data?[0].work}', '${i.data?[0].city}'),
+                      const SizedBox(height: 24),
+                      NumbersWidget(average: i.data?[0].ratingAverage),
+                      const SizedBox(height: 48),
+                      buildAbout('${i.data?[0].aboutMe}'),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
+                        child: Text(
+                          'Comments',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
                           ),
+                          textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 10),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 30,
-                            right: 16,
-                          ),
-                          height: 50,
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[0].name}'),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 30,
-                            right: 16,
-                          ),
-                          height: 50,
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[0].name}'),
-                        ),
-                        const SizedBox(height: 15),
-                        Container(
-                          margin: EdgeInsets.only(
-                            left: 30,
-                            right: 16,
-                          ),
-                          height: 50,
-                          color: Theme.of(context).colorScheme.secondary,
-                          child: Text('${i.data?[0].name}'),
-                        ),
-                      ],
-                    );
-                  } else if (i.hasError) {
-                    return Text('${i.error}');
-                  }
+                      ),
+                    ],
+                  );
+                } else if (i.hasError) {
+                  return Text('${i.error}');
+                }
 
-                  // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
-                },
-              ),
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
             ),
-          ],
-        ),
+          ),
+          Container(
+            child: FutureBuilder<List<CommentModel>>(
+              future: futureCommentModel,
+              builder: (context, i) {
+                if (i.hasData) {
+                  return GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 1),
+                      scrollDirection: Axis.vertical,
+                      itemCount: i.data?.length,
+                      itemBuilder: (context, index) {
+                        return buildComment('${i.data?[index].commentContent}');
+                      });
+                } else if (i.hasError) {
+                  return Text('${i.error}');
+                }
+                // By default, show a loading spinner.
+                return const CircularProgressIndicator();
+              },
+            ),
+          )
+        ]),
       ),
     );
   }

@@ -13,12 +13,6 @@ import 'package:m2m_flutter_main/model/register_request_model.dart';
 import 'package:m2m_flutter_main/model/register_response_model.dart';
 import 'package:m2m_flutter_main/model/update_user_request_model.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
-import '../model/getAllTags_model.dart';
-import '../model/getByRole_model.dart';
-import '../model/getMyMentees_model.dart';
-import '../model/getMyMentors_model.dart';
-import '../model/getUserAll_model.dart';
-import '../model/getById_model.dart';
 
 import '../model/getMyMentees_model.dart';
 import '../model/update_user_response_model.dart';

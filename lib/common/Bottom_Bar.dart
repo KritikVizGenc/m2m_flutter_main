@@ -29,7 +29,7 @@ class _BottomBarState extends State<BottomBar> {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          backgroundColor: Color.fromARGB(245,245,245,245),
+          backgroundColor: Color.fromARGB(245, 245, 245, 245),
           icon: Icon(Icons.home),
           label: 'Home',
         ),
@@ -51,7 +51,6 @@ class _BottomBarState extends State<BottomBar> {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.chat),
-        
           label: 'Chats',
         ),
       ],
@@ -63,17 +62,4 @@ class _BottomBarState extends State<BottomBar> {
       elevation: 15,
     );
   }
-
-  void _onTap(int index) {
-    _selectedIndex = index;
-    setState(() {});
-    onTap:(index);
-  }
-
-  void setState(Null Function() param0) {
-
-
-
-  }
 }
->>>>>>> ali

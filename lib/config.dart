@@ -1,9 +1,11 @@
 class Config {
-  static const String apiURL = "10.0.2.2:5000";
-
+  static const String apiURL = "192.168.43.65:5000";
   static const String loginAPI = "/api/login";
   static const String registerAPI = "/api/register";
-  static const String userAPI = "/user/user-profile";
-  static const String myMenteesAPI = "/api/myMentees/17";
-  static const String myMentorsAPI = "/api/myMentors/13";
+  static const String getUserAPI = "/api/getById/";
+  static const String getAllTags = "/api/getAllTag";
+  static const String getMyMentees = "/api/myMentees/";
+  static const String getMyMentors = "/api/myMentors/";
+  static const String connectAPI = "/api/reqMentors/";
+  static const String updateUserAPI = "/api/updateUser//";
 }

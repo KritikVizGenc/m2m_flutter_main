@@ -6,11 +6,13 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/ticker_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:m2m_flutter_main/model/update_user_request_model.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
-
+import 'package:snippet_coder_utils/FormHelper.dart';
+import '../service/api_service.dart';
 import '../common/theme_helper.dart';
 import '../model/user.dart';
 
@@ -32,6 +34,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final imageTemporary = File(image.path);
     setState(() => this.image = imageTemporary);
   }
+
+  final nameController = TextEditingController();
+  final surnameController = TextEditingController();
+  final aboutMeController = TextEditingController();
+  final avatarController = TextEditingController();
+  final cityController = TextEditingController();
+  final workController = TextEditingController();
 
   User user = UserPreferences.myUser;
   @override
@@ -88,36 +97,59 @@ class _EditProfilePageState extends State<EditProfilePage> {
             const SizedBox(
               height: 24,
             ),
-            TextFieldWidget(
-              label: 'Full Name',
-              text: user.name,
-              onChanged: (name) {},
+            Container(
+              child: TextFormField(
+                controller: nameController,
+                decoration: ThemeHelper()
+                    .textInputDecoration('First Name', 'Enter your first name'),
+                onChanged: (name) {},
+              ),
             ),
+
             const SizedBox(
               height: 24,
             ),
-            TextFieldWidget(
-              label: 'Major',
-              text: user.major,
-              onChanged: (major) {},
+            Container(
+              child: TextFormField(
+                controller: surnameController,
+                decoration: ThemeHelper()
+                    .textInputDecoration('First Name', 'Enter your first name'),
+                onChanged: (name) {},
+              ),
             ),
+
             const SizedBox(
               height: 24,
             ),
-            TextFieldWidget(
-              label: 'City',
-              text: user.city,
-              onChanged: (city) {},
+            Container(
+              child: TextFormField(
+                controller: aboutMeController,
+                decoration: ThemeHelper()
+                    .textInputDecoration('First Name', 'Enter your first name'),
+                onChanged: (name) {},
+              ),
             ),
+
             const SizedBox(
               height: 24,
             ),
-            TextFieldWidget(
-              label: 'About',
-              text: user.about,
-              maxLines: 5,
-              onChanged: (about) {},
+            Container(
+              child: TextFormField(
+                controller: cityController,
+                decoration: ThemeHelper()
+                    .textInputDecoration('First Name', 'Enter your first name'),
+                onChanged: (name) {},
+              ),
             ),
+            Container(
+              child: TextFormField(
+                controller: workController,
+                decoration: ThemeHelper()
+                    .textInputDecoration('First Name', 'Enter your first name'),
+                onChanged: (name) {},
+              ),
+            ),
+
             Container(
               margin: EdgeInsets.only(
                 top: 16,
@@ -126,29 +158,49 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    decoration: ThemeHelper().buttonBoxDecoration(context),
-                    child: ElevatedButton(
-                      style: ThemeHelper().buttonStyle(),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                        child: Text(
-                          'Save',
-                          style: TextStyle(
-                            fontSize: 30.0,
-                            color: Color.fromARGB(255, 255, 255, 255),
+                      decoration: ThemeHelper().buttonBoxDecoration(context),
+                      child: ElevatedButton(
+                          style: ThemeHelper().buttonStyle(),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                            child: Text(
+                              'Save',
+                              style: TextStyle(
+                                fontSize: 30.0,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage(
-                                      nereyeId: 2,
-                                    )));
-                      },
-                    ),
-                  )
+                          onPressed: () {
+                            UpdateUserRequestModel model =
+                                UpdateUserRequestModel(
+                                    aboutMe: aboutMeController.text,
+                                    city: cityController.text,
+                                    name: nameController.text,
+                                    surname: surnameController.text,
+                                    work: workController.text,
+                                    avatar: avatarController.text);
+                            APIService.updateUser(2, model).then(
+                              (response) => {
+                                if (response.message != null)
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ProfilePage(
+                                                  nereyeId: 2,
+                                                ))),
+                                  }
+                                else
+                                  {
+                                    FormHelper.showSimpleAlertDialog(context,
+                                        "Error", response.message!, "OK", () {
+                                      Navigator.pop(context);
+                                    })
+                                  }
+                              },
+                            );
+                          }))
                 ],
               ),
             )
