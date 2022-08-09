@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/registiration_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
@@ -56,7 +57,7 @@ class _MentorPageState extends State<MentorPage> {
   }
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerHelp(),
+      //drawer: DrawerHelp(),
       //bottomNavigationBar: BottomBar(),
       body: FutureBuilder<List<GetByRoleModel>>(
         future: futureGetByRoleModel,
@@ -96,6 +97,13 @@ class _MentorPageState extends State<MentorPage> {
         title: Text(
           "Mentor Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainPage()));
+          },
         ),
         elevation: 0.5,
         iconTheme: IconThemeData(color: Colors.white),

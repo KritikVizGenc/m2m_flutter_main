@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 245, 245, 245),
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     //crossAxisAlignment: Alignment(0.5, 0.5),
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 15),
+                        padding: EdgeInsets.fromLTRB(0, 70, 0, 15),
                         child: Text(
                           'Hi There!',
                           style: TextStyle(
@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-
+                      SizedBox(height: 10.0),
                       //Spacer(),
                       Align(
                         alignment: Alignment.topCenter,
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20.0),
+                      SizedBox(height: 30.0),
                       Form(
                           key: _formKey,
                           child: Column(
@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                                 decoration:
                                     ThemeHelper().inputBoxDecorationShaddow(),
                               ),
-                              SizedBox(height: 20.0),
+                              SizedBox(height: 25.0),
                               Container(
                                 child: TextFormField(
                                   obscureText: true,

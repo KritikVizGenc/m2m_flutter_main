@@ -34,7 +34,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 240, 236, 253),
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
       body: SingleChildScrollView(
         child: Stack(
           children: [

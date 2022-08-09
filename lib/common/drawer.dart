@@ -32,6 +32,7 @@ class _DrawerState extends State<DrawerHelp> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
       child: ListView(
         children: <Widget>[
           DrawerHeader(
@@ -63,10 +64,10 @@ class _DrawerState extends State<DrawerHelp> {
                     },
                     child: Container(
                       child: CircleAvatar(
-                        backgroundColor: Color.fromARGB(255, 62, 35, 60),
+                        backgroundColor: Color.fromARGB(255, 64, 46, 62),
                         radius: 33,
                         child: CircleAvatar(
-                          radius: 80,
+                          radius: 30,
                           backgroundImage: NetworkImage(
                               'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg'),
                         ),
@@ -240,6 +241,21 @@ class _DrawerState extends State<DrawerHelp> {
             onTap: () {
               SharedService.logout(context);
             },
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            height: 200,
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: AssetImage("assets/image/m2m.png"),
+                colorFilter: new ColorFilter.mode(
+                    Color.fromARGB(255, 241, 237, 252).withOpacity(0.3),
+                    BlendMode.dstATop),
+              ),
+            ),
+            // padding: EdgeInsets.all(20),
           ),
         ],
       ),

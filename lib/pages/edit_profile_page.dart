@@ -11,6 +11,7 @@ import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
 
+import '../common/Bottom_Bar.dart';
 import '../common/theme_helper.dart';
 import '../model/user.dart';
 
@@ -35,7 +36,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Color.fromARGB(255, 231, 236, 251),
+        backgroundColor: Color.fromARGB(255, 241, 237, 252),
         appBar: AppBar(
           title: Text(
             "Profile Page",
@@ -122,7 +123,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 top: 16,
                 right: 16,
               ),
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                  decoration: ThemeHelper().buttonBoxDecoration(context),
+                  child: ElevatedButton(
+                      style: ThemeHelper().buttonStyle(),
+                      child: Text(
+                        "Submit".toUpperCase(),
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProfilePage(
+                                      nereyeId: 3,
+                                    )));
+                      }),
+                ),
+              ],
+            ),
           ],
         ),
       );

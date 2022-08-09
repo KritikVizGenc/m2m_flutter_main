@@ -37,6 +37,13 @@ class Notifications extends StatelessWidget {
           "Notification Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainPage()));
+          },
+        ),
         elevation: 0.5,
         iconTheme: IconThemeData(color: Colors.white),
         flexibleSpace: Container(

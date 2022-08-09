@@ -15,6 +15,7 @@ import 'add_task_bar_page.dart';
 import 'login_page.dart';
 import 'mentee_page.dart';
 import 'mentor_page.dart';
+import 'notification.dart';
 import 'splash_screen.dart';
 import 'widgets/header_widget.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
@@ -149,7 +150,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 248, 237, 245),
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
       //Color.fromARGB(255, 241, 236, 244),
       drawer: DrawerHelp(),
       //bottomNavigationBar: BottomBar(),
@@ -170,34 +171,20 @@ class _MainPageState extends State<MainPage> {
                 Theme.of(context).colorScheme.secondary,
               ])),
         ),
-        
+
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
-          Container(
-            margin: EdgeInsets.only(
-              top: 16,
-              right: 16,
+          IconButton(
+            padding: EdgeInsets.only(right: 10),
+            icon: Icon(
+              Icons.notifications_active,
+              color: Colors.white,
             ),
-            child: Stack(
-              children: <Widget>[
-                Icon(Icons.notification_add),
-                Positioned(
-                  right: 0,
-                  child: Container(
-                    padding: EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    constraints: BoxConstraints(
-                      minWidth: 12,
-                      minHeight: 12,
-                    ),
-                  ),
-                )
-              ],
-            ),
-          )
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Notifications()));
+            },
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -237,7 +224,7 @@ class _MainPageState extends State<MainPage> {
             child: Padding(
               padding: const EdgeInsets.all(0.0),
               child: Container(
-                color: Color.fromARGB(255, 241, 236, 244),
+                color: Color.fromARGB(255, 241, 237, 252),
                 margin: EdgeInsets.all(5.0),
                 height: 155,
                 width: 800,
@@ -299,7 +286,7 @@ class _MainPageState extends State<MainPage> {
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Container(
-              color: Color.fromARGB(255, 241, 236, 244),
+              color: Color.fromARGB(255, 241, 237, 252),
               margin: EdgeInsets.all(5.0),
               height: 155,
               child: FutureBuilder<List<GetMyMenteesModel>?>(

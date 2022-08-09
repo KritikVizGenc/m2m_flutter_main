@@ -97,6 +97,25 @@ class _MenteePageState extends State<MenteePage> {
           "Mentee Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => MainPage()));
+          },
+        ),
+        elevation: 0.5,
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
         // elevation: 0.5,
         // iconTheme: IconThemeData(color: Colors.white),
         // flexibleSpace: Container(
@@ -119,7 +138,7 @@ class _MenteePageState extends State<MenteePage> {
         // ],
       ),
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
     );
     // );
   }

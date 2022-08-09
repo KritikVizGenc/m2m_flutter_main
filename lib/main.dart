@@ -38,8 +38,8 @@ class MyApp extends StatelessWidget {
     800: Color.fromARGB(255, 136, 103, 134), //90%
     900: Color.fromARGB(255, 62, 35, 60), //100%
   };
-  Color _primaryColor = Color.fromARGB(255, 194, 167, 192);
-  Color accentColor = Color.fromARGB(255, 101, 105, 136);
+  Color _primaryColor = Color.fromARGB(255, 217, 165, 181);
+  Color accentColor = Color.fromARGB(255, 130, 126, 172);
   Color backColor = Color.fromARGB(255, 231, 236, 251);
   MaterialColor primeColor = MaterialColor(0xFF3399FF, color);
 
@@ -56,9 +56,9 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
-        primaryColor: Color.fromARGB(255, 190, 168, 189),
+        primaryColor: Color.fromARGB(255, 217, 165, 181),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
-        scaffoldBackgroundColor: Color.fromARGB(255, 199, 202, 222),
+        scaffoldBackgroundColor: Color.fromARGB(255, 130, 126, 172),
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
       //home: LoginPage(),
       routes: {
         '/': (context) => _defaultHome,
-        '/home': (context) => MainPage(),
+        '/home': (context) => BottomBar(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => RegistrationPage(),
       },

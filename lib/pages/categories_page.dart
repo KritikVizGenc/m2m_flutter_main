@@ -5,16 +5,10 @@ import '../common/drawer.dart';
 
 class CategoriesPage extends StatefulWidget {
   @override
-    _CategoriesPageState createState() => _CategoriesPageState();
+  _CategoriesPageState createState() => _CategoriesPageState();
 }
 
-
 class _CategoriesPageState extends State<CategoriesPage> {
-
-
-
-
-
   @override
   Widget build(BuildContext context) {
     List<String> categoryList = <String>[];
@@ -30,11 +24,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
     categoryList.add("LINUX");
     categoryList.add("DATABASE MANAGEMENT");
 
-    
-
     return Scaffold(
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      // bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text("Categories"),
         centerTitle: false,
@@ -43,7 +35,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
         child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 65,
-
                 crossAxisSpacing: 5,
                 mainAxisSpacing: 0),
             itemCount: categoryList.length,
@@ -52,7 +43,6 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 child: _buildChip(categoryList[index], Colors.purple),
               );
             }),
-
       ),
     );
   }
@@ -72,6 +62,4 @@ class _CategoriesPageState extends State<CategoriesPage> {
       padding: EdgeInsets.all(8.0),
     );
   }
-
 }
-
