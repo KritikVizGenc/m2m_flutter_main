@@ -212,10 +212,6 @@ class MeetPagesState extends State<MeetPages> {
               ],
             ),
           ),
-          MyButton(
-              label: "+ Add Task",
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddTaskPage())))
         ],
       ),
     );

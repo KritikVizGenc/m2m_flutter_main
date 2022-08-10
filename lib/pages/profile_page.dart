@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:m2m_flutter_main/model/commentRequest_model.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
 import 'package:m2m_flutter_main/model/user.dart';
@@ -86,6 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    int? ownerID;
     final user = UserPreferences.myUser;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
@@ -133,6 +135,7 @@ class _ProfilePageState extends State<ProfilePage> {
               future: futureGetByIdModel,
               builder: (context, i) {
                 if (i.hasData) {
+                  ownerID = i.data?[0].id;
                   Uint8List _bytes;
                   _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
                   return ListView(
@@ -202,7 +205,9 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
           ),
+
           // CREATE COMMENT APISI YAZILMALI!!
+
           Container(
             padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
             child: TextFormField(
@@ -226,7 +231,13 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  onPressed: () {}))
+                  onPressed: () async {
+                    int? currentUserId = await SharedService.loginDetails();
+                    CommentRequestModel model = CommentRequestModel(
+                        commentContent: commentController.text,
+                        ownerId: ownerID!,
+                        authorId: currentUserId!);
+                  }))
         ]),
       ),
     );

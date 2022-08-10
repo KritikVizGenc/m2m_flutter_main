@@ -18,6 +18,8 @@ import '../model/createMeetResponse_model.dart';
 import '../model/getMeeting_model.dart';
 import '../model/getMyMentees_model.dart';
 import '../model/update_user_response_model.dart';
+import '../model/commentRequest_model.dart';
+import '../model/commentResponse_model.dart';
 
 class APIService {
   static var client = http.Client();
@@ -130,5 +132,16 @@ class APIService {
     var response = await client.put(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
     return createMeetingRequestModelFromJson(response.body);
+  }
+
+  static Future<CommentRequestModel> createComment(
+      int userId, CreateMeetingRequestModel model) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+    Uri url = Uri.http(Config.apiURL, '${Config.commentAddAPI}');
+    var response = await client.put(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    return commentRequestModelFromJson(response.body);
   }
 }
