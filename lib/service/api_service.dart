@@ -106,7 +106,7 @@ class APIService {
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
     };
-    Uri url = Uri.http(Config.apiURL, '${Config.connectAPI}$userId');
+    Uri url = Uri.http(Config.apiURL, '${Config.updateUserAPI}$userId');
     var response = await client.put(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
     return updateUserResponseModelFromJson(response.body);

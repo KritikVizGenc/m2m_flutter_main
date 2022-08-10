@@ -185,7 +185,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           "Main Page",

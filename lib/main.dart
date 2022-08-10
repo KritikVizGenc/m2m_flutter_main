@@ -11,9 +11,7 @@ import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
 
-Widget _defaultHome = EditProfilePage(
-  nereyeId: 2,
-);
+Widget _defaultHome = LoginPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
