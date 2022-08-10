@@ -48,7 +48,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         backgroundColor: Color.fromARGB(255, 231, 236, 251),
         appBar: AppBar(
           title: Text(
-            "Edit",
+            "Profile Edit",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
           elevation: 0.5,
@@ -121,6 +121,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
             Container(
               child: TextFormField(
+                minLines: 3,
+                maxLines: 15,
+                maxLength: 1000,
                 controller: aboutMeController,
                 decoration: ThemeHelper().textInputDecoration('About Me!'),
               ),
@@ -133,14 +136,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
               child: TextFormField(
                 controller: cityController,
                 decoration: ThemeHelper()
-                    .textInputDecoration('First Name', 'Enter your first name'),
+                    .textInputDecoration('Your City', 'Enter Your City'),
               ),
+            ),
+            const SizedBox(
+              height: 24,
             ),
             Container(
               child: TextFormField(
                 controller: workController,
                 decoration: ThemeHelper()
-                    .textInputDecoration('First Name', 'Enter your first name'),
+                    .textInputDecoration('Your Works!', 'Enter Your Works'),
               ),
             ),
 
@@ -176,7 +182,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     avatar: avatarController.text);
                             APIService.updateUser(2, model).then(
                               (response) => {
-                                if (response.message != null)
+                                if (response.message == "updated")
                                   {
                                     Navigator.push(
                                         context,

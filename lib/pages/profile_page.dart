@@ -8,6 +8,7 @@ import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
+import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
 import '../common/Bottom_Bar.dart';
@@ -198,8 +199,10 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
           ),
+         // CREATE COMMENT APISI YAZILMALI!!
           Container(
             child: TextFormField(
+             
               maxLines: 4,
               maxLength: 255,
               controller: commentController,
