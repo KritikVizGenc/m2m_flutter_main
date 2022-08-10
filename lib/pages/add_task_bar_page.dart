@@ -29,7 +29,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     return Scaffold(
          backgroundColor: Colors.white,
  drawer: DrawerHelp(),
-        bottomNavigationBar: BottomBar(),
+        //bottomNavigationBar: BottomBar(),
        
        appBar: AppBar(
           title: Text(

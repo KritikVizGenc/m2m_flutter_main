@@ -6,6 +6,7 @@ import 'package:m2m_flutter_main/pages/feedback.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
+import 'package:m2m_flutter_main/pages/settings_page.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
 import '../pages/categories_page.dart';
 import '../pages/login_page.dart';
@@ -215,11 +216,8 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          SplashScreen(title: "Splash Screen")));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SettingPage()));
             },
           ),
           ListTile(

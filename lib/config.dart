@@ -7,5 +7,5 @@ class Config {
   static const String getMyMentors = "/api/myMentors/";
   static const String menteesAPI = "/api/getByRole/mentee";
   static const String mentorsAPI = "/api/getByRole/mentor";
-  static const String getAllTags = "/api/getAllTags";
+  static const String getAllTags = "/api/getAllTag";
 }

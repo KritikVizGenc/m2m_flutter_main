@@ -19,7 +19,9 @@ void main() async {
 
   bool result = await SharedService.isLoggedIn();
   if (result) {
-    _defaultHome = BottomBar();
+    _defaultHome = BottomBar(
+      indexId: 0,
+    );
   }
 
   runApp(MyApp());
@@ -66,7 +68,9 @@ class MyApp extends StatelessWidget {
       //home: LoginPage(),
       routes: {
         '/': (context) => _defaultHome,
-        '/home': (context) => BottomBar(),
+        '/home': (context) => BottomBar(
+              indexId: 0,
+            ),
         '/login': (context) => const LoginPage(),
         '/register': (context) => RegistrationPage(),
       },

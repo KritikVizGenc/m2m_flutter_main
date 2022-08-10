@@ -5,11 +5,20 @@ import 'package:m2m_flutter_main/global.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 
 class BottomBar extends StatefulWidget {
+  final int indexId;
+
+  const BottomBar({Key? key, required this.indexId}) : super(key: key);
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
+  @override
+  void initState() {
+    Variable.bottomBarIndex = widget.indexId;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

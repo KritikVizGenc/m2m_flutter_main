@@ -101,8 +101,7 @@ class _MentorPageState extends State<MentorPage> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BottomBar()));
+            Navigator.pop(context);
           },
         ),
         elevation: 0.5,

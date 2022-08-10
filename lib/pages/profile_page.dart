@@ -61,7 +61,7 @@ class _ProfilePageState extends State<ProfilePage> {
     double _headerHeight = 150;
     final user = UserPreferences.myUser;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 231, 236, 251),
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
       //appBar: buildAppBar(context),
       drawer: DrawerHelp(),
       //bottomNavigationBar: BottomBar(),

@@ -62,12 +62,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfilePage(
-                              nereyeId: 37,
-                            )));
+                Navigator.pop(context);
               },
             )
           ],
@@ -140,12 +135,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         ),
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProfilePage(
-                                      nereyeId: 3,
-                                    )));
+                        Navigator.pop(context);
                       }),
                 ),
               ],

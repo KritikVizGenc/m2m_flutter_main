@@ -45,8 +45,7 @@ class MeetPagesState extends State<MeetPages> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BottomBar()));
+            Navigator.pop(context);
           },
         ),
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),

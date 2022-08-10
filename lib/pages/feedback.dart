@@ -29,8 +29,7 @@ class _FeedBackState extends State<FeedBack> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BottomBar()));
+            Navigator.pop(context);
           },
         ),
         flexibleSpace: Container(
@@ -125,10 +124,7 @@ class _FeedBackState extends State<FeedBack> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BottomBar()));
+                          Navigator.pop(context);
                         }),
                   ),
                 ],
