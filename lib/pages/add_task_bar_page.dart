@@ -40,7 +40,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     'post 3',
     'post 4',
   ];
-  String? selectedItem = "post1";
+  String? selectedItem = "Mentee Seçiniz.";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,39 +104,34 @@ class _AddTaskPageState extends State<AddTaskPage> {
                         ),
                         border: Border.all(color: MyThemes.primaryColor),
                       ),
-                      // child: FutureBuilder<List<GetMyMenteesModel>?>(
-                      //     future: futureGetMyMentesModel,
-                      //     builder: (context, i) {
-                      //      return ListView.builder(
+                      child: FutureBuilder<List<GetMyMenteesModel>?>(
+                          future: futureGetMyMentesModel,
+                          builder: (context, i) {
+                            return ListView.builder(
+                                itemCount: i.data?.length,
+                                itemBuilder: (context, index) {
+                                  //var containers=  tasks.map((tasks)=> Container(
+                                  // height: 90,
+                                  // width: 50,
+                                  // margin: EdgeInsets.all(5),
+                                  //   color: MyThemes.primaryColor,child: Text(tasks))).toList()
+                                  //   child: Padding( padding:EdgeInsets.all(8),
+                                  return DropdownButtonFormField<String>(
+                                      isExpanded: true,
+                                      dropdownColor: Colors.white,
 
-                      //     itemCount: i.data?.length,
-                      //     itemBuilder: (context, index) {
-                      //       //var containers=  tasks.map((tasks)=> Container(
-                      //       // height: 90,
-                      //       // width: 50,
-                      //       // margin: EdgeInsets.all(5),
-                      //       //   color: MyThemes.primaryColor,child: Text(tasks))).toList()
-                      //       //   child: Padding( padding:EdgeInsets.all(8),
-                      //       return  DropdownButtonFormField<String>(
-                      //           isExpanded: true,
-                      //           dropdownColor: Colors.white,
-
-                      //           // underline: Container(),
-                      //           value: selectedItem,
-                      //           onChanged: (String? newValue) {
-                      //             setState(() {
-                      //               selectedItem = newValue!;
-                      //             });
-                      //           },
-                      //           items: i.data?[index]<DropdownMenuItem<String>>(
-                      //             (String value) {
-                      //               return DropdownMenuItem<String>(
-                      //                 value: value,
-                      //                 child: Text(value),
-                      //               );
-                      //             },
-                      //           ).toList());
-                      //     }))
+                                      // underline: Container(),
+                                      value: selectedItem,
+                                      onChanged: (String? newValue) {
+                                        setState(() {
+                                          selectedItem = newValue!;
+                                        });
+                                      },
+                                      items: i.data?[index].myMenteesName<
+                                              List<GetMyMenteesModel>?>
+                                          .toList());
+                                });
+                          }),
                     ),
                   ),
                   MyInputField(

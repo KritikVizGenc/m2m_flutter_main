@@ -35,6 +35,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  int? ownerID;
   final commentController = TextEditingController();
   List<GetByIdModel> productsResponseFromJson(String str) =>
       List<GetByIdModel>.from(
@@ -87,7 +88,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    int? ownerID;
     final user = UserPreferences.myUser;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
@@ -117,12 +117,13 @@ class _ProfilePageState extends State<ProfilePage> {
               Icons.edit,
               color: Colors.white,
             ),
-            onPressed: () {
+            onPressed: () async {
+              int? currentUserId = await SharedService.loginDetails();
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => EditProfilePage(
-                            nereyeId: 2,
+                            nereyeId: currentUserId,
                           )));
             },
           )
@@ -205,9 +206,6 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
           ),
-
-          // CREATE COMMENT APISI YAZILMALI!!
-
           Container(
             padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
             child: TextFormField(
