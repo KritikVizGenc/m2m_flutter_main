@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
       //appBar: buildAppBar(context),
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+     // bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           "Profile Page",

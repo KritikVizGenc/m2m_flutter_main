@@ -36,7 +36,7 @@ class MeetPagesState extends State<MeetPages> {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: DrawerHelp(),
-        bottomNavigationBar: BottomBar(),
+        //bottomNavigationBar: BottomBar(),
        
        appBar: AppBar(
           title: Text(

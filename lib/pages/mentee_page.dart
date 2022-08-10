@@ -141,7 +141,7 @@ class _MenteePageState extends State<MenteePage> {
           // ],
         ),
         drawer: DrawerHelp(),
-        bottomNavigationBar: BottomBar(),
+       // bottomNavigationBar: BottomBar(),
       );
    // );
           // By default, show a loading spinner.

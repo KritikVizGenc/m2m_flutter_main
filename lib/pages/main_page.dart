@@ -43,7 +43,7 @@ class _MainPageState extends State<MainPage> {
     'fav 4',
     'fav 5',
   ];
- 
+
 
   Future<List<GetMyMenteesModel>?> futureMyMentees = APIService.getMyMentees();
   Future<List<GetMyMentorsModel>?> futureMyMentors = APIService.getMyMentors();
@@ -155,9 +155,8 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
-      
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+     // bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           "Main Page",

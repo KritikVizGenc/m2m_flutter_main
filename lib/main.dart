@@ -69,7 +69,7 @@ class MyApp extends StatelessWidget {
       //home: LoginPage(),
       routes: {
         '/': (context) => _defaultHome,
-        '/home': (context) => MainPage(),
+        '/home': (context) => BottomBar(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => RegistrationPage(),
       },

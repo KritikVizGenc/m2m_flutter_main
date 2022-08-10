@@ -39,10 +39,22 @@ class _CategoriesPageState extends State<CategoriesPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text("Categories"),
         centerTitle: false,
+        elevation: 0.5,
+        iconTheme: IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).colorScheme.secondary,
+                  ])),
+        ),
       ),
       body:  FutureBuilder<List<GetAllTagsModel>?>(
         future: futureTagsModel,

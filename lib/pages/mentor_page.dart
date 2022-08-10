@@ -57,7 +57,7 @@ class _MentorPageState extends State<MentorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+     // bottomNavigationBar: BottomBar(),
       body: FutureBuilder<List<GetByRoleModel>>(
         future: futureGetByRoleModel,
         builder: (context, i) {
