@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/pages/video_call_page.dart';
 
 class CategorySelector extends StatefulWidget {
   @override
@@ -11,8 +12,11 @@ class _CategorySelectorState extends State<CategorySelector> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Container(
+      
       height: 90.0,
+   
       color: Color.fromARGB(255, 243, 178, 239),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -22,6 +26,7 @@ class _CategorySelectorState extends State<CategorySelector> {
             onTap: () {
               setState(() {
                 selectedIndex = index;
+              
               });
             },
             child: Padding(
@@ -42,6 +47,10 @@ class _CategorySelectorState extends State<CategorySelector> {
           );
         },
       ),
-    );
+     
+    ) ;
+    
+  
+   
   }
 }

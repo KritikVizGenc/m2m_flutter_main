@@ -20,7 +20,7 @@ class AddTaskPage extends StatefulWidget {
 class _AddTaskPageState extends State<AddTaskPage> {
   DateTime _selectedDate = DateTime.now();
   String _endTime ="9:30 PM";
-  String _startTime =DateFormat("hh:mm ").format(DateTime.now()).toString();
+  String _startTime =DateFormat("hh:mm a").format(DateTime.now()).toString();
   int _selectedColor=0;
    List<String> items = [
     'post 1',
@@ -352,8 +352,11 @@ _getDateFromUser() async {
 }
 _getTimeFromUSer({required bool isStartTime}) async {
  
- var pickedTime= await _showTimePicker();
- String _formatedTime =pickedTime.format(context);
+ var pickedTime= await _showTimePicker(
+
+   
+ );
+ String _formatedTime =pickedTime.parse;
 
 
 
@@ -375,11 +378,15 @@ setState(() {
 
 _showTimePicker(){
  return showTimePicker(
+
+  
   initialEntryMode: TimePickerEntryMode.input,
   context: context,
    initialTime: TimeOfDay(
     hour: int.parse(_startTime.split(":")[0]),
     minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
+    
+   
     ),
     
     

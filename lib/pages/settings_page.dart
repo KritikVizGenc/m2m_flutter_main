@@ -185,19 +185,19 @@ class _SettingPageState extends State<SettingPage> {
             //     ),
             //   ),
             // ),
-            // Positioned(
-            //   bottom: 00,
-            //   left: 00,
-            //   child: IconButton(
-            //     icon: Icon(
-            //       FontAwesomeIcons.powerOff,
-            //       color: Colors.white,
-            //     ),
-            //     onPressed: () {
-            //       //log out
-            //     },
-           //   ),
-           // )
+            Positioned(
+              bottom: 00,
+              left: 00,
+              child: IconButton(
+                icon: Icon(
+                  FontAwesomeIcons.powerOff,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  //log out
+                },
+             ),
+           )
           ],
         ),
       ),
