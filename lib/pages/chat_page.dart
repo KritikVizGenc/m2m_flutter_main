@@ -13,22 +13,40 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    bottomNavigationBar: BottomAppBar(),
-    drawer: DrawerHelp(),
+      // bottomNavigationBar: BottomAppBar(),
+      drawer: DrawerHelp(),
       appBar: AppBar(
-          title: Text(
-            "CHATS",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
+        title: Text(
+          "CHATS",
+          style: TextStyle(
+              color: Color.fromARGB(255, 62, 35, 60),
+              fontWeight: FontWeight.bold),
+        ),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
       ),
-      backgroundColor: Color.fromARGB(255, 243, 178, 239) ,
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
       body: Column(
         children: <Widget>[
           CategorySelector(),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color:  Colors.white,
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                      Theme.of(context).primaryColor,
+                      Theme.of(context).colorScheme.secondary,
+                    ]),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
                   topRight: Radius.circular(30.0),

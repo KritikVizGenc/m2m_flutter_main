@@ -22,12 +22,12 @@ class MeetPagesState extends State<MeetPages> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      drawer: DrawerHelp(),
+      //drawer: DrawerHelp(),
       // bottomNavigationBar: BottomBar(),
 
       appBar: AppBar(
         title: Text(
-          "EVENT Page",
+          "Event Page",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,
@@ -38,9 +38,16 @@ class MeetPagesState extends State<MeetPages> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                //Theme.of(context).primaryColor,
-                //Theme.of(context).colorScheme.secondary,
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
               ])),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => BottomBar()));
+          },
         ),
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
@@ -75,7 +82,7 @@ class MeetPagesState extends State<MeetPages> {
         height: 100,
         width: 80,
         initialSelectedDate: DateTime.now(),
-        selectionColor: Color.fromARGB(255, 62, 35, 60),
+        selectionColor: Color.fromARGB(255, 145, 104, 143),
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
           textStyle: TextStyle(

@@ -154,6 +154,7 @@ class _MainPageState extends State<MainPage> {
       //Color.fromARGB(255, 241, 236, 244),
       drawer: DrawerHelp(),
       //bottomNavigationBar: BottomBar(),
+      
       appBar: AppBar(
         title: Text(
           "Main Page",

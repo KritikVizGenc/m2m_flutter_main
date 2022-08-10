@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:m2m_flutter_main/model/chat_user_model.dart';
 import 'package:m2m_flutter_main/model/message_model.dart';
 
-
 class ChatScreen extends StatefulWidget {
   final User user;
 
@@ -28,7 +27,8 @@ class _ChatScreenState extends State<ChatScreen> {
       padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 15.0),
       width: MediaQuery.of(context).size.width * 0.75,
       decoration: BoxDecoration(
-        color: isMe ? Theme.of(context).colorScheme.secondary : Color(0xFFFFEFEE),
+        color:
+            isMe ? Theme.of(context).colorScheme.secondary : Color(0xFFFFEFEE),
         borderRadius: isMe
             ? BorderRadius.only(
                 topLeft: Radius.circular(15.0),
@@ -45,7 +45,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Text(
             message.time,
             style: TextStyle(
-              color: Colors.blueGrey,
+              color: Color.fromARGB(255, 43, 52, 57),
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
             ),
@@ -54,7 +54,7 @@ class _ChatScreenState extends State<ChatScreen> {
           Text(
             message.text,
             style: TextStyle(
-              color: Colors.blueGrey,
+              color: Color.fromARGB(255, 37, 41, 43),
               fontSize: 16.0,
               fontWeight: FontWeight.w600,
             ),
@@ -73,9 +73,7 @@ class _ChatScreenState extends State<ChatScreen> {
               ? Icon(Icons.favorite)
               : Icon(Icons.favorite_border),
           iconSize: 30.0,
-          color: message.isLiked
-              ? Colors.red[900]
-              : Colors.blueGrey,
+          color: message.isLiked ? Colors.red[900] : Colors.blueGrey,
           onPressed: () {},
         )
       ],
@@ -92,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.photo),
             iconSize: 25.0,
-            color: Colors.pink[100],
+            color: Color.fromARGB(255, 178, 114, 137),
             onPressed: () {},
           ),
           Expanded(
@@ -118,7 +116,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.pink[50],
+      backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: Text(
           widget.user.name,
@@ -144,7 +142,13 @@ class _ChatScreenState extends State<ChatScreen> {
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        Theme.of(context).primaryColor.withOpacity(0.8),
+                        Theme.of(context).colorScheme.secondary.withOpacity(0.5)
+                      ]),
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),

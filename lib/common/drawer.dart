@@ -99,7 +99,7 @@ class _DrawerState extends State<DrawerHelp> {
               ),
             ),
           ),
-          ListTile(
+          /* ListTile(
             leading: Icon(
               Icons.home,
               size: _drawerIconSize,
@@ -114,7 +114,7 @@ class _DrawerState extends State<DrawerHelp> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => BottomBar()));
             },
-          ),
+          ),*/
           ListTile(
             leading: Icon(
               Icons.category,
@@ -130,10 +130,6 @@ class _DrawerState extends State<DrawerHelp> {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => CategoriesPage()));
             },
-          ),
-          Divider(
-            color: Theme.of(context).primaryColor,
-            height: 1,
           ),
           ListTile(
             leading: Icon(
@@ -185,9 +181,27 @@ class _DrawerState extends State<DrawerHelp> {
               );
             },
           ),
+          ListTile(
+            leading: Icon(Icons.favorite,
+                size: _drawerIconSize,
+                color: Theme.of(context).colorScheme.secondary),
+            title: Text(
+              'Favorite',
+              style: TextStyle(
+                  fontSize: _drawerFontSize,
+                  color: Theme.of(context).colorScheme.secondary),
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MentorPage()),
+              );
+            },
+          ),
           Divider(
-            color: Theme.of(context).primaryColor,
-            height: 1,
+            color: Theme.of(context).secondaryHeaderColor,
+            height: 2,
+            thickness: 3,
           ),
           ListTile(
             leading: Icon(
@@ -242,11 +256,8 @@ class _DrawerState extends State<DrawerHelp> {
               SharedService.logout(context);
             },
           ),
-          SizedBox(
-            height: 20,
-          ),
           Container(
-            height: 200,
+            height: 190,
             decoration: new BoxDecoration(
               image: new DecorationImage(
                 image: AssetImage("assets/image/m2m.png"),

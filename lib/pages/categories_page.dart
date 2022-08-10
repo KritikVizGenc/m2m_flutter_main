@@ -25,11 +25,28 @@ class _CategoriesPageState extends State<CategoriesPage> {
     categoryList.add("DATABASE MANAGEMENT");
 
     return Scaffold(
-      drawer: DrawerHelp(),
+      //drawer: DrawerHelp(),
       // bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text("Categories"),
         centerTitle: false,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => BottomBar()));
+          },
+        ),
       ),
       body: Center(
         child: GridView.builder(
@@ -40,10 +57,14 @@ class _CategoriesPageState extends State<CategoriesPage> {
             itemCount: categoryList.length,
             itemBuilder: (BuildContext ctx, index) {
               return Container(
-                child: _buildChip(categoryList[index], Colors.purple),
+                child: _buildChip(
+                  categoryList[index],
+                  Color.fromARGB(255, 80, 47, 77),
+                ),
               );
             }),
       ),
+      backgroundColor: Color.fromARGB(255, 241, 237, 252),
     );
   }
 

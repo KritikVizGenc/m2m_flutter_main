@@ -14,11 +14,8 @@ class _BottomBarState extends State<BottomBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Variable.sayfalar[Variable.bottomBarIndex],
-
       bottomNavigationBar: bottomBar(),
     );
-
-     
   }
 
   void _onTap(int index) {
@@ -27,12 +24,12 @@ class _BottomBarState extends State<BottomBar> {
       Variable.bottomBarIndex = index;
     });
   }
-  Widget bottomBar(){
+
+  Widget bottomBar() {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-
-          backgroundColor: Color.fromARGB(245, 245, 245, 245),
+          backgroundColor: Color.fromARGB(255, 231, 236, 251),
           icon: Icon(Icons.home),
           label: 'Home',
         ),
@@ -43,26 +40,16 @@ class _BottomBarState extends State<BottomBar> {
           label: 'Profile',
         ),
         BottomNavigationBarItem(
-          icon: Icon(
-            Icons.favorite,
-          ),
-          label: 'Favorite',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.notifications),
-          label: 'Notifications',
-        ),
-        BottomNavigationBarItem(
           icon: Icon(Icons.chat),
           label: 'Chats',
         ),
       ],
       currentIndex: Variable.bottomBarIndex,
-      selectedItemColor: Colors.pink,
-      unselectedItemColor: Colors.grey,
-      backgroundColor: Colors.deepOrange,
+      selectedItemColor: Color.fromARGB(255, 180, 113, 176),
+      unselectedItemColor: Color.fromARGB(255, 100, 98, 98),
+      // backgroundColor: Color.fromARGB(255, 255, 169, 143),
       onTap: _onTap,
-      elevation: 15,
+      elevation: 17,
     );
   }
 }

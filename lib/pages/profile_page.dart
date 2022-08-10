@@ -4,6 +4,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
 import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
+import 'package:m2m_flutter_main/pages/widgets/header_profile_widget.dart';
+import 'package:m2m_flutter_main/pages/widgets/header_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/square.dart';
@@ -56,6 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    double _headerHeight = 150;
     final user = UserPreferences.myUser;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
@@ -75,8 +78,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Theme.of(context).primaryColor,
-                Theme.of(context).colorScheme.secondary,
+                Theme.of(context).primaryColor.withOpacity(0.4),
+                Theme.of(context).colorScheme.secondary.withOpacity(0.5),
               ])),
         ),
         actions: <Widget>[
@@ -96,6 +99,11 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: [
             Container(
+              height: _headerHeight,
+              child: HeaderProfileWidget(_headerHeight, true,
+                  Icons.login_rounded), //let's create a common header widget
+            ),
+            Container(
               child: FutureBuilder<List<GetByIdModel>>(
                 future: futureGetByIdModel,
                 builder: (context, i) {
@@ -107,7 +115,6 @@ class _ProfilePageState extends State<ProfilePage> {
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       children: [
-                        const SizedBox(height: 24),
                         ProfileWidget(
                           imagePath: _bytes,
                           onClicked: () {
@@ -115,7 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
                                 builder: (context) => EditProfilePage()));
                           },
                         ),
-                        const SizedBox(height: 24),
                         buildName('${i.data?[0].name}', '${i.data?[0].surname}',
                             '${i.data?[0].work}', '${i.data?[0].city}'),
                         const SizedBox(height: 24),

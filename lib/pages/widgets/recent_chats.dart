@@ -8,7 +8,14 @@ class RecentChats extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ]),
+          //color: Colors.white,
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(30.0),
             topRight: Radius.circular(30.0),
@@ -59,7 +66,10 @@ class RecentChats extends StatelessWidget {
                               Text(
                                 chat.sender.name,
                                 style: TextStyle(
-                                  color: Colors.grey,
+                                  backgroundColor: Theme.of(context)
+                                      .secondaryHeaderColor
+                                      .withOpacity(0.6),
+                                  color: Theme.of(context).secondaryHeaderColor,
                                   fontSize: 15.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -86,7 +96,7 @@ class RecentChats extends StatelessWidget {
                           Text(
                             chat.time,
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: Color.fromARGB(255, 134, 134, 134),
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -97,7 +107,15 @@ class RecentChats extends StatelessWidget {
                                   width: 40.0,
                                   height: 20.0,
                                   decoration: BoxDecoration(
-                                    color: Colors.red[100],
+                                    gradient: LinearGradient(
+                                        begin: Alignment.topLeft,
+                                        end: Alignment.bottomRight,
+                                        colors: <Color>[
+                                          Theme.of(context).primaryColor,
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .secondary,
+                                        ]),
                                     borderRadius: BorderRadius.circular(30.0),
                                   ),
                                   alignment: Alignment.center,

@@ -32,20 +32,7 @@ class MyCircle extends StatelessWidget {
           
           color: Color.fromARGB(255, 133, 97, 109),
         ),
-        // child: ElevatedButton(
-        //   style: ElevatedButton.styleFrom(
-        //     primary: Theme.of(context).colorScheme.secondary,
-        //     minimumSize: Size(MediaQuery.of(context).size.width * 0.2,
-        //         MediaQuery.of(context).size.height * 0.2),
-        //     //elevation: 3,
-        //   ),
-          // child: Center(
-            
-          //  child: Text(
-          //     child,
-          //     style: TextStyle(fontSize: 40.0)
-          //   ),
-          // ),
+        
            
         ),
       );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/pages/chat_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
 import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentee_page.dart';
@@ -11,9 +12,8 @@ class Variable {
   static List<Widget> sayfalar = [
     MainPage(),
     ProfilePage(nereyeId: 3),
-    MeetPages(),
-    MenteePage(),
-    MentorPage(),
+    //MeetPages(),
+    //Notifications(),
+    ChatPage(),
   ];
-  
 }

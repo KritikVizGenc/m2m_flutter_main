@@ -12,7 +12,7 @@ import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
 
-Widget _defaultHome = const LoginPage();
+Widget _defaultHome = LoginPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
     900: Color.fromARGB(255, 62, 35, 60), //100%
   };
   Color _primaryColor = Color.fromARGB(255, 217, 165, 181);
-  Color accentColor = Color.fromARGB(255, 130, 126, 172);
+  Color accentColor = Color.fromARGB(255, 126, 122, 169);
   Color backColor = Color.fromARGB(255, 231, 236, 251);
   MaterialColor primeColor = MaterialColor(0xFF3399FF, color);
 
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         appBarTheme: AppBarTheme(backgroundColor: _primaryColor),
         primaryColor: Color.fromARGB(255, 217, 165, 181),
         colorScheme: ColorScheme.fromSwatch().copyWith(secondary: accentColor),
-        scaffoldBackgroundColor: Color.fromARGB(255, 130, 126, 172),
+        scaffoldBackgroundColor: Color.fromARGB(255, 121, 117, 163),
         primaryColorDark: Color.fromARGB(255, 0, 0, 0),
         primarySwatch: primeColor,
       ),
