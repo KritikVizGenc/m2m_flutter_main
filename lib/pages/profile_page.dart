@@ -9,6 +9,7 @@ import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
+import 'package:m2m_flutter_main/service/shared_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
 import '../common/Bottom_Bar.dart';
@@ -90,7 +91,7 @@ class _ProfilePageState extends State<ProfilePage> {
       backgroundColor: Color.fromARGB(255, 231, 236, 251),
       //appBar: buildAppBar(context),
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      // bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           "Profile Page",
@@ -142,10 +143,12 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: 24),
                       ProfileWidget(
                         imagePath: _bytes,
-                        onClicked: () {
+                        onClicked: () async {
+                          int? currentUserId =
+                              await SharedService.loginDetails();
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => EditProfilePage(
-                                    nereyeId: 2,
+                                    nereyeId: currentUserId,
                                   )));
                         },
                       ),

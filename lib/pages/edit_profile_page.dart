@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ import 'package:snippet_coder_utils/FormHelper.dart';
 import '../service/api_service.dart';
 import '../common/theme_helper.dart';
 import '../model/user.dart';
+import 'dart:typed_data';
 
 class EditProfilePage extends StatefulWidget {
   final int? nereyeId;
@@ -71,12 +73,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 Icons.done,
                 color: Colors.white,
               ),
-              onPressed: () {
+              onPressed: () async {
+                int? currentUserId = await SharedService.loginDetails();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ProfilePage(
-                              nereyeId: 2,
+                              nereyeId: currentUserId,
                             )));
               },
             )
@@ -90,12 +93,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
             const SizedBox(
               height: 24,
             ),
-            // ProfileWidget(
-
-            //   imagePath: user.imagePath,
-            //   isEdit: true,
-            //   onClicked: () => pickImage(ImageSource.gallery),
-            // ),
+            ProfileWidget(
+              imagePath: Base64Decoder().convert('$avatarController'),
+              isEdit: true,
+              onClicked: () => pickImage(ImageSource.gallery),
+            ),
             const SizedBox(
               height: 24,
             ),
@@ -106,7 +108,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     .textInputDecoration('Name', 'Enter Your Name'),
               ),
             ),
-
             const SizedBox(
               height: 24,
             ),
@@ -117,7 +118,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     .textInputDecoration(' Surname', 'Enter Your Surname'),
               ),
             ),
-
             const SizedBox(
               height: 24,
             ),
@@ -130,7 +130,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 decoration: ThemeHelper().textInputDecoration('About Me!'),
               ),
             ),
-
             const SizedBox(
               height: 24,
             ),
@@ -151,7 +150,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     .textInputDecoration('Your Works!', 'Enter Your Works'),
               ),
             ),
-
             Container(
               margin: EdgeInsets.only(
                 top: 16,

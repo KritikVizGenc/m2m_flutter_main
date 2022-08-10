@@ -10,8 +10,9 @@ import 'pages/login_page.dart';
 import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
+import 'pages/add_task_bar_page.dart';
 
-Widget _defaultHome = LoginPage();
+Widget _defaultHome = const AddTaskPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
