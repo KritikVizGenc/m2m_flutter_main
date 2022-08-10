@@ -11,9 +11,10 @@ class Variable {
   static int bottomBarIndex = 0;
   static List<Widget> sayfalar = [
     MainPage(),
-    ProfilePage(nereyeId: 3),
+    ProfilePage(nereyeId: Variable.nereyeId),
     //MeetPages(),
     //Notifications(),
     ChatPage(),
   ];
+  static int? nereyeId;
 }

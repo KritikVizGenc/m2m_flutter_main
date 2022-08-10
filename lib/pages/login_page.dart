@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:m2m_flutter_main/global.dart';
 import 'package:m2m_flutter_main/model/login_request_model.dart';
 import 'package:m2m_flutter_main/model/login_response_model.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
@@ -158,31 +159,32 @@ class _LoginPageState extends State<LoginPage> {
                                               password:
                                                   passwordController.text);
 
-                                      APIService.login(model)
-                                          .then((response) => {
-                                                if (response.userWithEmail !=
-                                                    null)
-                                                  {
-                                                    Navigator
-                                                        .pushNamedAndRemoveUntil(
-                                                      context,
-                                                      '/home',
-                                                      (route) => false,
-                                                    )
-                                                  }
-                                                else
-                                                  {
-                                                    //Hata mesajı gösterilecek
-                                                    FormHelper
-                                                        .showSimpleAlertDialog(
-                                                            context,
-                                                            "Error",
-                                                            response.message!,
-                                                            "OK", () {
-                                                      Navigator.pop(context);
-                                                    })
-                                                  }
-                                              });
+                                      APIService.login(model).then((response) =>
+                                          {
+                                            if (response.userWithEmail != null)
+                                              {
+                                                Variable.nereyeId =
+                                                    response.userWithEmail!.id,
+                                                Navigator
+                                                    .pushNamedAndRemoveUntil(
+                                                  context,
+                                                  '/home',
+                                                  (route) => false,
+                                                )
+                                              }
+                                            else
+                                              {
+                                                //Hata mesajı gösterilecek
+                                                FormHelper
+                                                    .showSimpleAlertDialog(
+                                                        context,
+                                                        "Error",
+                                                        response.message!,
+                                                        "OK", () {
+                                                  Navigator.pop(context);
+                                                })
+                                              }
+                                          });
                                     }
                                     // if (_formKey.currentState!.validate()) {
                                     //   Navigator.of(context).pushAndRemoveUntil(

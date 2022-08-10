@@ -81,11 +81,29 @@ class _MainPageState extends State<MainPage> {
       margin: const EdgeInsets.all(0),
       padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: Color.fromARGB(255, 241, 236, 244),
-            width: 4,
-          )),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: [0.0, 1.0],
+          colors: [
+            Color.fromARGB(233, 255, 255, 255),
+            Color.fromARGB(255, 234, 226, 236),
+          ],
+        ),
+        border: Border.all(
+          color: Color.fromARGB(255, 231, 236, 251),
+          width: 4,
+        ),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 4,
+            blurRadius: 5,
+            offset: Offset(1, 5), // changes position of shadow
+          ),
+        ],
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -154,7 +172,7 @@ class _MainPageState extends State<MainPage> {
       //Color.fromARGB(255, 241, 236, 244),
       drawer: DrawerHelp(),
       //bottomNavigationBar: BottomBar(),
-      
+
       appBar: AppBar(
         title: Text(
           "Main Page",

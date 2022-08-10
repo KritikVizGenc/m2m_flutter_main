@@ -83,16 +83,17 @@ class _ProfilePageState extends State<ProfilePage> {
               ])),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.edit,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => EditProfilePage()));
-            },
-          )
+          if (widget.nereyeId == 3)
+            IconButton(
+              icon: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => EditProfilePage()));
+              },
+            )
         ],
       ),
       body: SingleChildScrollView(
