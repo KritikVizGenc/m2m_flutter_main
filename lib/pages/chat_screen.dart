@@ -33,8 +33,12 @@ class _ChatScreenState extends State<ChatScreen> {
             ? BorderRadius.only(
                 topLeft: Radius.circular(15.0),
                 bottomLeft: Radius.circular(15.0),
+                topRight: Radius.circular(15.0),
+                bottomRight: Radius.circular(15.0),
               )
             : BorderRadius.only(
+                topLeft: Radius.circular(15.0),
+                bottomLeft: Radius.circular(15.0),
                 topRight: Radius.circular(15.0),
                 bottomRight: Radius.circular(15.0),
               ),
@@ -90,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: Icon(Icons.photo),
             iconSize: 25.0,
-            color: Color.fromARGB(255, 178, 114, 137),
+            color: Color.fromARGB(255, 141, 89, 108),
             onPressed: () {},
           ),
           Expanded(
@@ -150,8 +154,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         Theme.of(context).colorScheme.secondary.withOpacity(0.5)
                       ]),
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0),
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(0.0),
                   ),
                 ),
                 child: ClipRRect(

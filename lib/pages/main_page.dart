@@ -277,6 +277,7 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -348,7 +349,7 @@ class _MainPageState extends State<MainPage> {
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              Container(
+              /* Container(
                 padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
                 child: TextButton(
                   child: Text(
@@ -365,7 +366,7 @@ class _MainPageState extends State<MainPage> {
                             builder: (context) => CategoriesPage()));
                   },
                 ),
-              ),
+              ),*/
             ],
           ),
           // Container(
@@ -398,7 +399,9 @@ class _MainPageState extends State<MainPage> {
                           return Container(
                             padding: const EdgeInsets.only(right: 10, left: 20),
                             child: _buildChip(
-                                '${i.data?[index].tagName}', Colors.purple),
+                              '${i.data?[index].tagName}',
+                              Color.fromARGB(255, 189, 161, 193),
+                            ),
                           );
                         });
                   } else if (i.hasError) {

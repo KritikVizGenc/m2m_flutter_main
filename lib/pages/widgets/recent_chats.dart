@@ -17,8 +17,8 @@ class RecentChats extends StatelessWidget {
               ]),
           //color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
+            topLeft: Radius.circular(40.0),
+            topRight: Radius.circular(40.0),
           ),
         ),
         child: ClipRRect(
@@ -40,14 +40,19 @@ class RecentChats extends StatelessWidget {
                   ),
                 ),
                 child: Container(
-                  margin: EdgeInsets.only(top: 5.0, bottom: 5.0, right: 20.0),
+                  margin: EdgeInsets.only(
+                      top: 15.0, bottom: 0.0, right: 10.0, left: 10),
                   padding:
                       EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                   decoration: BoxDecoration(
-                    color: chat.unread ? Color(0xFFFFEFEE) : Colors.white,
+                    color: chat.unread
+                        ? Color.fromARGB(255, 225, 223, 241)
+                        : Colors.white,
                     borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20.0),
-                      bottomRight: Radius.circular(20.0),
+                      topRight: Radius.circular(30.0),
+                      bottomRight: Radius.circular(30.0),
+                      topLeft: Radius.circular(30.0),
+                      bottomLeft: Radius.circular(30.0),
                     ),
                   ),
                   child: Row(
@@ -57,7 +62,8 @@ class RecentChats extends StatelessWidget {
                         children: <Widget>[
                           CircleAvatar(
                             radius: 35.0,
-                            backgroundImage: AssetImage(chat.sender.imageUrl),
+                            backgroundImage:
+                                AssetImage('assets/image/olivia.jpg'),
                           ),
                           SizedBox(width: 10.0),
                           Column(
@@ -66,11 +72,8 @@ class RecentChats extends StatelessWidget {
                               Text(
                                 chat.sender.name,
                                 style: TextStyle(
-                                  backgroundColor: Theme.of(context)
-                                      .secondaryHeaderColor
-                                      .withOpacity(0.6),
                                   color: Theme.of(context).secondaryHeaderColor,
-                                  fontSize: 15.0,
+                                  fontSize: 19.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -80,7 +83,7 @@ class RecentChats extends StatelessWidget {
                                 child: Text(
                                   chat.text,
                                   style: TextStyle(
-                                    color: Colors.blueGrey,
+                                    color: Color.fromARGB(255, 84, 102, 110),
                                     fontSize: 15.0,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -96,7 +99,7 @@ class RecentChats extends StatelessWidget {
                           Text(
                             chat.time,
                             style: TextStyle(
-                              color: Color.fromARGB(255, 134, 134, 134),
+                              color: Color.fromARGB(255, 151, 148, 148),
                               fontSize: 15.0,
                               fontWeight: FontWeight.bold,
                             ),

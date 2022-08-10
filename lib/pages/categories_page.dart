@@ -67,8 +67,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(6.0),
-                    child:
-                        _buildChip('${i.data?[index].tagName}', Colors.purple),
+                    child: _buildChip('${i.data?[index].tagName}',
+                        Color.fromARGB(255, 189, 161, 193)),
                   ),
                 ),
               ));

@@ -19,7 +19,7 @@ class _ChatPageState extends State<ChatPage> {
         title: Text(
           "CHATS",
           style: TextStyle(
-              color: Color.fromARGB(255, 62, 35, 60),
+              color: Color.fromARGB(255, 255, 255, 255),
               fontWeight: FontWeight.bold),
         ),
         flexibleSpace: Container(

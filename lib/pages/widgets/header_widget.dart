@@ -77,7 +77,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                 gradient: new LinearGradient(
                     colors: [
                       Color.fromARGB(255, 217, 165, 181),
-                      Color.fromARGB(255, 130, 126, 172),
+                      // Color.fromARGB(255, 163, 104, 123),
+                      Color.fromARGB(255, 115, 112, 158),
                     ],
                     begin: const FractionalOffset(0.0, 0.0),
                     end: const FractionalOffset(1.0, 0.0),

@@ -18,11 +18,9 @@ class ProfileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primary;
-    
+
     return Center(
-      
       child: Stack(
-        
         children: [
           buildImage(),
           Positioned(
@@ -39,7 +37,6 @@ class ProfileWidget extends StatelessWidget {
     final image = NetworkImage(imagePath.toString());
 
     return ClipOval(
-      
       child: Material(
         color: Colors.transparent,
         child: Ink.image(

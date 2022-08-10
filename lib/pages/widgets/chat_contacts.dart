@@ -10,34 +10,26 @@ class FavoriteContacts extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 3),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
                   'Favorite Contacts',
                   style: TextStyle(
-                    color: Color.fromARGB(255, 62, 35, 60),
-                    fontSize: 18.0,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    fontSize: 19.0,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.0,
                   ),
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.more_horiz,
-                  ),
-                  iconSize: 30.0,
-                  color: Colors.blueGrey,
-                  onPressed: () {},
                 ),
               ],
             ),
           ),
           Container(
-            height: 120.0,
+            height: 125.0,
             child: ListView.builder(
-              padding: EdgeInsets.only(left: 10.0),
+              padding: EdgeInsets.only(left: 10.0, top: 5),
               scrollDirection: Axis.horizontal,
               itemCount: favorites.length,
               itemBuilder: (BuildContext context, int index) {
@@ -56,15 +48,14 @@ class FavoriteContacts extends StatelessWidget {
                       children: <Widget>[
                         CircleAvatar(
                           radius: 35.0,
-                          backgroundImage:
-                              AssetImage(favorites[index].imageUrl),
+                          backgroundImage: AssetImage('assets/image/greg.jpg'),
                         ),
                         SizedBox(height: 6.0),
                         Text(
                           favorites[index].name,
                           style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 16.0,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 20.0,
                             fontWeight: FontWeight.w600,
                           ),
                         ),

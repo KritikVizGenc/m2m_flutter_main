@@ -138,7 +138,7 @@ class _FeedBackState extends State<FeedBack> {
 
   buildFeedbackForm() {
     return Container(
-      color: Color.fromARGB(255, 235, 227, 227),
+      color: Theme.of(context).secondaryHeaderColor.withOpacity(0.1),
       height: 150,
       child: Stack(
         children: [

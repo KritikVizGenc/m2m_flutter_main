@@ -58,7 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    double _headerHeight = 150;
+    double _headerHeight = 100;
     final user = UserPreferences.myUser;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 241, 237, 252),
