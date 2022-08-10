@@ -10,6 +10,7 @@ import 'package:m2m_flutter_main/model/update_user_request_model.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
+import 'package:m2m_flutter_main/service/shared_service.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
 import 'package:snippet_coder_utils/FormHelper.dart';
 import '../service/api_service.dart';
@@ -90,6 +91,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               height: 24,
             ),
             // ProfileWidget(
+
             //   imagePath: user.imagePath,
             //   isEdit: true,
             //   onClicked: () => pickImage(ImageSource.gallery),
@@ -171,7 +173,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               ),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             UpdateUserRequestModel model =
                                 UpdateUserRequestModel(
                                     aboutMe: aboutMeController.text,
@@ -180,7 +182,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     surname: surnameController.text,
                                     work: workController.text,
                                     avatar: avatarController.text);
-                            APIService.updateUser(2, model).then(
+                            int? currentUserId =
+                                await SharedService.loginDetails();
+                            APIService.updateUser(currentUserId!, model).then(
                               (response) => {
                                 if (response.message == "updated")
                                   {

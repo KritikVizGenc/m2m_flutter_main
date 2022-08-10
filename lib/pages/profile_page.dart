@@ -199,17 +199,31 @@ class _ProfilePageState extends State<ProfilePage> {
               },
             ),
           ),
-         // CREATE COMMENT APISI YAZILMALI!!
+          // CREATE COMMENT APISI YAZILMALI!!
           Container(
+            padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
             child: TextFormField(
-             
-              maxLines: 4,
               maxLength: 255,
               controller: commentController,
               decoration: ThemeHelper().textInputDecoration(
                   'Comment..', 'Enter Your Comment to This Mentor! '),
             ),
-          )
+          ),
+          Container(
+              decoration: ThemeHelper().buttonBoxDecoration(context),
+              child: ElevatedButton(
+                  style: ThemeHelper().buttonStyle(),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                    child: Text(
+                      'Okey!',
+                      style: TextStyle(
+                        fontSize: 30.0,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {}))
         ]),
       ),
     );

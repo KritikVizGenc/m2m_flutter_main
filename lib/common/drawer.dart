@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:m2m_flutter_main/model/message_model.dart';
 import 'package:m2m_flutter_main/pages/categories_page.dart';
 import 'package:m2m_flutter_main/pages/chat_page.dart';
 import 'package:m2m_flutter_main/pages/main_page.dart';
@@ -73,16 +74,18 @@ class _DrawerState extends State<DrawerHelp> {
                     children: [
                       Container(
                         child: TextButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            int? currentUserId =
+                                await SharedService.loginDetails();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ProfilePage(
-                                          nereyeId: 2,
+                                          nereyeId: currentUserId,
                                         )));
                           },
                           child: Text(
-                            '\nName Surname',
+                            "Name Surname",
                             style: TextStyle(
                                 fontSize: 23,
                                 color: Theme.of(context).colorScheme.onPrimary),
