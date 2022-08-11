@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/circle.dart';
 import 'package:m2m_flutter_main/model/getAllTags_model.dart';
+import 'package:m2m_flutter_main/model/getByRole_model.dart';
 import 'package:m2m_flutter_main/model/getMyMentees_model.dart';
 import 'package:m2m_flutter_main/model/getMyMentors_model.dart';
+import 'package:m2m_flutter_main/model/message_model.dart';
 import 'package:m2m_flutter_main/pages/categories_page.dart';
+import 'package:m2m_flutter_main/pages/tag_mentors_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
+import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -31,47 +35,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final List _posts = [
-    'post 1',
-    'post 2 ',
-    'post 3',
-    'post 4',
-  ];
-  final List _stories = [
-    'fav 1',
-    'fav 2 ',
-    'fav 3',
-    'fav 4',
-    'fav 5',
-  ];
+  int? selectedChip;
+  String? selectedChipName;
 
   Future<List<GetMyMenteesModel>?> futureMyMentees = APIService.getMyMentees();
   Future<List<GetMyMentorsModel>?> futureMyMentors = APIService.getMyMentors();
-
-  final url3 = "http://10.0.2.2:5000/api/getAllTag";
-
-  List<GetAllTagsModel> productsResponseFromJson3(String str) =>
-      List<GetAllTagsModel>.from(
-          json.decode(str).map((x) => GetAllTagsModel.fromJson(x)));
-
-  late Future<List<GetAllTagsModel>> futureGetByRoleModel3;
-  Future<List<GetAllTagsModel>> fetchGetByRoleModel3() async {
-    final response = await get(Uri.parse(url3));
-
-    if (response.statusCode == 200) {
-      return productsResponseFromJson3(response.body);
-    } else {
-      throw Exception('Failed to load album');
-    }
-  }
+  Future<List<GetAllTagsModel>?> futureGetTags = APIService.getAllTags();
+  Future<List<GetByRoleModel>?> futureGetTop = APIService.getTop();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    futureGetByRoleModel3 =
-        fetchGetByRoleModel3() as Future<List<GetAllTagsModel>>;
   }
 
   Widget _userCard(
@@ -113,13 +88,14 @@ class _MainPageState extends State<MainPage> {
                   MaterialPageRoute(
                       builder: (context) => ProfilePage(nereyeId: id)));
             },
-            child: CircleAvatar(
-              backgroundColor: Color.fromARGB(255, 62, 35, 60),
-              radius: 43,
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: NetworkImage(imageUrl),
-              ),
+            child: ProfileWidget(
+              imagePath: Base64Decoder().convert(imageUrl),
+              onClicked: () {
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => ProfilePage(
+                //           nereyeId: id,
+                //         )));
+              },
             ),
           ),
           Text(
@@ -142,25 +118,19 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildChip(String label, Color color) {
-    return Transform(
-      transform: new Matrix4.identity()..scale(1.3),
-      child: new Chip(
-        labelPadding: EdgeInsets.all(2.0),
-        label: Container(
-          width: 100,
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Colors.white,
-            ),
+    return Chip(
+      label: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white,
           ),
         ),
-        backgroundColor: color,
-        elevation: 15.0,
-        shadowColor: Colors.grey[60],
-        padding: EdgeInsets.all(8.0),
       ),
+      backgroundColor: color,
+      elevation: 6.0,
+      shadowColor: Colors.grey[60],
     );
   }
 
@@ -168,10 +138,7 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 241, 237, 252),
-      //Color.fromARGB(255, 241, 236, 244),
       drawer: DrawerHelp(),
-      //bottomNavigationBar: BottomBar(),
-
       appBar: AppBar(
         title: Text(
           "Main Page",
@@ -185,9 +152,9 @@ class _MainPageState extends State<MainPage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Theme.of(context).primaryColor,
-                Theme.of(context).colorScheme.secondary,
-              ])),
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).colorScheme.secondary,
+                  ])),
         ),
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
@@ -210,9 +177,9 @@ class _MainPageState extends State<MainPage> {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.fromLTRB(20, 0, 200, 0),
+                padding: EdgeInsets.fromLTRB(10, 0, 200, 0),
                 child: Text(
-                  'My Mentors',
+                  'My Connections',
                   style: TextStyle(
                       color: Color.fromARGB(255, 50, 28, 49),
                       fontSize: 18,
@@ -223,7 +190,7 @@ class _MainPageState extends State<MainPage> {
                 padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 child: TextButton(
                   child: Text(
-                    'See all',
+                    'View all',
                     style: TextStyle(
                         color: Color.fromARGB(255, 50, 28, 49),
                         fontSize: 15,
@@ -241,7 +208,7 @@ class _MainPageState extends State<MainPage> {
             child: Padding(
               padding: const EdgeInsets.all(0.0),
               child: Container(
-                color: Color.fromARGB(255, 241, 237, 252),
+                color: Color.fromARGB(255, 231, 236, 251),
                 margin: EdgeInsets.all(5.0),
                 height: 155,
                 width: 800,
@@ -252,24 +219,28 @@ class _MainPageState extends State<MainPage> {
                       return GridView.builder(
                           padding: const EdgeInsets.all(0.0),
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1),
+                          SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 1),
                           scrollDirection: Axis.horizontal,
                           itemCount: i.data?.length,
                           itemBuilder: (context, index) {
-                            return _userCard(
-                                'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg',
-                                '${i.data?[index].myMentorsName}',
-                                '${i.data?[index].myMentorsSurname}',
-                                i.data![index].myMentorsRatingAverage,
-                                i.data![index].myMentorsId);
-                          });
+                            GetMyMentorsModel? item = i.data?[index];
+
+                              return _userCard(
+                                  item?.myMentorsAvatar ?? "",
+                                  '${i.data?[index].myMentorsName}',
+                                  '${i.data?[index].myMentorsSurname}',
+                                  i.data![index].myMentorsRatingAverage,
+                                  i.data![index].myMentorsId);
+                            }
+
+                          );
                     } else if (i.hasError) {
                       return Text('${i.error}');
                     }
 
                     // By default, show a loading spinner.
-                    return const CircularProgressIndicator();
+                    return const CircularProgressIndicator(strokeWidth: 0.0);
                   },
                 ),
               ),
@@ -279,36 +250,26 @@ class _MainPageState extends State<MainPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                'Top Mentors',
-                style: TextStyle(
-                    color: Color.fromARGB(255, 50, 28, 49),
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold),
-              ),
-              TextButton(
+              Padding(
+                padding: const EdgeInsets.only(top: 20, left: 10),
                 child: Text(
-                  'See all',
+                  'Top Mentors',
                   style: TextStyle(
                       color: Color.fromARGB(255, 50, 28, 49),
-                      fontSize: 18,
+                      fontSize: 19,
                       fontWeight: FontWeight.bold),
                 ),
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MentorPage()));
-                },
               ),
             ],
           ),
           Padding(
             padding: const EdgeInsets.all(0.0),
             child: Container(
-              color: Color.fromARGB(255, 241, 237, 252),
+              color: Color.fromARGB(255, 231, 236, 251),
               margin: EdgeInsets.all(5.0),
               height: 155,
-              child: FutureBuilder<List<GetMyMenteesModel>?>(
-                future: futureMyMentees,
+              child: FutureBuilder<List<GetByRoleModel>?>(
+                future: futureGetTop,
                 builder: (context, i) {
                   if (i.hasData) {
                     return GridView.builder(
@@ -318,18 +279,18 @@ class _MainPageState extends State<MainPage> {
                         itemCount: i.data?.length,
                         itemBuilder: (context, index) {
                           return _userCard(
-                              'https://productimages.hepsiburada.net/s/40/1500/10650895351858.jpg',
-                              '${i.data?[index].myMenteesName}',
-                              '${i.data?[index].myMenteesSurname}',
-                              i.data![index].myMenteesRatingAverage,
-                              i.data![index].myMenteesId);
+                              '${i.data?[index].avatar}',
+                              '${i.data?[index].name}',
+                              '${i.data?[index].surname}',
+                              i.data![index].ratingAverage,
+                              i.data![index].id);
                         });
                   } else if (i.hasError) {
                     return Text('${i.error}');
                   }
 
                   // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
+                  return const CircularProgressIndicator(strokeWidth: 0.0);
                 },
               ),
             ),
@@ -340,31 +301,16 @@ class _MainPageState extends State<MainPage> {
               Container(
                 padding: EdgeInsets.fromLTRB(20, 30, 180, 0),
                 child: Text(
-                  'Categories',
+                  'Tags',
                   style: TextStyle(
                       color: Color.fromARGB(255, 50, 28, 49),
                       fontSize: 22,
                       fontWeight: FontWeight.bold),
                 ),
               ),
-              /* Container(
+              Container(
                 padding: EdgeInsets.fromLTRB(10, 20, 0, 0),
-                child: TextButton(
-                  child: Text(
-                    'See all',
-                    style: TextStyle(
-                        color: Color.fromARGB(255, 50, 28, 49),
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CategoriesPage()));
-                  },
-                ),
-              ),*/
+              ),
             ],
           ),
           // Container(
@@ -382,170 +328,53 @@ class _MainPageState extends State<MainPage> {
             height: 200,
             child: Padding(
               padding: const EdgeInsets.all(0.0),
-              child: FutureBuilder<List<GetAllTagsModel>>(
-                future: futureGetByRoleModel3,
+              child: FutureBuilder<List<GetAllTagsModel>?>(
+                future: futureGetTags,
                 builder: (context, i) {
                   if (i.hasData) {
-                    return GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent: 95,
-                                crossAxisSpacing: 5,
-                                mainAxisSpacing: 0),
-                        itemCount: i.data?.length,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            padding: const EdgeInsets.only(right: 10, left: 20),
-                            child: _buildChip(
-                              '${i.data?[index].tagName}',
-                              Color.fromARGB(255, 189, 161, 193),
+                    if (i.data != null && i.data!.isNotEmpty) {
+                      return Wrap(
+                          children: List.generate(
+                            i.data!.length,
+                                (index) => GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedChip = i.data?[index].id;
+                                  selectedChipName = i.data?[index].tagName;
+                                });
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => TagMentorPage(
+                                        tagId: selectedChip!,
+                                        tagName: selectedChipName!,
+                                      )),
+                                );
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(6.0),
+                                child: _buildChip('${i.data?[index].tagName}',
+                                    Color.fromARGB(255, 172, 138, 177)),
+                              ),
                             ),
-                          );
-                        });
+                          ));
+                    }
                   } else if (i.hasError) {
                     return Text('${i.error}');
                   }
 
                   // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
+                  return const CircularProgressIndicator(strokeWidth: 0.0);
                 },
               ),
             ),
           ),
         ]),
-
-        //     body: ListView(
-        //       children: [
-        //         Padding(
-        //           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-        //           child: Column(
-        //             children: [
-        //               Container(
-        //                 padding: EdgeInsets.fromLTRB(290, 0, 0, 0),
-        //                 child: TextButton(
-        //                   child: Text(
-        //                     'See all',
-        //                     style: TextStyle(
-        //                         color: Color.fromARGB(255, 50, 28, 49),
-        //                         fontSize: 15,
-        //                         fontWeight: FontWeight.bold),
-        //                   ),
-        //                   onPressed: () {
-        //                     Navigator.push(
-        //                         context,
-        //                         MaterialPageRoute(
-        //                             builder: (context) => MentorPage()));
-        //                   },
-        //                 ),
-        //               ),
-        //               Container(
-        //                 color: Color.fromARGB(255, 69, 41, 67),
-        //                 height: 150,
-        //                 child: GridView.builder(
-        //                   scrollDirection: Axis.horizontal,
-        //                   itemCount: 25,
-        //                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //                       crossAxisCount: 1),
-        //                   itemBuilder: (context, index) {
-        //                     return MyCircle(child: Text("1"));
-        //                   },
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-        //           child: Column(
-        //             children: [
-        //               Container(
-        //                 padding: EdgeInsets.fromLTRB(290, 0, 0, 0),
-        //                 child: TextButton(
-        //                   child: Text(
-        //                     'See all',
-        //                     style: TextStyle(
-        //                         color: Color.fromARGB(255, 50, 28, 49),
-        //                         fontSize: 15,
-        //                         fontWeight: FontWeight.bold),
-        //                   ),
-        //                   onPressed: () {
-        //                     Navigator.push(
-        //                         context,
-        //                         MaterialPageRoute(
-        //                             builder: (context) => MentorPage()));
-        //                   },
-        //                 ),
-        //               ),
-        //               Container(
-        //                 color: Color.fromARGB(255, 69, 41, 67),
-        //                 height: 150,
-        //                 child: GridView.builder(
-        //                   scrollDirection: Axis.horizontal,
-        //                   itemCount: 25,
-        //                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //                       crossAxisCount: 1),
-        //                   itemBuilder: (context, index) {
-        //                     return MyCircle(child: Text("1"));
-        //                   },
-        //                 ),
-        //               ),
-        //               Container(
-        //                 padding: EdgeInsets.fromLTRB(0, 40, 240, 0),
-        //                 child: Text(
-        //                   'Categories',
-        //                   style: TextStyle(
-        //                       color: Color.fromARGB(255, 50, 28, 49),
-        //                       fontSize: 25,
-        //                       fontWeight: FontWeight.bold),
-        //                 ),
-        //               ),
-        //               Container(
-        //                 height: 150,
-        //                 child: GridView.builder(
-        //                   itemCount: 5,
-        //                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //                       crossAxisCount: 3),
-        //                   itemBuilder: (context, index) {
-        //                     return MySquare(child: Text("1"));
-        //                   },
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         )
-        //       ],
-        //     ),
-        //   );
-        // }
-
-        // Column ss() {
-        //   return Column(
-        //     children: [
-        //       Container(
-        //         //padding: const EdgeInsets.symmetric(vertical: 8.0),
-        //         height: 150,
-        //         color: Color.fromARGB(255, 231, 236, 251),
-        //         child: ListView.builder(
-        //             itemCount: _stories.length,
-        //             scrollDirection: Axis.horizontal,
-        //             itemBuilder: (context, index) {
-        //               return MyCircle(
-        //                 child: _stories[index],
-        //               );
-        //             }),
-        //       ),
-        //       Container(
-        //         height: 150,
-        //         color: Color.fromARGB(255, 231, 236, 251),
-        //         child: ListView.builder(
-        //             itemCount: _stories.length,
-        //             scrollDirection: Axis.horizontal,
-        //             itemBuilder: (context, index) {
-        //               return MyCircle(
-        //                 child: _stories[index],
-        //               );
-        //             }),
       ),
     );
   }
+}
+
+_null() {
+  return null;
 }

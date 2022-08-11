@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:js';
 
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/model/getMyMentees_model.dart';
@@ -90,7 +89,7 @@ class _MenteePageState extends State<ChooseMentee> {
         // ],
       ),
       drawer: DrawerHelp(),
-      bottomNavigationBar: BottomBar(),
+      //bottomNavigationBar: BottomBar(),
     );
     // );
   }

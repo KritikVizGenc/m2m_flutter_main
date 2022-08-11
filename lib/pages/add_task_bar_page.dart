@@ -113,20 +113,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   MyInputField(
                     controller: menteeIdController,
                     title: "Mentee",
-                    hint: _startTime,
-                    widget: IconButton(
-                      // ignore: use_build_context_synchronously
-                      onPressed: () async {
-                        int? currentUserId = await SharedService.loginDetails();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ChooseMentee()));
-                      },
-                      icon: Icon(
-                        Icons.access_time_rounded,
-                      ),
-                    ),
+                    hint: "Input mentee name",
                   ),
                   MyInputField(
                     controller: meetingDateController,
@@ -187,17 +174,21 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       MyButton(
                         label: "Create Task",
                         onTap: () async {
-                          int? currentUserId =
-                              await SharedService.loginDetails();
-                          CreateMeetingRequestModel model =
-                              CreateMeetingRequestModel(
-                                  menteeId: 2,
-                                  meetingDate: meetingDateController.text,
-                                  startTime: startTimeController.text,
-                                  endTime: endTimeController.text,
-                                  message: messageController.text);
-                          APIService.createMeeting(currentUserId!, model)
-                              .then((response) => null);
+
+                          print(meetingDateController.text);
+
+                          SharedService.loginDetails().then((value) =>
+
+                          APIService.createMeeting(value!, CreateMeetingRequestModel(
+                              menteeId: 1,
+                              meetingDate: _selectedDate,
+                              startTime: _startTime,
+                              endTime: _endTime,
+                              message: messageController.text))
+                          );
+
+
+
                         },
                       )
                     ],
@@ -208,7 +199,19 @@ class _AddTaskPageState extends State<AddTaskPage> {
           ),
         ));
   }
-
+  _getDateFromUser() async {
+    DateTime? _pickerDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2015),
+        lastDate: DateTime(2122)
+    );
+    if (_pickerDate != null) {
+      setState(() {
+        _selectedDate = _pickerDate;
+      });
+    } else {}
+  }
   _colorPalete() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -252,108 +255,36 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  _getDateFromUser() async {
-    DateTime? _pickerDate = await showDatePicker(
+
+
+
+    _getTimeFromUSer({required bool isStartTime}) async {
+      var pickedTime = await _showTimePicker();
+      String _formatedTime = pickedTime.format(context);
+      if (pickedTime == null) {
+        print("time cancel");
+      } else if (isStartTime) {
+        setState(() {
+          _startTime = _formatedTime;
+        });
+      } else if (isStartTime == false) {
+        setState(() {
+          _endTime = _formatedTime;
+        });
+      }
+    }
+
+    _showTimePicker() {
+      return showTimePicker(
+        initialEntryMode: TimePickerEntryMode.input,
         context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2015),
-        lastDate: DateTime(2122));
-    if (_pickerDate != null) {
-_colorPalete(){
-  return Column(
-  crossAxisAlignment: CrossAxisAlignment.start,
-
-  children: [
-Text("Color",
-style: subHeadingStyle,
-
-
-),
-SizedBox(height: 8.0,),
-Wrap(
-  children: List<Widget>.generate(
-  3,(int index){
-return GestureDetector(
-onTap: () {
-  setState(() {
-    _selectedColor=index;
-  });
-
-},
-
-  child:   Padding(
-
-    padding: const EdgeInsets.only(right:8.0),
-
-    child:   CircleAvatar (
-    radius: 14,
-    backgroundColor: index==0?MyThemes.primaryColor:index==1?MyThemes.primaryColor:Colors.pink,
-  child: _selectedColor==index?Icon(Icons.done,
-  color: Colors.white,
-  size: 16,
-
-  ):Container(
-
-  ),
-
-
-    ),
-
-  ),
-);
-  }
-)
-)
-],
-);
-
-}
-
-
-
-
-
-
-
-
-_getDateFromUser() async {
-  DateTime? _pickerDate = await showDatePicker(
-    context: context,
-    initialDate: DateTime.now(),
-    firstDate: DateTime(2015),
-     lastDate: DateTime(2122)
-     );
-     if(_pickerDate!=null){
-      setState(() {
-        _selectedDate = _pickerDate;
-      });
-    } else {}
-  }
-
-  _getTimeFromUSer({required bool isStartTime}) async {
-    var pickedTime = await _showTimePicker();
-    String _formatedTime = pickedTime.parse;
-    if (pickedTime == null) {
-      print("time cancel");
-    } else if (isStartTime == true) {
-      setState(() {
-        _startTime = _formatedTime;
-      });
-    } else if (isStartTime == false) {
-      setState(() {
-        _endTime = _formatedTime;
-      });
+        initialTime: TimeOfDay(
+          hour: int.parse(_startTime.split(":")[0]),
+          minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
+        ),
+      );
     }
   }
 
-  _showTimePicker() {
-    return showTimePicker(
-      initialEntryMode: TimePickerEntryMode.input,
-      context: context,
-      initialTime: TimeOfDay(
-        hour: int.parse(_startTime.split(":")[0]),
-        minute: int.parse(_startTime.split(":")[1].split(" ")[0]),
-      ),
-    );
-  }
-}
+
+

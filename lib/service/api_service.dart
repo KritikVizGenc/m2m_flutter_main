@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -15,8 +17,12 @@ import 'package:m2m_flutter_main/model/register_response_model.dart';
 import 'package:m2m_flutter_main/model/update_user_request_model.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
 import '../model/createMeetResponse_model.dart';
+import '../model/feedbackRequest_model.dart';
+import '../model/feedbackResponse_model.dart';
+import '../model/getByRole_model.dart';
 import '../model/getMeeting_model.dart';
 import '../model/getMyMentees_model.dart';
+import '../model/getUserByTag_model.dart';
 import '../model/update_user_response_model.dart';
 import '../model/commentRequest_model.dart';
 import '../model/commentResponse_model.dart';
@@ -123,25 +129,58 @@ class APIService {
     return getMeetingModelFromJson(response.body);
   }
 
-  static Future<CreateMeetingRequestModel> createMeeting(
+  static Future<CreateMeetingResponseModel> createMeeting(
       int userId, CreateMeetingRequestModel model) async {
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
     };
     Uri url = Uri.http(Config.apiURL, '${Config.createMeetingAPI}$userId');
-    var response = await client.put(url,
+    var response = await client.post(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
-    return createMeetingRequestModelFromJson(response.body);
+    return createMeetingResponseModelFromJson(response.body);
   }
 
-  static Future<CommentRequestModel> createComment(
-      int userId, CreateMeetingRequestModel model) async {
+  static Future<CommentResponseModel> createComment(
+      int userId, CommentRequestModel model) async {
     Map<String, String> requestHeaders = {
       'Content-Type': 'application/json',
     };
-    Uri url = Uri.http(Config.apiURL, '${Config.commentAddAPI}');
+    Uri url = Uri.http(Config.apiURL, Config.commentAddAPI);
     var response = await client.put(url,
         headers: requestHeaders, body: jsonEncode(model.toJson()));
-    return commentRequestModelFromJson(response.body);
+    return commentResponseModelFromJson(response.body);
+  }
+
+  static Future<FeedBackResponseModel> feedBack(
+      FeedBackRequestModel model) async {
+    Map<String, String> requestHeaders = {
+      'Content-Type': 'application/json',
+    };
+    int? currentUserId = await SharedService.loginDetails();
+    Uri url = Uri.http(Config.apiURL, Config.feedBackAPI);
+    var response = await client.post(url,
+        headers: requestHeaders, body: jsonEncode(model.toJson()));
+    return feedBackResponseModelFromJson(response.body);
+  }
+  static Future<List<GetUserByTagModel>> getUserByTag(int tagId) async {
+    Uri url = Uri.http(Config.apiURL, '${Config.getByTags}$tagId');
+    var response = await client.get(url);
+    return getUserByTagModelFromJson(response.body);
+  }
+  static Future<List<GetByRoleModel>> getAllMentors() async {
+    Uri url = Uri.http(Config.apiURL, Config.mentorsAPI);
+    var response = await client.get(url);
+    return getByRoleModelFromJson(response.body);
+  }
+
+  static Future<List<GetByRoleModel>> getAllMentees() async {
+    Uri url = Uri.http(Config.apiURL, Config.menteesAPI);
+    var response = await client.get(url);
+    return getByRoleModelFromJson(response.body);
+  }
+  static Future<List<GetByRoleModel>> getTop() async {
+    Uri url = Uri.http(Config.apiURL, Config.getTop);
+    var response = await client.get(url);
+    return getByRoleModelFromJson(response.body);
   }
 }

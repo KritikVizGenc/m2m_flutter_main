@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:m2m_flutter_main/model/ConnectRequestModel.dart';
 import 'package:m2m_flutter_main/model/commentRequest_model.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
-import 'package:m2m_flutter_main/model/getById_model.dart';
+import 'package:m2m_flutter_main/model/getComment_model.dart';
+import 'package:m2m_flutter_main/model/message_model.dart';
 import 'package:m2m_flutter_main/model/user.dart';
 import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
-import 'package:m2m_flutter_main/pages/widgets/header_profile_widget.dart';
-import 'package:m2m_flutter_main/pages/widgets/header_widget.dart';
 import 'package:m2m_flutter_main/pages/widgets/numbers_widgets.dart';
 import 'package:m2m_flutter_main/pages/widgets/profile_widget.dart';
-import 'package:m2m_flutter_main/pages/widgets/textfield_widget.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
 import 'package:m2m_flutter_main/square.dart';
 import 'package:m2m_flutter_main/utils/user_preferences.dart';
+import 'package:snippet_coder_utils/FormHelper.dart';
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
 import '../common/theme_helper.dart';
@@ -34,6 +32,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   int? ownerID;
+  String? ownerImage;
   final commentController = TextEditingController();
   List<GetByIdModel> productsResponseFromJson(String str) =>
       List<GetByIdModel>.from(
@@ -42,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
   late Future<List<GetByIdModel>> futureGetByIdModel;
   Future<List<GetByIdModel>> fetchGetByIdModel(nereyeId) async {
     Uri url = Uri.http(
-      '10.0.2.2:5000',
+      '192.168.141.65:5000',
       '/api/getById/${jsonEncode(nereyeId)}',
     );
 
@@ -62,8 +61,8 @@ class _ProfilePageState extends State<ProfilePage> {
   late Future<List<CommentModel>> futureCommentModel;
   Future<List<CommentModel>> fetchCommentModel(nereyeId) async {
     Uri url1 = Uri.http(
-      '10.0.2.2:5000',
-      '/api/getComment/${jsonEncode(nereyeId)}',
+      '192.168.141.65:5000',
+      '/api/getComment/$nereyeId',
     );
     final response = await get(Uri.parse(url1.toString()));
 
@@ -79,20 +78,17 @@ class _ProfilePageState extends State<ProfilePage> {
     // TODO: implement initState
     super.initState();
     futureGetByIdModel =
-        fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
+    fetchGetByIdModel(widget.nereyeId) as Future<List<GetByIdModel>>;
     futureCommentModel =
-        fetchCommentModel(widget.nereyeId) as Future<List<CommentModel>>;
+    fetchCommentModel(widget.nereyeId) as Future<List<CommentModel>>;
   }
 
   @override
   Widget build(BuildContext context) {
-    double _headerHeight = 100;
-    final user = UserPreferences.myUser;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 241, 237, 252),
+      backgroundColor: Color.fromARGB(255, 231, 236, 251),
       //appBar: buildAppBar(context),
       drawer: DrawerHelp(),
-      // bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text(
           "Profile Page",
@@ -106,9 +102,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Theme.of(context).primaryColor.withOpacity(0.4),
-                Theme.of(context).colorScheme.secondary.withOpacity(0.5),
-              ])),
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).colorScheme.secondary,
+                  ])),
         ),
         actions: <Widget>[
           IconButton(
@@ -116,137 +112,228 @@ class _ProfilePageState extends State<ProfilePage> {
               Icons.edit,
               color: Colors.white,
             ),
-            onPressed: () async {
-              int? currentUserId = await SharedService.loginDetails();
-              Navigator.push(
+            onPressed: () {
+              SharedService.loginDetails().then((value) => Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => EditProfilePage(
-                            nereyeId: currentUserId,
-                          )));
+                        nereyeId: value,
+                      ))));
             },
           )
         ],
-        
       ),
       body: SingleChildScrollView(
-        child: Column(children: [
-          Container(
-            child: FutureBuilder<List<GetByIdModel>>(
-              future: futureGetByIdModel,
-              builder: (context, i) {
-                if (i.hasData) {
-                  ownerID = i.data?[0].id;
-                  Uint8List _bytes;
-                  _bytes = Base64Decoder().convert('${i.data?[0].avatar}');
-                  return ListView(
-                    primary: false, //??
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      const SizedBox(height: 24),
-                      ProfileWidget(
-                        imagePath: _bytes,
-                        onClicked: () async {
-                          int? currentUserId =
-                              await SharedService.loginDetails();
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => EditProfilePage(
-                                    nereyeId: currentUserId,
-                                  )));
-                        },
-                      ),
-                      const SizedBox(height: 24),
-                      buildName('${i.data?[0].name}', '${i.data?[0].surname}',
-                          '${i.data?[0].work}', '${i.data?[0].city}'),
-                      const SizedBox(height: 24),
-                      NumbersWidget(average: i.data?[0].ratingAverage),
-                      const SizedBox(height: 48),
-                      buildAbout('${i.data?[0].aboutMe}'),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
-                        child: Text(
-                          'Comments',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
+        child: Column(
+          children: [
+            Container(
+              child: FutureBuilder<List<GetByIdModel>>(
+                future: futureGetByIdModel,
+                builder: (context, i) {
+                  if (i.hasData) {
+                    ownerID = i.data?[0].id;
+                    ownerImage = i.data?[0].avatar;
+                    Uint8List _bytes;
+                    _bytes = Base64Decoder().convert('${ownerImage}');
+                    return ListView(
+                      primary: false, //??
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        const SizedBox(height: 24),
+                        ProfileWidget(
+                          imagePath: _bytes,
+                          onClicked: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => EditProfilePage(
+                                  nereyeId: ownerID,
+                                )));
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        buildName('${i.data?[0].name}', '${i.data?[0].surname}',
+                            '${i.data?[0].work}', '${i.data?[0].city}'),
+                        const SizedBox(height: 24),
+                        TextButton(
+                            style: ButtonStyle(
+                              foregroundColor:
+                              MaterialStateProperty.all<Color>(Colors.blue),
+                              overlayColor:
+                              MaterialStateProperty.resolveWith<Color?>(
+                                    (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered))
+                                    return Colors.blue.withOpacity(0.04);
+                                  if (states.contains(MaterialState.focused) ||
+                                      states.contains(MaterialState.pressed))
+                                    return Colors.blue.withOpacity(0.12);
+                                  return null; // Defer to the widget's default.
+                                },
+                              ),
+                            ),
+                            onPressed: () {
+                              // if (i.data![0].userRole == 1) {
+                              //   FormHelper.showSimpleAlertDialog(
+                              //       context,
+                              //       "Warning",
+                              //       "You cannot do this...",
+                              //       "OK", () {
+                              //     Navigator.pop(context);
+                              //   });
+
+                              ConnectRequestModel model =
+                              ConnectRequestModel(userId: i.data![0].id);
+
+                              APIService.connectUser(model).then((response) => {
+                                if (response.follow != null)
+                                  {
+                                    Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/home',
+                                          (route) => false,
+                                    )
+                                  }
+                                else
+                                  {
+                                    //Hata mesajı gösterilecek
+                                    FormHelper.showSimpleAlertDialog(
+                                        context,
+                                        "Error",
+                                        response.msg!,
+                                        "OK", () {
+                                      Navigator.pop(context);
+                                    })
+                                  }
+                              });
+
+                              // if (_formKey.currentState!.validate()) {
+                              //   Navigator.of(context).pushAndRemoveUntil(
+                              //       MaterialPageRoute(
+                              //           builder: (context) => MainPage()),
+                              //       (Route<dynamic> route) => false);
+                              // }
+                            },
+                            child: Container(child: Text('CONNECT'))),
+                        NumbersWidget(average: i.data?[0].ratingAverage),
+                        const SizedBox(height: 48),
+                        buildAbout('${i.data?[0].aboutMe}'),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
+                          child: Text(
+                            'Comments',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: 30,
+                            right: 16,
+                          ),
+                          height: 50,
+                          color: Theme.of(context).colorScheme.secondary,
+                          child: Text('${i.data?[0].name}'),
+                        ),
+                        const SizedBox(height: 15),
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: 30,
+                            right: 16,
+                          ),
+                          height: 50,
+                          color: Theme.of(context).colorScheme.secondary,
+                          child: Text('${i.data?[0].name}'),
+                        ),
+                        const SizedBox(height: 15),
+                        Container(
+                          margin: EdgeInsets.only(
+                            left: 30,
+                            right: 16,
+                          ),
+                          height: 50,
+                          color: Theme.of(context).colorScheme.secondary,
+                          child: Text('${i.data?[0].name}'),
+                        ),
+                      ],
+                    );
+                  } else if (i.hasError) {
+                    return Text('${i.error}');
+                  }
+
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
+              ),
+            ),
+            Container(
+              height: 100,
+              child: FutureBuilder<List<CommentModel>>(
+                future: futureCommentModel,
+                builder: (context, i) {
+                  if (i.hasData) {
+                    return ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        itemCount: i.data?.length,
+                        itemBuilder: (context, index) {
+                          return buildComment(
+                              '${i.data?[index].commentContent}');
+                        });
+                  } else if (i.hasError) {
+                    return Text('${i.error}');
+                  }
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
+              child: TextFormField(
+                maxLength: 255,
+                controller: commentController,
+                decoration: ThemeHelper().textInputDecoration(
+                    'Comment..', 'Enter Your Comment to This Mentor! '),
+              ),
+            ),
+            Container(
+                decoration: ThemeHelper().buttonBoxDecoration(context),
+                child: ElevatedButton(
+                    style: ThemeHelper().buttonStyle(),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
+                      child: Text(
+                        'Okey!',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                          color: Color.fromARGB(255, 255, 255, 255),
                         ),
                       ),
-                    ],
-                  );
-                } else if (i.hasError) {
-                  return Text('${i.error}');
-                }
-
-                // By default, show a loading spinner.
-                return const CircularProgressIndicator();
-              },
-            ),
-          ),
-          Container(
-            child: FutureBuilder<List<CommentModel>>(
-              future: futureCommentModel,
-              builder: (context, i) {
-                if (i.hasData) {
-                  return GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1),
-                      scrollDirection: Axis.vertical,
-                      itemCount: i.data?.length,
-                      itemBuilder: (context, index) {
-                        return buildComment('${i.data?[index].commentContent}');
-                      });
-                } else if (i.hasError) {
-                  return Text('${i.error}');
-                }
-                // By default, show a loading spinner.
-                return const CircularProgressIndicator();
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.fromLTRB(0, 20, 200, 0),
-            child: TextFormField(
-              maxLength: 255,
-              controller: commentController,
-              decoration: ThemeHelper().textInputDecoration(
-                  'Comment..', 'Enter Your Comment to This Mentor! '),
-            ),
-          ),
-          Container(
-              decoration: ThemeHelper().buttonBoxDecoration(context),
-              child: ElevatedButton(
-                  style: ThemeHelper().buttonStyle(),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(40, 10, 40, 10),
-                    child: Text(
-                      'Okey!',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        color: Color.fromARGB(255, 255, 255, 255),
-                      ),
                     ),
-                  ),
-                  onPressed: () async {
-                    int? currentUserId = await SharedService.loginDetails();
-                    CommentRequestModel model = CommentRequestModel(
-                        commentContent: commentController.text,
-                        ownerId: ownerID!,
-                        authorId: currentUserId!);
-                  }))
-        ]),
+                    onPressed: () {
+                      print("çalış");
+                      SharedService.loginDetails().then((value) =>
+                          APIService.createComment(
+                              value!,
+                              CommentRequestModel(
+                                  commentContent: commentController.text,
+                                  ownerId: ownerID!,
+                                  authorId: value)));
+                    }))
+          ],
+        ),
       ),
     );
   }
 
   Widget buildName(
-    String name,
-    String surname,
-    String major,
-    String city,
-  ) =>
+      String name,
+      String surname,
+      String major,
+      String city,
+      ) =>
       Column(
         children: [
           Text(
@@ -274,34 +361,58 @@ class _ProfilePageState extends State<ProfilePage> {
       );
 
   Widget buildAbout(String about) => Container(
-        padding: EdgeInsets.symmetric(horizontal: 40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'About',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              about,
-              style: TextStyle(fontSize: 16, height: 1.4),
-            ),
-          ],
+    padding: EdgeInsets.symmetric(horizontal: 40),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'About',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-      );
+        const SizedBox(
+          height: 4,
+        ),
+        Text(
+          about,
+          style: TextStyle(fontSize: 16, height: 1.4),
+        ),
+      ],
+    ),
+  );
 }
 
 Widget buildComment(String comment) {
-  return Container(
-    margin: EdgeInsets.only(
-      left: 30,
-      right: 16,
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      margin: EdgeInsets.only(
+        left: 30,
+        right: 16,
+      ),
+      child: Text(
+          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500), comment),
     ),
-    height: 50,
-    color: Color.fromARGB(255, 255, 255, 255),
-    child: Text(comment),
   );
 }
+
+// comment kısmı için widget
+// Widget buildComment(list ) => Container(
+//         padding: EdgeInsets.symmetric(horizontal: 40),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               'About',
+//               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//             ),
+//             const SizedBox(
+//               height: 4,
+//             ),
+//             Text(
+//               about,
+//               style: TextStyle(fontSize: 16, height: 1.4),
+//             ),
+//           ],
+//         ),
+//       );
+// }

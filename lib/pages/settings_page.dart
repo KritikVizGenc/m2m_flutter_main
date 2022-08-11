@@ -5,7 +5,7 @@ import 'package:m2m_flutter_main/pages/edit_profile_page.dart';
 import 'package:m2m_flutter_main/pages/login_page.dart';
 import 'package:m2m_flutter_main/pages/profile_page.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
-
+import '../pages/edit_profile_page.dart';
 class SettingPage extends StatefulWidget {
   static final String path = "lib/src/pages/settings_page.dart";
 
@@ -98,11 +98,13 @@ class _SettingPageState extends State<SettingPage> {
                           Icons.edit,
                           color: Colors.white,
                         ),
-                        onPressed: () {
+                        onPressed: () async{
+                          int? currentUserId =
+                              await SharedService.loginDetails();
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => EditProfilePage()));
+                                  builder: (context) => EditProfilePage(nereyeId:currentUserId)));
                         },
                       ),
                     ),

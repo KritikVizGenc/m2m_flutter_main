@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:m2m_flutter_main/common/theme_helper.dart';
@@ -32,7 +33,6 @@ class MeetPagesState extends State<MeetPages> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: DrawerHelp(),
@@ -51,15 +51,9 @@ class MeetPagesState extends State<MeetPages> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Theme.of(context).primaryColor,
-                Theme.of(context).colorScheme.secondary,
-              ])),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+                    //Theme.of(context).primaryColor,
+                    //Theme.of(context).colorScheme.secondary,
+                  ])),
         ),
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
@@ -68,13 +62,10 @@ class MeetPagesState extends State<MeetPages> {
               top: 16,
               right: 16,
             ),
-            
           )
         ],
       ),
-       
       body: Column(
-        
         children: [
           _addTaskBar(),
           _addDateBAr(),
@@ -94,7 +85,7 @@ class MeetPagesState extends State<MeetPages> {
                             return ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: tasks.length,
+                              itemCount: i.data?.length,
                               itemBuilder: (context, index) {
                                 //var containers=  tasks.map((tasks)=> Container(
                                 // height: 90,
@@ -105,16 +96,17 @@ class MeetPagesState extends State<MeetPages> {
                                 return Card(
                                   child: ListTile(
                                     title: Text("Mentee:" +
-                                        i.data![index].menteesName +
+                                        '${i.data![index].menteesName}' +
                                         "- " +
-                                        i.data![index].menteesSurname +
+                                        '${i.data![index].menteesSurname}' +
                                         "Mentor:" +
-                                        i.data![index].mentorName +
+                                        '${i.data![index].mentorName}' +
                                         " " +
-                                        i.data![index].mentorSurname),
-                                    subtitle: Text(i.data![index].startTime +
-                                        " " +
-                                        i.data![index].endTime),
+                                        '${i.data![index].mentorSurname}'),
+                                    subtitle: Text(
+                                        '${i.data![index].startTime}' +
+                                            " " +
+                                            '${i.data![0].endTime}'),
                                     trailing: Container(
                                       width: 70,
                                       child: Row(
@@ -126,15 +118,15 @@ class MeetPagesState extends State<MeetPages> {
                                                       context: context,
                                                       builder: (context) =>
                                                           SimpleDialog(
-                                                        children: [
-                                                          TextField(onChanged:
-                                                              (value) {
-                                                            setState(() {
-                                                              text = value;
-                                                            });
-                                                          }),
-                                                        ],
-                                                      ),
+                                                            children: [
+                                                              TextField(onChanged:
+                                                                  (value) {
+                                                                setState(() {
+                                                                  text = value;
+                                                                });
+                                                              }),
+                                                            ],
+                                                          ),
                                                     );
                                                   },
                                                   icon: Icon(Icons.edit))),
@@ -179,7 +171,7 @@ class MeetPagesState extends State<MeetPages> {
         height: 100,
         width: 80,
         initialSelectedDate: DateTime.now(),
-        selectionColor: Color.fromARGB(255, 145, 104, 143),
+        selectionColor: Color.fromARGB(255, 62, 35, 60),
         selectedTextColor: Colors.white,
         dateTextStyle: GoogleFonts.lato(
           textStyle: TextStyle(
@@ -223,65 +215,16 @@ class MeetPagesState extends State<MeetPages> {
           ),
           MyButton(
               label: "+ Add Task",
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddTaskPage())))
+              onTap: () =>
+                  SharedService.loginDetails().then((value) =>
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => AddTaskPage(nereyeId: value)))),
+    ),
+
         ],
       ),
     );
   }
 
-//  Slidable taskWidget(Color color,String title,String time){
-//   return Slidable(
-//   actionPane:SlidableDrawerActionPane(),
-//   actionExtentRatio:0.3 ,
-//   child:Container(
-// height: 80,
-// margin:EdgeInsets.symmetric(horizontal: 20,vertical: 10) ,
-// decoration: BoxDecoration(
-//   color: Colors.white,
-//   boxShadow: [BoxShadow(
-//     color: Colors.black.withOpacity(0.03),
-//     offset: Offset(0,9),
-//     blurRadius: 20,
-//     spreadRadius: 1
-//
-//   )]
-// ),
-//
-// child: Row(children: [
-//   Container(
-//     margin:EdgeInsets.symmetric(horizontal:20 ) ,
-//   height: 25,
-//   width: 25,
-//   decoration: BoxDecoration(
-// color: Colors.white,
-// shape: BoxShape.circle,
-// border: Border.all(color:color,width: 4)
-//
-//   ),
-//
-//
-//   ),
-//   Column(
-// crossAxisAlignment: CrossAxisAlignment.start,
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-//   Text(title, style:TextStyle(
-//     color: Colors.black,
-//   ) ,)
-// ],
-//
-//   ),
-//
-//
-//
-//
-//
-// ]),
-//   ) ,
-//
-//
-//   );
-// }
-
+  _removeTask(index) {}
 }

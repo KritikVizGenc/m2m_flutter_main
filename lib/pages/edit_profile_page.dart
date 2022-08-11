@@ -175,20 +175,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                     city: cityController.text,
                                     name: nameController.text,
                                     surname: surnameController.text,
-                                    work: workController.text,
-                                    avatar: avatarController.text);
+                                    work: workController.text);
                             int? currentUserId =
                                 await SharedService.loginDetails();
                             APIService.updateUser(currentUserId!, model).then(
                               (response) => {
-                                if (response.message == "updated")
+                                if (response.message != null)
                                   {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => ProfilePage(
-                                                  nereyeId: 2,
-                                                ))),
+                                    Navigator.pop(context),
                                   }
                                 else
                                   {

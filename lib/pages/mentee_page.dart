@@ -26,7 +26,7 @@ class MenteePage extends StatefulWidget {
 class _MenteePageState extends State<MenteePage> {
   TextEditingController editingController = TextEditingController();
 
-  final url = "http://10.0.2.2:5000/api/getByRole/mentee";
+  final url = "http://192.168.141.65:5000/api/getByRole/mentee";
 
   List<GetByRoleModel> productsResponseFromJson(String str) =>
       List<GetByRoleModel>.from(
@@ -136,41 +136,7 @@ class _MenteePageState extends State<MenteePage> {
         //   ),
         // ],
       ),
-      drawer: DrawerHelp(),
-      //bottomNavigationBar: BottomBar(),
     );
-    // );
-  }
-}
-                  // By default, show a loading spinner.
-                  return const CircularProgressIndicator();
-                },
-              ),
-            ),
-          ]),
-        ),
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            "Mentee Page",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          elevation: 0.5,
-          iconTheme: IconThemeData(color: Colors.white),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: <Color>[
-                  Theme.of(context).primaryColor,
-                  Theme.of(context).colorScheme.secondary,
-                ])),
-          ),
-        ),
-        drawer: DrawerHelp(),
-        // bottomNavigationBar: BottomBar(),
-      );
     }
   }
 

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final getMyMentorsModel = getMyMentorsModelFromJson(jsonString);
-
 import 'dart:convert';
 
 List<GetMyMentorsModel> getMyMentorsModelFromJson(String str) =>
@@ -25,8 +21,12 @@ class GetMyMentorsModel {
     required this.myMentorsEmail,
     required this.myMentorsPassword,
     required this.myMentorsUserRole,
+    required this.myMentorsAvatar,
     required this.myMentorsRatingAverage,
     required this.myMentorsRating,
+    required this.myMentorsAboutMe,
+    required this.myMentorsCity,
+    required this.myMentorsWork,
     required this.myMentorsCreatedAt,
     required this.myMentorsUpdatedAt,
   });
@@ -43,8 +43,12 @@ class GetMyMentorsModel {
   String myMentorsEmail;
   String myMentorsPassword;
   int myMentorsUserRole;
+  String myMentorsAvatar;
   double myMentorsRatingAverage;
-  List<dynamic> myMentorsRating;
+  List<int> myMentorsRating;
+  String myMentorsAboutMe;
+  String myMentorsCity;
+  String myMentorsWork;
   DateTime myMentorsCreatedAt;
   DateTime myMentorsUpdatedAt;
 
@@ -62,29 +66,36 @@ class GetMyMentorsModel {
         myMentorsEmail: json["myMentors.email"],
         myMentorsPassword: json["myMentors.password"],
         myMentorsUserRole: json["myMentors.user_role"],
+        myMentorsAvatar: json["myMentors.avatar"],
         myMentorsRatingAverage: json["myMentors.ratingAverage"].toDouble(),
-        myMentorsRating:
-            List<dynamic>.from(json["myMentors.rating"].map((x) => x)),
+        myMentorsRating: List<int>.from(json["myMentors.rating"].map((x) => x)),
+        myMentorsAboutMe: json["myMentors.about_me"],
+        myMentorsCity: json["myMentors.city"],
+        myMentorsWork: json["myMentors.work"],
         myMentorsCreatedAt: DateTime.parse(json["myMentors.createdAt"]),
         myMentorsUpdatedAt: DateTime.parse(json["myMentors.updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
-        "user_id": userId,
-        "rel_id": relId,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
-        "userTableId": userTableId,
-        "myMentors.id": myMentorsId,
-        "myMentors.name": myMentorsName,
-        "myMentors.surname": myMentorsSurname,
-        "myMentors.email": myMentorsEmail,
-        "myMentors.password": myMentorsPassword,
-        "myMentors.user_role": myMentorsUserRole,
-        "myMentors.ratingAverage": myMentorsRatingAverage,
-        "myMentors.rating": List<dynamic>.from(myMentorsRating.map((x) => x)),
-        "myMentors.createdAt": myMentorsCreatedAt.toIso8601String(),
-        "myMentors.updatedAt": myMentorsUpdatedAt.toIso8601String(),
-      };
+    "id": id,
+    "user_id": userId,
+    "rel_id": relId,
+    "createdAt": createdAt.toIso8601String(),
+    "updatedAt": updatedAt.toIso8601String(),
+    "userTableId": userTableId,
+    "myMentors.id": myMentorsId,
+    "myMentors.name": myMentorsName,
+    "myMentors.surname": myMentorsSurname,
+    "myMentors.email": myMentorsEmail,
+    "myMentors.password": myMentorsPassword,
+    "myMentors.user_role": myMentorsUserRole,
+    "myMentors.avatar": myMentorsAvatar,
+    "myMentors.ratingAverage": myMentorsRatingAverage,
+    "myMentors.rating": List<dynamic>.from(myMentorsRating.map((x) => x)),
+    "myMentors.about_me": myMentorsAboutMe,
+    "myMentors.city": myMentorsCity,
+    "myMentors.work": myMentorsWork,
+    "myMentors.createdAt": myMentorsCreatedAt.toIso8601String(),
+    "myMentors.updatedAt": myMentorsUpdatedAt.toIso8601String(),
+  };
 }

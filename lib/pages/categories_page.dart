@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:m2m_flutter_main/model/getAllTags_model.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:m2m_flutter_main/pages/tag_mentors_page.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../common/Bottom_Bar.dart';
 import '../common/drawer.dart';
@@ -18,6 +18,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Future<List<GetAllTagsModel>?> futureTagsModel = APIService.getAllTags();
 
   int? selectedChip;
+  String? selectedChipName;
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      //drawer: DrawerHelp(),
+      drawer: DrawerHelp(),
       //bottomNavigationBar: BottomBar(),
       appBar: AppBar(
         title: Text("Categories"),
@@ -41,15 +42,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                Theme.of(context).primaryColor,
-                Theme.of(context).colorScheme.secondary,
-              ])),
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+                    Theme.of(context).primaryColor,
+                    Theme.of(context).colorScheme.secondary,
+                  ])),
         ),
       ),
       body: FutureBuilder<List<GetAllTagsModel>?>(
@@ -59,20 +54,29 @@ class _CategoriesPageState extends State<CategoriesPage> {
             if (i.data != null && i.data!.isNotEmpty) {
               return Wrap(
                   children: List.generate(
-                i.data!.length,
-                (index) => GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selectedChip = i.data?[index].id;
-                    });
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(6.0),
-                    child: _buildChip('${i.data?[index].tagName}',
-                        Color.fromARGB(255, 189, 161, 193)),
-                  ),
-                ),
-              ));
+                    i.data!.length,
+                        (index) => GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedChip = i.data?[index].id;
+                          selectedChipName = i.data?[index].tagName;
+                        });
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TagMentorPage(
+                                tagId: selectedChip!,
+                                tagName: selectedChipName!,
+                              )),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child:
+                        _buildChip('${i.data?[index].tagName}', Colors.purple),
+                      ),
+                    ),
+                  ));
             }
           } else if (i.hasError) {
             return Text('${i.error}');

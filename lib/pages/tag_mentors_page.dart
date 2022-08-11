@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:m2m_flutter_main/model/getById_model.dart';
+import 'package:m2m_flutter_main/model/getUserByTag_model.dart';
 import 'package:m2m_flutter_main/pages/registiration_page.dart';
 import 'package:m2m_flutter_main/pages/splash_screen.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
@@ -18,24 +19,29 @@ import '../common/Listing.dart';
 import '../model/getByRole_model.dart';
 import '../pages/profile_page.dart';
 
-class MentorPage extends StatefulWidget {
-  const MentorPage({Key? key}) : super(key: key);
+class TagMentorPage extends StatefulWidget {
+  final int tagId;
+  final String tagName;
+  const TagMentorPage({Key? key, required this.tagId, required this.tagName})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return _MentorPageState();
+    return _TagMentorPageState();
   }
 }
 
-class _MentorPageState extends State<MentorPage> {
+class _TagMentorPageState extends State<TagMentorPage> {
   TextEditingController editingController = TextEditingController();
 
-  Future<List<GetByRoleModel>?> futureAllMentors = APIService.getAllMentors();
+  late Future<List<GetUserByTagModel>?> futureGetByTag;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    futureGetByTag = APIService.getUserByTag(widget.tagId);
+    print(futureGetByTag);
   }
 
   double _drawerIconSize = 24;
@@ -47,53 +53,49 @@ class _MentorPageState extends State<MentorPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerHelp(),
-      body: FutureBuilder<List<GetByRoleModel>?>(
-        future: futureAllMentors,
+      //bottomNavigationBar: BottomBar(),
+      body: FutureBuilder<List<GetUserByTagModel>?>(
+        future: futureGetByTag,
         builder: (context, i) {
           if (i.hasData) {
-            return Container(
-              width: 600,
-              child: ListView.builder(
-                  itemCount: i.data?.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ProfilePage(nereyeId: i.data?[index].id)));
-                      },
-                      title: Container(
-                        color:
-                        Color.fromARGB(255, 225, 217, 226).withOpacity(0.5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Text('${i.data?[index].name}' +
-                                '   ' +
-                                '${i.data?[index].surname}'),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text('${i.data?[index].ratingAverage}'),
-                              ),
-                            ),
-                            Stars(average: i.data?[index].ratingAverage),
-                          ],
+            return ListView.builder(
+                itemCount: i.data?.length,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfilePage(
+                                  nereyeId: i.data?[index].userId)));
+                    },
+                    title: Row(
+                      children: [
+                        Text(
+                          '${i.data?[index].userTagName}' +
+                              '   ' +
+                              '${i.data?[index].userTagSurname}' +
+                              ' \n ' +
+                              '${i.data?[index].userTagRatingAverage}',
                         ),
-                      ),
-                      subtitle: Text('${i.data?[index].city}'),
-                      leading: CircleAvatar(
-                        backgroundColor: Color.fromARGB(255, 197, 194, 194),
-                        child: Text('${i.data?[index].name[0]}'),
-                      ),
-                      trailing: Column(
-                        children: <Widget>[],
-                      ),
-                    );
-                  }),
-            );
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.end,
+                        //   children: <Widget>[
+                        //     Stars(average: i.data?[index].userTagRatingAverage),
+                        //   ],
+                        // ),
+                      ],
+                    ),
+                    subtitle: Text('${i.data?[index].userTagCity}'),
+                    leading: CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 197, 194, 194),
+                      child: Text('${i.data?[index].userTagName[0]}'),
+                    ),
+                    trailing: Column(
+                      children: <Widget>[],
+                    ),
+                  );
+                });
           } else if (i.hasError) {
             return Text('${i.error}');
           }
@@ -105,7 +107,7 @@ class _MentorPageState extends State<MentorPage> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
-          "Mentor Page",
+          widget.tagName,
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         elevation: 0.5,

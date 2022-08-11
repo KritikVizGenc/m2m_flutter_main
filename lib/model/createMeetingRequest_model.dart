@@ -20,7 +20,7 @@ class CreateMeetingRequestModel {
   });
 
   int menteeId;
-  String meetingDate;
+  DateTime meetingDate;
   String startTime;
   String endTime;
   String message;
