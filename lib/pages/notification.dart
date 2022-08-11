@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'package:m2m_flutter_main/pages/registiration_page.dart';
@@ -15,22 +16,234 @@ import '../model/getByRole_model.dart';
 import 'login_page.dart';
 import 'main_page.dart';
 
-class Notifications extends StatelessWidget {
+class Notifications extends StatefulWidget {
+  @override
+  State<Notifications> createState() => _NotificationsState();
+}
+
+class _NotificationsState extends State<Notifications> {
+  final List _notifications = [
+    'notification 1',
+    'notification2 ',
+    'notification 3',
+    'notification 4',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView.separated(
-          itemBuilder: (context, index) {
-            return ListViewItem(index);
-          },
-          separatorBuilder: (context, index) {
-            return Divider(
-              color: Colors.black,
-              thickness: 2,
-              height: 4,
-            );
-          },
-          itemCount: 15),
+      body: ListView(children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "Yeni bir mentee takip etti",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                )
+                //leading: Icon,
+
+                ,
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "Yeni bir puan aldınız",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                )
+                //leading: Icon,
+
+                ,
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "assşfdgfdki",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                ),
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "assşfdgfdki",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                ),
+                //leading: Icon      ,
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "assşfdgfdki",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                ),
+                //leading: Icon,
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "assşfdgfdki",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                ),
+                //leading: Icon,
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "assşfdgfdki",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                ), //leading: Icon,
+              ),
+              _buildDivider(),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                child: ListTile(
+                  title: Text(
+                    "assşfdgfdki",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  subtitle: Text(
+                    DateFormat.yMMMMd().format(DateTime.now()),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
+                  ),
+                  leading: Icon(
+                    Icons.notifications_active_rounded,
+                    size: 25,
+                    color: Color.fromARGB(255, 167, 36, 36),
+                  ),
+                ),
+                //leading: Icon,
+              ),
+            ],
+          ),
+        ),
+      ]),
+
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(
@@ -132,13 +345,13 @@ Widget timeAndData(int index) {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '23-01-2022',
+          DateFormat.yMMMMd().format(DateTime.now()),
           style: TextStyle(
             fontSize: 14,
           ),
         ),
         Text(
-          '23-01-2022',
+          DateFormat.yMMMMd().format(DateTime.now()),
           style: TextStyle(
             fontSize: 12,
           ),
@@ -146,4 +359,14 @@ Widget timeAndData(int index) {
       ],
     ),
   );
+}
+
+Container _buildDivider() {
+  return Container(
+      margin: const EdgeInsets.symmetric(
+        horizontal: 8.0,
+      ),
+      width: double.infinity,
+      height: 1.0,
+      color: Color.fromARGB(255, 151, 37, 37));
 }

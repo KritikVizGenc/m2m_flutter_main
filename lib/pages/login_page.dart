@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                     //crossAxisAlignment: Alignment(0.5, 0.5),
                     children: [
                       Padding(
-                        padding: EdgeInsets.fromLTRB(0, 70, 0, 15),
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 15),
                         child: Text(
                           'Hi There!',
                           style: TextStyle(
