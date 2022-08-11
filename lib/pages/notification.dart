@@ -37,9 +37,8 @@ class _NotificationsState extends State<Notifications> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "Yeni bir mentee takip etti",
@@ -57,7 +56,7 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 )
                 //leading: Icon,
@@ -66,7 +65,7 @@ class _NotificationsState extends State<Notifications> {
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "Yeni bir puan aldınız",
@@ -84,7 +83,7 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 )
                 //leading: Icon,
@@ -93,7 +92,7 @@ class _NotificationsState extends State<Notifications> {
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "assşfdgfdki",
@@ -111,13 +110,13 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 ),
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "assşfdgfdki",
@@ -135,14 +134,14 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 ),
                 //leading: Icon      ,
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "assşfdgfdki",
@@ -160,14 +159,14 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 ),
                 //leading: Icon,
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "assşfdgfdki",
@@ -185,14 +184,14 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 ),
                 //leading: Icon,
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "assşfdgfdki",
@@ -210,13 +209,13 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 ), //leading: Icon,
               ),
               _buildDivider(),
               Container(
-                margin: EdgeInsets.symmetric(horizontal: 13, vertical: 10),
+                margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 child: ListTile(
                   title: Text(
                     "assşfdgfdki",
@@ -234,7 +233,7 @@ class _NotificationsState extends State<Notifications> {
                   leading: Icon(
                     Icons.notifications_active_rounded,
                     size: 25,
-                    color: Color.fromARGB(255, 167, 36, 36),
+                    color: Theme.of(context).secondaryHeaderColor,
                   ),
                 ),
                 //leading: Icon,
@@ -368,5 +367,5 @@ Container _buildDivider() {
       ),
       width: double.infinity,
       height: 1.0,
-      color: Color.fromARGB(255, 151, 37, 37));
+      color: Color.fromARGB(255, 158, 118, 187));
 }

@@ -100,7 +100,7 @@ class _DrawerState extends State<DrawerHelp> {
               ),
             ),
           ),
-          /* ListTile(
+          ListTile(
             leading: Icon(
               Icons.home,
               size: _drawerIconSize,
@@ -112,10 +112,13 @@ class _DrawerState extends State<DrawerHelp> {
                   fontSize: 17, color: Theme.of(context).colorScheme.secondary),
             ),
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => BottomBar()));
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => BottomBar(indexId: 0)),
+                  (route) => false);
             },
-          ),*/
+          ),
           ListTile(
             leading: Icon(
               Icons.category,
