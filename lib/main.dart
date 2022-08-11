@@ -11,19 +11,20 @@ import 'pages/login_page.dart';
 import 'pages/main_page.dart';
 import 'pages/mentee_page.dart';
 import 'pages/registiration_page.dart';
+import 'pages/add_task_bar_page.dart';
 
 Widget _defaultHome = LoginPage();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  
   bool result = await SharedService.isLoggedIn();
   if (result) {
     _defaultHome = BottomBar(
       indexId: 0,
     );
   }
-
+  
   runApp(MyApp());
 }
 

@@ -142,6 +142,37 @@ class _MenteePageState extends State<MenteePage> {
     // );
   }
 }
+                  // By default, show a loading spinner.
+                  return const CircularProgressIndicator();
+                },
+              ),
+            ),
+          ]),
+        ),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            "Mentee Page",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          elevation: 0.5,
+          iconTheme: IconThemeData(color: Colors.white),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                  Theme.of(context).primaryColor,
+                  Theme.of(context).colorScheme.secondary,
+                ])),
+          ),
+        ),
+        drawer: DrawerHelp(),
+        // bottomNavigationBar: BottomBar(),
+      );
+    }
+  }
 
 // class MySearchDelegate extends SearchDelegate {
 //   @override

@@ -37,7 +37,6 @@ class _MainPageState extends State<MainPage> {
     'post 3',
     'post 4',
   ];
-
   final List _stories = [
     'fav 1',
     'fav 2 ',
@@ -190,7 +189,6 @@ class _MainPageState extends State<MainPage> {
                 Theme.of(context).colorScheme.secondary,
               ])),
         ),
-
         //margin: EdgeInsets.fromLTRB(40, 0, 40, 10),
         actions: [
           IconButton(

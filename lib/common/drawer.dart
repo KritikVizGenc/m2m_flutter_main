@@ -8,7 +8,6 @@ import 'package:m2m_flutter_main/pages/meeting_pages.dart';
 import 'package:m2m_flutter_main/pages/mentor_page.dart';
 import 'package:m2m_flutter_main/pages/settings_page.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
-import '../pages/categories_page.dart';
 import '../pages/login_page.dart';
 import '../pages/mentee_page.dart';
 import '../pages/profile_page.dart';

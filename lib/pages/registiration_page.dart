@@ -8,6 +8,8 @@ import 'widgets/header_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'main_page.dart';
+import '../model/update_user_request_model.dart';
+import '../model/update_user_response_model.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
