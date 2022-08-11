@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/src/widgets/framework.dart';
@@ -5,6 +6,8 @@ import 'package:m2m_flutter_main/common/drawer.dart';
 import 'package:m2m_flutter_main/common/theme_helper.dart';
 import 'package:m2m_flutter_main/model/createMeetingRequest_model.dart';
 import 'package:m2m_flutter_main/model/getMyMentees_model.dart';
+import 'package:m2m_flutter_main/model/message_model.dart';
+import 'package:m2m_flutter_main/pages/choose_mentee_createMeeting_page.dart';
 import 'package:m2m_flutter_main/pages/widgets/button.dart';
 import 'package:m2m_flutter_main/service/api_service.dart';
 import 'package:m2m_flutter_main/service/shared_service.dart';
@@ -15,7 +18,9 @@ import '../common/Bottom_Bar.dart';
 
 //import 'package:flutter/src/material/date_picker.dart';
 class AddTaskPage extends StatefulWidget {
-  const AddTaskPage({Key? key}) : super(key: key);
+  final int? nereyeId;
+
+  const AddTaskPage({Key? key, required this.nereyeId}) : super(key: key);
 
   @override
   State<AddTaskPage> createState() => _AddTaskPageState();
@@ -40,7 +45,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     'post 3',
     'post 4',
   ];
-  String? selectedItem = "Mentee Seçiniz.";
+  String? selectedItem = "post1";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,48 +95,37 @@ class _AddTaskPageState extends State<AddTaskPage> {
                       controller: messageController,
                       title: "Title-Note",
                       hint: "Enter your title"),
-                  Text(
-                    "Mentee",
-                    style: subHeadingStyle,
-                  ),
+                  // Text(
+                  //   "Mentee",
+                  //   style: subHeadingStyle,
+                  // ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(3, 30, 5, 2),
-                    child: Container(
-                      width: 1200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
+                      padding: const EdgeInsets.fromLTRB(3, 30, 5, 2),
+                      child: Container(
+                        width: 1200,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                          border: Border.all(color: MyThemes.primaryColor),
                         ),
-                        border: Border.all(color: MyThemes.primaryColor),
+                      )),
+                  MyInputField(
+                    controller: menteeIdController,
+                    title: "Mentee",
+                    hint: _startTime,
+                    widget: IconButton(
+                      // ignore: use_build_context_synchronously
+                      onPressed: () async {
+                        int? currentUserId = await SharedService.loginDetails();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ChooseMentee()));
+                      },
+                      icon: Icon(
+                        Icons.access_time_rounded,
                       ),
-                      child: FutureBuilder<List<GetMyMenteesModel>?>(
-                          future: futureGetMyMentesModel,
-                          builder: (context, i) {
-                            return ListView.builder(
-                                itemCount: i.data?.length,
-                                itemBuilder: (context, index) {
-                                  //var containers=  tasks.map((tasks)=> Container(
-                                  // height: 90,
-                                  // width: 50,
-                                  // margin: EdgeInsets.all(5),
-                                  //   color: MyThemes.primaryColor,child: Text(tasks))).toList()
-                                  //   child: Padding( padding:EdgeInsets.all(8),
-                                  return DropdownButtonFormField<String>(
-                                      isExpanded: true,
-                                      dropdownColor: Colors.white,
-
-                                      // underline: Container(),
-                                      value: selectedItem,
-                                      onChanged: (String? newValue) {
-                                        setState(() {
-                                          selectedItem = newValue!;
-                                        });
-                                      },
-                                      items: i.data?[index].myMenteesName<
-                                              List<GetMyMenteesModel>?>
-                                          .toList());
-                                });
-                          }),
                     ),
                   ),
                   MyInputField(

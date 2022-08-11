@@ -10,4 +10,5 @@ class Config {
   static const String updateUserAPI = "/api/updateUser/";
   static const String getMeetingAPI = "/api/getMeeting/";
   static const String createMeetingAPI = "/api/createMeet/";
+  static const String commentAddAPI = "/api/addComment";
 }
