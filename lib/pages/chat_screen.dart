@@ -31,16 +31,16 @@ class _ChatScreenState extends State<ChatScreen> {
             isMe ? Theme.of(context).colorScheme.secondary : Color(0xFFFFEFEE),
         borderRadius: isMe
             ? BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                bottomLeft: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
+                topLeft: Radius.circular(25.0),
+                bottomLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
+                bottomRight: Radius.circular(25.0),
               )
             : BorderRadius.only(
-                topLeft: Radius.circular(15.0),
-                bottomLeft: Radius.circular(15.0),
-                topRight: Radius.circular(15.0),
-                bottomRight: Radius.circular(15.0),
+                topLeft: Radius.circular(25.0),
+                bottomLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0),
+                bottomRight: Radius.circular(25.0),
               ),
       ),
       child: Column(
@@ -72,14 +72,6 @@ class _ChatScreenState extends State<ChatScreen> {
     return Row(
       children: <Widget>[
         msg,
-        IconButton(
-          icon: message.isLiked
-              ? Icon(Icons.favorite)
-              : Icon(Icons.favorite_border),
-          iconSize: 30.0,
-          color: message.isLiked ? Colors.red[900] : Colors.blueGrey,
-          onPressed: () {},
-        )
       ],
     );
   }
@@ -130,14 +122,16 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
         ),
         elevation: 0.0,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.more_horiz),
-            iconSize: 30.0,
-            color: Colors.white,
-            onPressed: () {},
-          ),
-        ],
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                Theme.of(context).primaryColor,
+                Theme.of(context).colorScheme.secondary,
+              ])),
+        ),
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
